@@ -30,19 +30,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private OAuth2ClientContext oauth2ClientContext;
 
 	@Bean
-    @ConfigurationProperties("facebook")
+    @ConfigurationProperties(value = "facebook", ignoreInvalidFields = false)
     public ClientResources facebook() {
         return new ClientResources();
     }
 
     @Bean
-    @ConfigurationProperties("google")
+    @ConfigurationProperties(value = "google", ignoreInvalidFields = false)
     public ClientResources google() {
         return new ClientResources();
     }
     
     @Bean
-    @ConfigurationProperties("kakao")
+    @ConfigurationProperties(value = "kakao", ignoreInvalidFields = false)
     public ClientResources kakao() {
         return new ClientResources();
     }

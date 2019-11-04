@@ -1,10 +1,10 @@
 server:
    port: 8000
-   ssl:
-      key-store: keystore.p12
-      key-store-password: wldrod2
-      keyStoreType: PKCS12
-      keyAlias: tomcat
+#   ssl:
+#      key-store: keystore.p12
+#      key-store-password: wldrod2
+#      keyStoreType: PKCS12
+#      keyAlias: tomcat
    servlet: 
       jsp:
       init-parameters:

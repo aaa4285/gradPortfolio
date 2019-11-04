@@ -1,5 +1,5 @@
 server:
-   port: 8000
+   port: ${8000}
 #   ssl:
 #      key-store: keystore.p12
 #      key-store-password: wldrod2

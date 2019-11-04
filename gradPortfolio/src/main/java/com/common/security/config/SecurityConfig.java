@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
-
+/*
         http.csrf().disable();
         
 		http.antMatcher("/**").authorizeRequests()
@@ -74,7 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .maximumSessions(1)
         .maxSessionsPreventsLogin(true)
         .expiredUrl("/duplicated-login");
-		
+		*/
     }
     
     private Filter ssoFilter() {

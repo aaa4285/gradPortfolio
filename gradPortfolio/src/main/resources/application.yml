@@ -16,8 +16,6 @@ spring:
   
 --- #local
 spring:
-   server:
-      port: 8080
    profiles: dev
    devtools:
       livereload:

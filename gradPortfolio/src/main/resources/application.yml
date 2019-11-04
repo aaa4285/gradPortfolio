@@ -1,5 +1,5 @@
 server:
-   port: ${port:8000}
+   port: 8000
    ssl:
       key-store: keystore.p12
       key-store-password: wldrod2
@@ -8,18 +8,32 @@ server:
          
 spring:
    profiles:
-      active: dev
-  
---- #local
-spring:
-   profiles: dev
-   devtools:
-      livereload:
-         enabled: true
+      active: local
    mvc:
       view:
          prefix: /WEB-INF/views/ 
          suffix: .jsp
+         
+--- #local
+spring:
+   server:
+   port: 8000
+   profiles: local
+   servlet: 
+      jsp:
+      init-parameters:
+         development: true
+      devtools:
+      livereload:
+         enabled: true
+
+--- #dev
+spring:
+   server:
+   port: ${port:8000}
+   profiles: dev
+  
+         
 
 facebook:
   client:

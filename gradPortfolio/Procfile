@@ -1,1 +1,1 @@
-web: java -Dspring.server.port=8080 -Dspring.profiles.active=dev $JAVA_OPTS -jar /app/target/gradPortfolio-0.1.war
+web: java -Dspring.server.port=8000 -Dspring.profiles.active=dev $JAVA_OPTS -jar /app/target/gradPortfolio-0.1.war

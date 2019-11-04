@@ -16,9 +16,9 @@ spring:
          
 --- #local
 spring:
+   profiles: local
    server:
    port: 8000
-   profiles: local
    servlet: 
       jsp:
       init-parameters:
@@ -32,8 +32,6 @@ spring:
    server:
    port: ${port:8000}
    profiles: dev
-  
-         
 
 facebook:
   client:

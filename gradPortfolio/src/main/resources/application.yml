@@ -8,7 +8,7 @@ server:
    servlet: 
       jsp:
       init-parameters:
-         development: truee
+         development: true
          
 spring:
    profiles:

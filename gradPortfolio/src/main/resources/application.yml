@@ -88,8 +88,8 @@ facebook:
 
 google :
   client :
-    clientId : 361321224931-7rnhths49neu5js8bjco1ng2asmm39tr.apps.googleusercontent.com
-    clientSecret: XcOAZMx_ObyNvyIHA442mNxM
+    clientId : 361321224931-4uj2in7j3r4v7l6004864u3uv9moqg1h.apps.googleusercontent.com
+    clientSecret: DbV3n3kwynhfm4XfTv9mCTyb
     accessTokenUri: https://www.googleapis.com/oauth2/v4/token
     userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
     clientAuthenticationScheme: form

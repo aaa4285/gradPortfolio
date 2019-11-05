@@ -1,18 +1,15 @@
 package com.common.login.controller;
 
-import java.security.Principal;
-
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class LoginController {
 	
-	@RequestMapping("/login")
+	@RequestMapping("/")
 	public String welcome() {
 		AuthenticationTrustResolver trustResolver = new AuthenticationTrustResolverImpl();
 		if (trustResolver.isAnonymous(SecurityContextHolder.getContext().getAuthentication())) {
@@ -84,11 +81,5 @@ public class LoginController {
 		return "redirect:/main/index.do";
 	}
 	*/
-	
-	@RequestMapping("/")
-	public @ResponseBody Principal home(Principal principal) {
-		System.out.println("asdasdasda");
-		return principal;
-	}
 
 }

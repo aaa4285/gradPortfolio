@@ -70,9 +70,10 @@ naver:
 
 --- #dev
 spring:
-   server:
-   port: ${port:8000}
    profiles: dev
+
+server:
+   port: ${port:8000}
    
 facebook:
   client:

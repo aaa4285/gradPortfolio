@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class LoginController {
 	
-	@RequestMapping("/")
+	@RequestMapping("/login")
 	public String welcome() {
 		AuthenticationTrustResolver trustResolver = new AuthenticationTrustResolverImpl();
 		if (trustResolver.isAnonymous(SecurityContextHolder.getContext().getAuthentication())) {

@@ -73,7 +73,7 @@ public class MainController {
 			menuVO = new MenuVO();
 			menuVO.setIdx(5);
 			menuVO.setTitle("자유게시판");
-			menuVO.setUrl("/main/index5.do");
+			menuVO.setUrl("/board/list");
 			menuList.add(menuVO);
 			
 			SessionVO sessionVO = new SessionVO();

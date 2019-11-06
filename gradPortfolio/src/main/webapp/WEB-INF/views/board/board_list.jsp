@@ -7,7 +7,7 @@
  
 <h2> 게시글 목록 </h2>
  
-<button class="btn btn-primary" onclick="location.href='/insert'">글쓰기</button>
+<button class="btn btn-primary" onclick="location.href='/board/insert'">글쓰기</button>
  
 <div class="container">
     <table class="table table-hover">
@@ -18,7 +18,7 @@
             <th>Date</th>
         </tr>
           <c:forEach var="l" items="${list}" varStatus="status">
-              <tr onclick="location.href='detail/${l.bno}'" style="cursor:pointer;">
+              <tr onclick="location.href='/board/detail/${l.bno}'" style="cursor:pointer;">
                   <td>${status.count}</td>
                   <td>${l.subject}</td>
                   <td>${l.writer}</td>

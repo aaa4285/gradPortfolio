@@ -4,29 +4,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <body>
-<h2> 게시글 상세 </h2>
-<button class="btn btn-primary" onclick="location.href='/board/update/${detail.bno}'">수정</button> <!-- 추가 -->
-<button class="btn btn-danger" onclick="location.href='/board/delete/${detail.bno}'">삭제</button>  <!-- 추가 -->
 <div class="container">
-    <form action="/board/list" method="post">
-      <div class="form-group">
-        <label>제목</label>
-        <p>${detail.subject}</p>
-      </div>
-      <div class="form-group">
-        <label>작성자</label>
-        <p>${detail.writer}</p>
-      </div>
-      <div class="form-group">
-        <label>작성날짜</label>
-        <p>${detail.reg_date}</p>
-      </div>
-      <div class="form-group">
-        <label>내용</label>
-        <p>${detail.content}</p>
-      </div>
-      <button type="submit" class="btn btn-primary">목록</button>
-    </form>
+    <div class="col-xs-12" style="margin:15px auto;">
+        <label style="font-size:20px;"><span class="glyphicon glyphicon-list-alt"></span>게시글 상세</label>
+    </div>
+ 
+    <div class="col-xs-12">
+        <form action="/insertProc" method="post">
+            <dl class="dl-horizontal">
+              <dt>제목</dt>
+              <dd>${detail.subject}</dd>
+              
+              <dt>작성자</dt>
+              <dd>${detail.writer}</dd>
+              
+              <dt>작성날짜</dt>
+              <dd>
+                  <fmt:formatDate value="${detail.reg_date}" pattern="yyyy.MM.dd HH:mm:ss"/>
+              </dd>
+
+              <dt>내용</dt>
+              <dd>${detail.content}</dd>
+            </dl>
+        </form>
+        <div class="btn-group btn-group-sm" role="group" style="float:right;">
+          <button type="button" class="btn btn-primary btn-sm" onclick="location.href='/board/delete/${detail.bno}'" style="margin-left: 3px;">삭제</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="location.href='/board/update/${detail.bno}'" style="margin-left: 3px;">수정</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="location.href='/board/list'" style="margin-left: 3px;"> 목록 </button>
+        </div>
+    </div>
 </div>
 </body>
 </html>

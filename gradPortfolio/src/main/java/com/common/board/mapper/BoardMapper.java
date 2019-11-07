@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.common.board.domain.BoardVO;
+import com.common.board.paging.Criteria;
 
 @Mapper
 public interface BoardMapper {
@@ -12,7 +13,7 @@ public interface BoardMapper {
     public int boardCount() throws Exception;
     
     //게시글 목록  
-    public List<BoardVO> boardList() throws Exception;
+    public List<BoardVO> boardList(Criteria criteria) throws Exception;
     
     //게시글 상세
     public BoardVO boardDetail(int bno) throws Exception;
@@ -25,6 +26,5 @@ public interface BoardMapper {
     
     //게시글 삭제  
     public int boardDelete(int bno) throws Exception;
-
-
+    
 }

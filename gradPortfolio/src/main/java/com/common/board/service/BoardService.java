@@ -7,35 +7,42 @@ import org.springframework.stereotype.Service;
 
 import com.common.board.domain.BoardVO;
 import com.common.board.mapper.BoardMapper;
+import com.common.board.paging.Criteria;
 
 @Service
 public class BoardService {
  
     @Autowired
-    BoardMapper mBoardMapper;
+    BoardMapper boardMapper;
     
-    public List<BoardVO> boardListService() throws Exception{
-        
-        return mBoardMapper.boardList();
+    //게시글 개수  
+    public int boardCount() throws Exception {
+    	return boardMapper.boardCount();
     }
     
-    public BoardVO boardDetailService(int bno) throws Exception{
+    public List<BoardVO> boardList(Criteria criteria) throws Exception{
         
-        return mBoardMapper.boardDetail(bno);
+        return boardMapper.boardList(criteria);
     }
     
-    public int boardInsertService(BoardVO board) throws Exception{
+    public BoardVO boardDetail(int bno) throws Exception{
         
-        return mBoardMapper.boardInsert(board);
+        return boardMapper.boardDetail(bno);
     }
     
-    public int boardUpdateService(BoardVO board) throws Exception{
+    public int boardInsert(BoardVO board) throws Exception{
         
-        return mBoardMapper.boardUpdate(board);
+        return boardMapper.boardInsert(board);
     }
     
-    public int boardDeleteService(int bno) throws Exception{
+    public int boardUpdate(BoardVO board) throws Exception{
         
-        return mBoardMapper.boardDelete(bno);
+        return boardMapper.boardUpdate(board);
     }
+    
+    public int boardDelete(int bno) throws Exception{
+        
+        return boardMapper.boardDelete(bno);
+    }
+
 }

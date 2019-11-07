@@ -11,10 +11,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM BOARD
     </select>
     
-    <select id="boardList" resultType="com.common.board.domain.BoardVO">
+    <select id="boardList" resultType="com.common.board.domain.BoardVO" parameterType="com.common.board.paging.Criteria">
         SELECT
             *
         FROM BOARD
+        ORDER BY BNO DESC
+		LIMIT #{pageStart}, #{perPageNum}
     </select>
     
     <select id="boardDetail" parameterType="int" resultType="com.common.board.domain.BoardVO">
@@ -47,5 +49,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="boardDelete" parameterType="int">
         DELETE FROM BOARD WHERE BNO = #{bno}
     </delete>
-
+    
 </mapper>

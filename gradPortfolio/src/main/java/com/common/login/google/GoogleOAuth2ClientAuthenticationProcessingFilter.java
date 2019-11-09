@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -28,6 +29,18 @@ public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2Clie
     }
     
     @Override
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+    		throws AuthenticationException, IOException{
+    	try {
+			return super.attemptAuthentication(request, response);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    
+    @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         // super.successfulAuthentication(request, response, chain, authResult);
         // Nearly a no-op, but if there is a ClientTokenServices then the token will now be stored
@@ -41,8 +54,8 @@ public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2Clie
         final UserConnection userConnection = UserConnection.valueOf(userDetails);
         
         final UsernamePasswordAuthenticationToken authenticationToken = socialService.doAuthentication(userConnection);
+        
         super.successfulAuthentication(request, response, chain, authenticationToken);
-
     }
 
 }

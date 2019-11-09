@@ -17,13 +17,13 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CompositeFilter;
 
-import com.common.login.facebook.FacebookOAuth2ClientAuthenticationProcessingFilter;
-import com.common.login.google.GoogleOAuth2ClientAuthenticationProcessingFilter;
+import com.common.login.facebook.FacebookLoginSuccessHandler;
 import com.common.login.service.SocialService;
 
 import lombok.AllArgsConstructor;
@@ -76,7 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public ClientResources google() {
         return new ClientResources();
     }
-
+/*
     private Filter ssoFilter() {
         CompositeFilter filter = new CompositeFilter();
         List<Filter> filters = new ArrayList<>();
@@ -98,5 +98,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setTokenServices(tokenServices);
         filter.setAuthenticationSuccessHandler((request, response, authentication) -> response.sendRedirect(redirectUrl.toString()));
         return filter;
+    }*/
+    
+    private Filter ssoFilter() {
+
+        CompositeFilter filter = new CompositeFilter();
+        List<OAuth2ClientAuthenticationProcessingFilter> filters = new ArrayList<>();
+
+        OAuth2ClientAuthenticationProcessingFilter facebookFilter = new OAuth2ClientAuthenticationProcessingFilter(
+                "/login/facebook");
+        OAuth2RestTemplate facebookTemplate = new OAuth2RestTemplate(facebook().getClient(), oauth2ClientContext);
+        facebookFilter.setRestTemplate(facebookTemplate);
+        UserInfoTokenServices tokenServices = new UserInfoTokenServices(facebook().getResource().getUserInfoUri(),
+                facebook().getClient().getClientId());
+        tokenServices.setRestTemplate(facebookTemplate);
+        facebookFilter.setTokenServices(tokenServices);
+        facebookFilter.setAuthenticationSuccessHandler(new FacebookLoginSuccessHandler());
+
+
+        filters.add(facebookFilter);
+
+        filter.setFilters(filters);
+
+        return filter;
     }
+    
 }

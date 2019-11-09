@@ -32,66 +32,31 @@ import lombok.AllArgsConstructor;
 @EnableOAuth2Client
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	 private final OAuth2ClientContext oauth2ClientContext;
-	 private final SocialService socialService;
 
-	@Bean
-    @ConfigurationProperties(value = "facebook", ignoreInvalidFields = false)
-    public ClientResources facebook() {
-        return new ClientResources();
-    }
+    private final OAuth2ClientContext oauth2ClientContext;
+    private final SocialService socialService;
 
-    @Bean
-    @ConfigurationProperties(value = "google", ignoreInvalidFields = false)
-    public ClientResources google() {
-        return new ClientResources();
-    }
-    
-    @Bean
-    @ConfigurationProperties(value = "kakao", ignoreInvalidFields = false)
-    public ClientResources kakao() {
-        return new ClientResources();
-    }
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
+
         http.csrf().disable();
-        
-		http.antMatcher("/**").authorizeRequests()
-				.antMatchers("/login/**", "/img/**", "/common/css/**", "/common/js/**").permitAll()
-				.anyRequest().authenticated()
-				.and().exceptionHandling() //403 핸들링
-				.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")).and()
+        http.antMatcher("/**").authorizeRequests().antMatchers("/login/**", "/img/**", "/common/css/**", "/common/js/**").permitAll().anyRequest()
+				.authenticated().and().exceptionHandling()
+				.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and()
 				.addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
-					
 
 		// logout
 		http.logout()
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/test")
+                    .logoutSuccessUrl("/")
                 .permitAll();
 		// @formatter:on
-		
-		http.sessionManagement()
-        .maximumSessions(1)
-        .maxSessionsPreventsLogin(true)
-        .expiredUrl("/duplicated-login");
-		
     }
-    
-    private Filter ssoFilter() {
-        CompositeFilter filter = new CompositeFilter();
-        List<Filter> filters = new ArrayList<>();
-        filters.add(ssoFilter(facebook(), new FacebookOAuth2ClientAuthenticationProcessingFilter(socialService))); //  이전에 등록했던 OAuth 리다이렉트 URL 
-        filters.add(ssoFilter(google(), new GoogleOAuth2ClientAuthenticationProcessingFilter(socialService)));
-//        filters.add(ssoFilter(kakao(), "/login/kakao"));
-        filter.setFilters(filters);
-        return filter;
-    }
-    
+
     @Bean
     public FilterRegistrationBean oauth2ClientFilterRegistration(OAuth2ClientContextFilter filter) {
         FilterRegistrationBean registration = new FilterRegistrationBean();
@@ -100,16 +65,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return registration;
     }
 
+    @Bean
+    @ConfigurationProperties("facebook")
+    public ClientResources facebook() {
+        return new ClientResources();
+    }
+
+    @Bean
+    @ConfigurationProperties("google")
+    public ClientResources google() {
+        return new ClientResources();
+    }
+
+    private Filter ssoFilter() {
+        CompositeFilter filter = new CompositeFilter();
+        List<Filter> filters = new ArrayList<>();
+        filters.add(ssoFilter(google(), new GoogleOAuth2ClientAuthenticationProcessingFilter(socialService)));
+        filters.add(ssoFilter(facebook(), new FacebookOAuth2ClientAuthenticationProcessingFilter(socialService)));
+        filter.setFilters(filters);
+        return filter;
+    }
+
     private Filter ssoFilter(ClientResources client, OAuth2ClientAuthenticationProcessingFilter filter) {
         OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(client.getClient(), oauth2ClientContext);
-        StringBuilder redirectUrl = new StringBuilder("/main/index.do");
-        
-        UserInfoTokenServices tokenServices = new UserInfoTokenServices(client.getResource().getUserInfoUri(), client.getClient().getClientId());
-        tokenServices.setRestTemplate(restTemplate);
-        
-        filter.setTokenServices(tokenServices);
         filter.setRestTemplate(restTemplate);
-        filter.setAuthenticationSuccessHandler((request, response, authentication) -> response.sendRedirect(redirectUrl.toString()));
+        UserInfoTokenServices tokenServices = new UserInfoTokenServices(client.getResource().getUserInfoUri(), client.getClient().getClientId());
+        filter.setTokenServices(tokenServices);
+        tokenServices.setRestTemplate(restTemplate);
         return filter;
     }
 }

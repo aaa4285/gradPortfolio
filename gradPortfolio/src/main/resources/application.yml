@@ -6,16 +6,15 @@ spring:
          prefix: /WEB-INF/views/ 
          suffix: .jsp
    datasource:
-        url: jdbc:mysql://nkpl8b2jg68m87ht.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/yvkycdergykwvkp4
+        url: jdbc:mysql://nkpl8b2jg68m87ht.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/yvkycdergykwvkp4?autoReconnect=true
         username: g49ghwo2qt9ms0a0
         password: ts6plmm9bwlv7wmn
         driver-class-name: org.mariadb.jdbc.Driver
         tomcat:
-           max-active: 5
+           max-active: 3
            initial-size: 1
            max-idle: 1
            min-idle: 1
-           
    
 --- #local
 spring:

@@ -31,8 +31,7 @@ public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2Clie
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
     		throws AuthenticationException, IOException, ServletException {
-	    	final String data = request.getParameter("data");
-	        request.getSession().setAttribute("data", data);
+    	// TODO Auto-generated method stub
     	return super.attemptAuthentication(request, response);
     }
 

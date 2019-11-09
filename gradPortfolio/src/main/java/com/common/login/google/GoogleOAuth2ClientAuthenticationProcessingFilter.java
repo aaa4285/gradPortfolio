@@ -8,20 +8,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.stereotype.Repository;
 
 import com.common.login.entity.UserConnection;
 import com.common.login.service.SocialService;
 
+@Repository
 public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2ClientAuthenticationProcessingFilter {
 
     private ObjectMapper mapper = new ObjectMapper();
     private SocialService socialService;
+    
+    @Autowired
+    private AuthenticationManager authenticationManager;
     
     public GoogleOAuth2ClientAuthenticationProcessingFilter(SocialService socialService) {
         super("/login/google");
@@ -29,12 +37,24 @@ public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2Clie
     }
     
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
-    		throws AuthenticationException, IOException, ServletException {
-    	// TODO Auto-generated method stub
-    	return super.attemptAuthentication(request, response);
-    }
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+        String token = request.getParameter("token");
 
+        if(token == null) {
+            throw new AuthenticationServiceException("Token Missing");
+        }
+
+        Authentication authResponse;
+
+        try {
+            authResponse = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(token, "dssit"));
+        } catch (AuthenticationException e) {
+            throw new AuthenticationServiceException("Bad Token");
+        }
+
+        return authResponse;
+    }
+    
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         // super.successfulAuthentication(request, response, chain, authResult);
@@ -53,11 +73,4 @@ public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2Clie
 
     }
     
-    @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
-    		AuthenticationException failed) throws IOException, ServletException {
-    	// TODO Auto-generated method stub
-    	super.unsuccessfulAuthentication(request, response, failed);
-    }
-
 }

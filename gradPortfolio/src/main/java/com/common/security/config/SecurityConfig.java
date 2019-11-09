@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.antMatcher("/**").authorizeRequests().antMatchers("/login/**", "/img/**", "/common/css/**", "/common/js/**").permitAll().anyRequest()
 				.authenticated().and().exceptionHandling()
-				.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and()
+				.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")).and()
 				.addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
 
 		// logout
@@ -87,11 +87,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private Filter ssoFilter(ClientResources client, OAuth2ClientAuthenticationProcessingFilter filter) {
+    	StringBuilder redirectUrl = new StringBuilder("/main/index.do");
+    	
         OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(client.getClient(), oauth2ClientContext);
-        filter.setRestTemplate(restTemplate);
         UserInfoTokenServices tokenServices = new UserInfoTokenServices(client.getResource().getUserInfoUri(), client.getClient().getClientId());
-        filter.setTokenServices(tokenServices);
         tokenServices.setRestTemplate(restTemplate);
+        
+        filter.setRestTemplate(restTemplate);
+        filter.setTokenServices(tokenServices);
+        filter.setAuthenticationSuccessHandler((request, response, authentication) -> response.sendRedirect(redirectUrl.toString()));
         return filter;
     }
 }

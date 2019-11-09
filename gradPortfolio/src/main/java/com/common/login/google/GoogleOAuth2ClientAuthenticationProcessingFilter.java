@@ -47,10 +47,16 @@ public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2Clie
         userDetails.setAccessToken(accessToken);
         final UserConnection userConnection = UserConnection.valueOf(userDetails);
         
-        System.out.println(mapper.writeValueAsString(userConnection));
         final UsernamePasswordAuthenticationToken authenticationToken = socialService.doAuthentication(userConnection);
         super.successfulAuthentication(request, response, chain, authenticationToken);
 
+    }
+    
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
+    		AuthenticationException failed) throws IOException, ServletException {
+    	// TODO Auto-generated method stub
+    	super.unsuccessfulAuthentication(request, response, failed);
     }
 
 }

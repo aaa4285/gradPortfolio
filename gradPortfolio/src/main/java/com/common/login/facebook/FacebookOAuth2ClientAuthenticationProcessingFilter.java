@@ -54,5 +54,12 @@ public class FacebookOAuth2ClientAuthenticationProcessingFilter extends OAuth2Cl
 
         super.successfulAuthentication(request, response, chain, authenticationToken);
     }
+    
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
+    		AuthenticationException failed) throws IOException, ServletException {
+    	// TODO Auto-generated method stub
+    	super.unsuccessfulAuthentication(request, response, failed);
+    }
 
 }

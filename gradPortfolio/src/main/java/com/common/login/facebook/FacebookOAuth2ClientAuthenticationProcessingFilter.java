@@ -19,7 +19,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import com.common.login.entity.UserConnection;
 import com.common.login.service.SocialService;
 
-public class FacebookOAuth2ClientAuthenticationProcessingFilter extends OAuth2ClientAuthenticationProcessingFilter {
+public class FacebookOAuth2ClientAuthenticationProcessingFilter extends OAuth2ClientAuthenticationProcessingFilter{
 
     private ObjectMapper mapper = new ObjectMapper();
     private final SocialService socialService;
@@ -31,12 +31,6 @@ public class FacebookOAuth2ClientAuthenticationProcessingFilter extends OAuth2Cl
 
     }
     
-    @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
-    		throws AuthenticationException, IOException, ServletException {
-    	return super.attemptAuthentication(request, response);
-    }
-
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         // super.successfulAuthentication(request, response, chain, authResult);
@@ -51,15 +45,6 @@ public class FacebookOAuth2ClientAuthenticationProcessingFilter extends OAuth2Cl
 
         final UserConnection userConnection = UserConnection.valueOf(userDetails);
         final UsernamePasswordAuthenticationToken authenticationToken = socialService.doAuthentication(userConnection);
-
-        super.successfulAuthentication(request, response, chain, authenticationToken);
     }
     
-    @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
-    		AuthenticationException failed) throws IOException, ServletException {
-    	// TODO Auto-generated method stub
-    	super.unsuccessfulAuthentication(request, response, failed);
-    }
-
 }

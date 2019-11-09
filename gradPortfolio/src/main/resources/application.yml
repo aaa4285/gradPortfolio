@@ -11,7 +11,7 @@ spring:
         password: ts6plmm9bwlv7wmn
         driver-class-name: org.mariadb.jdbc.Driver
         tomcat:
-           max-active: 3
+           max-active: 2
            initial-size: 1
            max-idle: 1
            min-idle: 1

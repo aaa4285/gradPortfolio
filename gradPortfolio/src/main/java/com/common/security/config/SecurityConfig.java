@@ -17,13 +17,13 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CompositeFilter;
 
-import com.common.login.facebook.FacebookLoginSuccessHandler;
+import com.common.login.facebook.FacebookOAuth2ClientAuthenticationProcessingFilter;
+import com.common.login.google.GoogleOAuth2ClientAuthenticationProcessingFilter;
 import com.common.login.service.SocialService;
 
 import lombok.AllArgsConstructor;
@@ -76,13 +76,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public ClientResources google() {
         return new ClientResources();
     }
-/*
+
     private Filter ssoFilter() {
         CompositeFilter filter = new CompositeFilter();
         List<Filter> filters = new ArrayList<>();
 
+        filters.add(ssoFilter(facebook(), new FacebookOAuth2ClientAuthenticationProcessingFilter(socialService))); //  이전에 등록했던 OAuth 리다이렉트 URL 
         filters.add(ssoFilter(google(), new GoogleOAuth2ClientAuthenticationProcessingFilter(socialService)));
-        filters.add(ssoFilter(facebook(), new FacebookOAuth2ClientAuthenticationProcessingFilter(socialService)));
         filter.setFilters(filters);
         return filter;
     }
@@ -98,12 +98,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setTokenServices(tokenServices);
         filter.setAuthenticationSuccessHandler((request, response, authentication) -> response.sendRedirect(redirectUrl.toString()));
         return filter;
-    }*/
-    
-    private Filter ssoFilter() {
+    }
+    /*
+    private Filter facebookSsoFilter() {
 
-        CompositeFilter filter = new CompositeFilter();
-        List<OAuth2ClientAuthenticationProcessingFilter> filters = new ArrayList<>();
 
         OAuth2ClientAuthenticationProcessingFilter facebookFilter = new OAuth2ClientAuthenticationProcessingFilter(
                 "/login/facebook");
@@ -113,14 +111,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 facebook().getClient().getClientId());
         tokenServices.setRestTemplate(facebookTemplate);
         facebookFilter.setTokenServices(tokenServices);
-        facebookFilter.setAuthenticationSuccessHandler(new FacebookLoginSuccessHandler());
+        facebookFilter.setAuthenticationSuccessHandler(new FacebookLoginSuccessHandler(socialService));
 
 
-        filters.add(facebookFilter);
-
-        filter.setFilters(filters);
-
-        return filter;
+        return facebookFilter;
     }
     
+    private Filter googleSsoFilter() {
+
+        OAuth2ClientAuthenticationProcessingFilter googleFilter = new OAuth2ClientAuthenticationProcessingFilter(
+                "/login/google");
+        OAuth2RestTemplate googleTemplate = new OAuth2RestTemplate(google().getClient(), oauth2ClientContext);
+        googleFilter.setRestTemplate(googleTemplate);
+        UserInfoTokenServices tokenServices = new UserInfoTokenServices(google().getResource().getUserInfoUri(),
+        		google().getClient().getClientId());
+        tokenServices.setRestTemplate(googleTemplate);
+        googleFilter.setTokenServices(tokenServices);
+        googleFilter.setAuthenticationSuccessHandler(new FacebookLoginSuccessHandler(socialService));
+
+        return googleFilter;
+    }
+    */
 }

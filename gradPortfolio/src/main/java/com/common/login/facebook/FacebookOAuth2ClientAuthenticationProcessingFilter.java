@@ -32,6 +32,12 @@ public class FacebookOAuth2ClientAuthenticationProcessingFilter extends OAuth2Cl
     }
     
     @Override
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
+    	// TODO Auto-generated method stub
+    	return null;
+    }
+    
+    @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) {
         // super.successfulAuthentication(request, response, chain, authResult);
         // Nearly a no-op, but if there is a ClientTokenServices then the token will now be stored

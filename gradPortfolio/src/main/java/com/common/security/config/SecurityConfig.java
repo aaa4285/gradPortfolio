@@ -99,37 +99,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setAuthenticationSuccessHandler((request, response, authentication) -> response.sendRedirect(redirectUrl.toString()));
         return filter;
     }
-    /*
-    private Filter facebookSsoFilter() {
-
-
-        OAuth2ClientAuthenticationProcessingFilter facebookFilter = new OAuth2ClientAuthenticationProcessingFilter(
-                "/login/facebook");
-        OAuth2RestTemplate facebookTemplate = new OAuth2RestTemplate(facebook().getClient(), oauth2ClientContext);
-        facebookFilter.setRestTemplate(facebookTemplate);
-        UserInfoTokenServices tokenServices = new UserInfoTokenServices(facebook().getResource().getUserInfoUri(),
-                facebook().getClient().getClientId());
-        tokenServices.setRestTemplate(facebookTemplate);
-        facebookFilter.setTokenServices(tokenServices);
-        facebookFilter.setAuthenticationSuccessHandler(new FacebookLoginSuccessHandler(socialService));
-
-
-        return facebookFilter;
-    }
-    
-    private Filter googleSsoFilter() {
-
-        OAuth2ClientAuthenticationProcessingFilter googleFilter = new OAuth2ClientAuthenticationProcessingFilter(
-                "/login/google");
-        OAuth2RestTemplate googleTemplate = new OAuth2RestTemplate(google().getClient(), oauth2ClientContext);
-        googleFilter.setRestTemplate(googleTemplate);
-        UserInfoTokenServices tokenServices = new UserInfoTokenServices(google().getResource().getUserInfoUri(),
-        		google().getClient().getClientId());
-        tokenServices.setRestTemplate(googleTemplate);
-        googleFilter.setTokenServices(tokenServices);
-        googleFilter.setAuthenticationSuccessHandler(new FacebookLoginSuccessHandler(socialService));
-
-        return googleFilter;
-    }
-    */
 }

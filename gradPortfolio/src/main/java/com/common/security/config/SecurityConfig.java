@@ -80,7 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private Filter ssoFilter() {
         CompositeFilter filter = new CompositeFilter();
         List<Filter> filters = new ArrayList<>();
-        filters.add(ssoFilter(google(), new GoogleOAuth2ClientAuthenticationProcessingFilter(socialService)));
+        filters.add(ssoFilter(google(), ("/login/google")));
         filters.add(ssoFilter(facebook(), new FacebookOAuth2ClientAuthenticationProcessingFilter(socialService)));
         filter.setFilters(filters);
         return filter;
@@ -95,6 +95,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         
         filter.setRestTemplate(restTemplate);
         filter.setTokenServices(tokenServices);
+        filter.setAuthenticationSuccessHandler((request, response, authentication) -> response.sendRedirect(redirectUrl.toString()));
+        return filter;
+    }
+    
+    private Filter ssoFilter(ClientResources client, String path) {
+        OAuth2ClientAuthenticationProcessingFilter filter = new OAuth2ClientAuthenticationProcessingFilter(path);
+        OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(client.getClient(), oauth2ClientContext);
+        StringBuilder redirectUrl = new StringBuilder("/main/index.do");
+        
+        UserInfoTokenServices tokenServices = new UserInfoTokenServices(client.getResource().getUserInfoUri(), client.getClient().getClientId());
+        tokenServices.setRestTemplate(restTemplate);
+        
+        filter.setTokenServices(tokenServices);
+        filter.setRestTemplate(restTemplate);
         filter.setAuthenticationSuccessHandler((request, response, authentication) -> response.sendRedirect(redirectUrl.toString()));
         return filter;
     }

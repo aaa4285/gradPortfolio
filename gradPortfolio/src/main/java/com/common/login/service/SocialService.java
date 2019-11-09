@@ -10,18 +10,19 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import com.common.login.entity.User;
+import com.common.login.entity.UserConnection;
 import com.common.login.entity.UserService;
-import com.common.login.userconnection.UserConnection;
 
 import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor
 public class SocialService {
-	
+
     private final UserService userService;
 
     public UsernamePasswordAuthenticationToken doAuthentication(UserConnection userConnection) {
+
         if (userService.isExistUser(userConnection)) {
             // 기존 회원일 경우에는 데이터베이스에서 조회해서 인증 처리
             final User user = userService.findBySocial(userConnection);
@@ -33,7 +34,6 @@ public class SocialService {
 
         }
     }
-
 
     private UsernamePasswordAuthenticationToken setAuthenticationToken(Object user) {
         return new UsernamePasswordAuthenticationToken(user, null, getAuthorities("ROLE_USER"));

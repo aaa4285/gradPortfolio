@@ -6,19 +6,22 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.common.constantes.BaseConstantes;
-
 @Controller
 public class LoginController {
 	
 	@RequestMapping("/login")
-	public String welcome() {
+	public String login() {
 		AuthenticationTrustResolver trustResolver = new AuthenticationTrustResolverImpl();
 		if (trustResolver.isAnonymous(SecurityContextHolder.getContext().getAuthentication())) {
-			return "login";
+			return "login/login";
 		} else {
 			return "redirect:/main/index.do";
 		}
+	}
+	
+	@RequestMapping("/")
+	public String main() {
+		return "redirect:/main/index.do";
 	}
 	
 	/*

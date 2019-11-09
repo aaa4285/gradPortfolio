@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.common.*" %>
 <%@ page import="java.util.*" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -16,7 +15,7 @@
 	
 	<!-- Custom styles for this template -->
 	<link href="/common/css/index.css" rel="stylesheet">
-
+	
 	<script src="/common/test/jquery-2.1.1.js"></script>
 	<script src="/common/js/bootstrap.min.js"></script>
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -25,15 +24,15 @@
   		$(document).ready(function(){
   			// 스크롤 메뉴 fixed 이벤트
   			$(window).scroll(function() {
-  				var nav = $("body > nav.navbar.navbar-default");
+  				var nav = $("body > nav.navbar.navbar-expand-lg");
   				if(!nav || !nav.offset()){return;}
   			  if (!$("body").hasClass("fixed") && $(document).scrollTop() >= nav.offset().top) {
-  			    nav.addClass('navbar-fixed-top');
-  				nav.removeClass('navbar-static-top');
+  			    nav.addClass('fixed-top');
+  				nav.removeClass('static-top');
   				$("body").addClass('fixed');
   			  } else if ($("body").hasClass("fixed") && $(document).scrollTop()<=$("body > div.title").height()) {
-  			    nav.removeClass('navbar-fixed-top');
-  				nav.addClass('navbar-static-top');
+  			    nav.removeClass('fixed-top');
+  				nav.addClass('static-top');
   				$("body").removeClass('fixed');
   			  }
   			});

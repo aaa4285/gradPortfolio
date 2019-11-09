@@ -15,6 +15,15 @@ spring:
            initial-size: 1
            max-idle: 1
            min-idle: 1
+   jpa:
+      database: h2
+      show-sql: true
+      hibernate:
+         ddl-auto: update
+      properties:
+         hibernate.format_sql: true
+         hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+         hibernate.hbm2ddl.import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
    
 --- #local
 spring:

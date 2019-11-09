@@ -2,8 +2,6 @@ package com.common.login.entity;
 
 import org.springframework.stereotype.Service;
 
-import com.common.login.userconnection.UserConnection;
-
 import lombok.AllArgsConstructor;
 
 @Service
@@ -24,6 +22,7 @@ public class UserService {
     }
 
     public boolean isExistUser(UserConnection userConnection) {
+    	
         final User user = userRepository.findBySocial(userConnection);
         return (user != null);
     }

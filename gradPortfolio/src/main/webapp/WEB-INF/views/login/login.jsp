@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <style>
-:root { -
-	-input-padding-x: 1.5rem; -
+:root {
+	-input-padding-x: 1.5rem;
 	-input-padding-y: .75rem;
 }
 

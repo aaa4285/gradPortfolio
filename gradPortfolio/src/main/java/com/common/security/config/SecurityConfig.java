@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.Filter;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -23,11 +22,18 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CompositeFilter;
 
+import com.common.login.facebook.FacebookOAuth2ClientAuthenticationProcessingFilter;
+import com.common.login.google.GoogleOAuth2ClientAuthenticationProcessingFilter;
+import com.common.login.service.SocialService;
+
+import lombok.AllArgsConstructor;
+
 @EnableWebSecurity
 @EnableOAuth2Client
+@AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	@Autowired
-	private OAuth2ClientContext oauth2ClientContext;
+	 private final OAuth2ClientContext oauth2ClientContext;
+	 private final SocialService socialService;
 
 	@Bean
     @ConfigurationProperties(value = "facebook", ignoreInvalidFields = false)
@@ -50,13 +56,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
-
         http.csrf().disable();
         
 		http.antMatcher("/**").authorizeRequests()
-				.antMatchers("/login/**", "/img/**").permitAll()
+				.antMatchers("/login/**", "/img/**", "/common/css/**", "/common/js/**").permitAll()
 				.anyRequest().authenticated()
-				.and().exceptionHandling()
+				.and().exceptionHandling() //403 핸들링
 				.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")).and()
 				.addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
 					
@@ -80,9 +85,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private Filter ssoFilter() {
         CompositeFilter filter = new CompositeFilter();
         List<Filter> filters = new ArrayList<>();
-        filters.add(ssoFilter(facebook(), "/login/facebook")); //  이전에 등록했던 OAuth 리다이렉트 URL 
-        filters.add(ssoFilter(google(), "/login/google"));
-        filters.add(ssoFilter(kakao(), "/login/kakao"));
+        filters.add(ssoFilter(facebook(), new FacebookOAuth2ClientAuthenticationProcessingFilter(socialService))); //  이전에 등록했던 OAuth 리다이렉트 URL 
+        filters.add(ssoFilter(google(), new GoogleOAuth2ClientAuthenticationProcessingFilter(socialService)));
+//        filters.add(ssoFilter(kakao(), "/login/kakao"));
         filter.setFilters(filters);
         return filter;
     }
@@ -95,11 +100,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return registration;
     }
 
-    private Filter ssoFilter(ClientResources client, String path) {
-        OAuth2ClientAuthenticationProcessingFilter filter = new OAuth2ClientAuthenticationProcessingFilter(path);
+    private Filter ssoFilter(ClientResources client, OAuth2ClientAuthenticationProcessingFilter filter) {
         OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(client.getClient(), oauth2ClientContext);
         StringBuilder redirectUrl = new StringBuilder("/main/index.do");
-        
         
         UserInfoTokenServices tokenServices = new UserInfoTokenServices(client.getResource().getUserInfoUri(), client.getClient().getClientId());
         tokenServices.setRestTemplate(restTemplate);

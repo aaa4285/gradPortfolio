@@ -14,8 +14,8 @@ import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticat
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
+import com.common.login.entity.UserConnection;
 import com.common.login.service.SocialService;
-import com.common.login.userconnection.UserConnection;
 
 public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2ClientAuthenticationProcessingFilter {
 
@@ -41,7 +41,6 @@ public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2Clie
         final UserConnection userConnection = UserConnection.valueOf(userDetails);
         
         System.out.println(mapper.writeValueAsString(userConnection));
-        
         final UsernamePasswordAuthenticationToken authenticationToken = socialService.doAuthentication(userConnection);
         super.successfulAuthentication(request, response, chain, authenticationToken);
 

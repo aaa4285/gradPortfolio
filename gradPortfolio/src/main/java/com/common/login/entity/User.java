@@ -2,8 +2,6 @@ package com.common.login.entity;
 
 import javax.persistence.*;
 
-import com.common.login.userconnection.UserConnection;
-
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "email", nullable = false, unique = true)

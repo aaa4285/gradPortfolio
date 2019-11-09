@@ -1,4 +1,6 @@
-package com.common.login.userconnection;
+package com.common.login.entity;
+
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.common.login.entity.ProviderType;
 import com.common.login.facebook.FacebookUserDetails;
 import com.common.login.google.GoogleUserDetails;
 
@@ -22,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "user_connection")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class UserConnection {
+public class UserConnection implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

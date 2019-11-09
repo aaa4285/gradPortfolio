@@ -35,28 +35,8 @@ public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2Clie
         super("/login/google");
         this.socialService = socialService;
     }
-    
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
-        String token = request.getParameter("token");
-
-        if(token == null) {
-            throw new AuthenticationServiceException("Token Missing");
-        }
-
-        Authentication authResponse;
-
-        try {
-            authResponse = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(token, "dssit"));
-        } catch (AuthenticationException e) {
-            throw new AuthenticationServiceException("Bad Token");
-        }
-
-        return authResponse;
-    }
-    
-    @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException {
         // super.successfulAuthentication(request, response, chain, authResult);
         // Nearly a no-op, but if there is a ClientTokenServices then the token will now be stored
 
@@ -69,7 +49,11 @@ public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2Clie
         final UserConnection userConnection = UserConnection.valueOf(userDetails);
         
         final UsernamePasswordAuthenticationToken authenticationToken = socialService.doAuthentication(userConnection);
-        super.successfulAuthentication(request, response, chain, authenticationToken);
+        try {
+			super.successfulAuthentication(request, response, chain, authenticationToken);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		}
 
     }
     

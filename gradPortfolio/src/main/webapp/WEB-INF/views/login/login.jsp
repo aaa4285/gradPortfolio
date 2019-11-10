@@ -12,6 +12,7 @@
 body {
 	/* background: #007bff;
 	background: linear-gradient(to right, #0062E6, #33AEFF); */
+	
 }
 
 .card-signin {
@@ -69,8 +70,8 @@ body {
 	border: 1px solid transparent;
 	border-radius: .25rem;
 	transition: all .1s ease-in-out;
-    margin-left: 10px;
-    margin-top: 5px;
+	margin-left: 10px;
+	margin-top: 5px;
 }
 
 .form-label-group input::-webkit-input-placeholder {
@@ -94,42 +95,77 @@ body {
 }
 
 .form-label-group
+
  
+
 input
+
+
 :not
+
  
+
 (
 :placeholder-shown
+
  
+
 )
 {
 padding-top
+
+
 :
+
  
+
 calc
-(var(-
+
+
+(
+var
+(-
+
  
+
 -input-padding-y
+
+
 )
 +
 var
+
+
 (-
- 
 -input-padding-y
+
+
 )
 *
+
  
+
 (2/3));
 padding-bottom
+
+
 :
+
  
+
 calc
-(var(-
+
+
+(
+var
+(-
+
  
+
 -input-padding-y
+
+
 )/3);
-
-
 }
 .form-label-group input:not (:placeholder-shown )~label {
 	padding-top: calc(var(- -input-padding-y)/3);
@@ -238,13 +274,13 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 									for="inputPassword"></label>
 							</div>
 
-							<div class="custom-control custom-checkbox mb-3">
-								<input type="checkbox" class="custom-control-input"
-									id="customCheck1"> <label class="custom-control-label"
-									for="customCheck1">Remember password</label>
-							</div>
 							<button class="btn btn-lg btn-primary btn-block text-uppercase"
-								type="submit">Sign in</button>
+								type="submit">로그인</button>
+							<div class="custom-control mb-3">
+								<div class="d-flex justify-content-center links">
+									<a href="#">회원가입</a>
+								</div>
+							</div>
 							<hr class="my-4">
 							<button class="btn btn-lg btn-google btn-block text-uppercase"
 								type="button" onclick="login('/login/google')">

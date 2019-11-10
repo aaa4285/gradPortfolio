@@ -17,7 +17,6 @@ import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
 import com.common.login.entity.UserConnection;
-import com.common.login.facebook.FacebookUserDetails.Picture.Data;
 import com.common.login.service.SocialService;
 
 public class FacebookOAuth2ClientAuthenticationProcessingFilter extends OAuth2ClientAuthenticationProcessingFilter{

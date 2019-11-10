@@ -24,6 +24,7 @@ import org.springframework.web.filter.CompositeFilter;
 
 import com.common.login.facebook.FacebookOAuth2ClientAuthenticationProcessingFilter;
 import com.common.login.google.GoogleOAuth2ClientAuthenticationProcessingFilter;
+import com.common.login.handler.LoginSuccessHandler;
 import com.common.login.service.SocialService;
 
 import lombok.AllArgsConstructor;
@@ -42,8 +43,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // @formatter:off
 
         http.csrf().disable();
-        http.antMatcher("/**").authorizeRequests().antMatchers("/login/**", "/img/**", "/common/css/**", "/common/js/**").permitAll().anyRequest()
-				.authenticated().and().exceptionHandling()
+        http.antMatcher("/**").authorizeRequests()
+        		.antMatchers("/board/**").authenticated()
+        		.antMatchers("/**").permitAll()
+				.and().exceptionHandling()
 				.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")).and()
 				.addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
 
@@ -88,7 +91,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private Filter ssoFilter(ClientResources client, OAuth2ClientAuthenticationProcessingFilter filter) {
-    	StringBuilder redirectUrl = new StringBuilder("/main/index.do");
     	
         OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(client.getClient(), oauth2ClientContext);
         UserInfoTokenServices tokenServices = new UserInfoTokenServices(client.getResource().getUserInfoUri(), client.getClient().getClientId());
@@ -96,7 +98,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         
         filter.setRestTemplate(restTemplate);
         filter.setTokenServices(tokenServices);
-        filter.setAuthenticationSuccessHandler((request, response, authentication) -> response.sendRedirect(redirectUrl.toString()));
+        filter.setAuthenticationSuccessHandler(new LoginSuccessHandler());
         return filter;
     }
 }

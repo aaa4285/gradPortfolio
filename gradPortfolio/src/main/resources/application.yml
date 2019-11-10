@@ -10,11 +10,14 @@ spring:
         username: g49ghwo2qt9ms0a0
         password: ts6plmm9bwlv7wmn
         driver-class-name: org.mariadb.jdbc.Driver
+        max-active: 1
         tomcat:
-           max-active: 2
+           max-active: 1
            initial-size: 1
            max-idle: 1
            min-idle: 1
+        
+        
    jpa:
       database: h2
       show-sql: true

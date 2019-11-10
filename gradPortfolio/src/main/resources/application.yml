@@ -11,13 +11,12 @@ spring:
         password: ts6plmm9bwlv7wmn
         driver-class-name: org.mariadb.jdbc.Driver
         max-active: 1
+        type: org.apache.tomcat.jdbc.pool.DataSource
         tomcat:
            max-active: 1
            initial-size: 1
            max-idle: 1
            min-idle: 1
-        
-        
    jpa:
       database: h2
       show-sql: true

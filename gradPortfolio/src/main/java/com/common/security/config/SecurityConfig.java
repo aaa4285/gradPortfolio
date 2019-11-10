@@ -25,6 +25,7 @@ import org.springframework.web.filter.CompositeFilter;
 import com.common.login.facebook.FacebookOAuth2ClientAuthenticationProcessingFilter;
 import com.common.login.google.GoogleOAuth2ClientAuthenticationProcessingFilter;
 import com.common.login.handler.LoginSuccessHandler;
+import com.common.login.kakao.KaKaoOAuth2ClientAuthenticationProcessingFilter;
 import com.common.login.service.SocialService;
 
 import lombok.AllArgsConstructor;
@@ -79,13 +80,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public ClientResources google() {
         return new ClientResources();
     }
+    
+    @Bean
+    @ConfigurationProperties("kakao")
+    public ClientResources kakao() {
+        return new ClientResources();
+    }
 
     private Filter ssoFilter() {
         CompositeFilter filter = new CompositeFilter();
         List<Filter> filters = new ArrayList<>();
 
-        filters.add(ssoFilter(facebook(), new FacebookOAuth2ClientAuthenticationProcessingFilter(socialService))); //  이전에 등록했던 OAuth 리다이렉트 URL 
+        filters.add(ssoFilter(facebook(), new FacebookOAuth2ClientAuthenticationProcessingFilter(socialService)));  
         filters.add(ssoFilter(google(), new GoogleOAuth2ClientAuthenticationProcessingFilter(socialService)));
+        filters.add(ssoFilter(kakao(), new KaKaoOAuth2ClientAuthenticationProcessingFilter(socialService)));
         filter.setFilters(filters);
         return filter;
     }

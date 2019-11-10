@@ -27,7 +27,6 @@ public class FacebookUserDetails {
 
     @Getter
     public static class Picture {
-    	@JsonProperty("data")
     	private Data data;
     	
     	@Getter

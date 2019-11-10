@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import com.common.login.facebook.FacebookUserDetails;
 import com.common.login.google.GoogleUserDetails;
+import com.common.login.kakao.KaKaoUserDetails;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -89,6 +90,18 @@ public class UserConnection implements Serializable{
                 .displayName(userDetails.getName())
                 .imageUrl(userDetails.getImageUrl())
                 .provider(ProviderType.FACEBOOK)
+                .build();
+    }
+    
+    public static UserConnection valueOf(KaKaoUserDetails userDetails) {
+        return UserConnection.builder()
+                .expireTime(userDetails.getExpiration())
+                .accessToken(userDetails.getAccess_token())
+                .providerId(userDetails.getId())
+                .email(userDetails.getEmail())
+                .displayName(userDetails.getName())
+                .imageUrl(userDetails.getImageUrl())
+                .provider(ProviderType.KAKAO)
                 .build();
     }
 

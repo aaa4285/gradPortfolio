@@ -13,7 +13,7 @@ spring:
         max-active: 1
         type: org.apache.tomcat.jdbc.pool.DataSource
         tomcat:
-           max-active: 1
+           max-active: 3
            initial-size: 1
            max-idle: 1
            min-idle: 1

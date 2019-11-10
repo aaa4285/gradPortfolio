@@ -112,9 +112,10 @@
 		
 		<!--JDBC -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
+	      <groupId>org.apache.tomcat</groupId>
+	      <artifactId>tomcat-jdbc</artifactId>
+	      <scope>provided</scope>
+	    </dependency>
                 
         <!-- MARIA -->
  		<dependency>

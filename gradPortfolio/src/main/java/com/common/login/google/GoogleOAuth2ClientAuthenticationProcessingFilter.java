@@ -48,7 +48,9 @@ public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2Clie
         final OAuth2AccessToken accessToken = restTemplate.getAccessToken();
         final OAuth2Authentication auth = (OAuth2Authentication) authResult;
         final Object details = auth.getUserAuthentication().getDetails();
-
+        
+        System.out.println(mapper.writeValueAsString(details));
+        
         final GoogleUserDetails userDetails = mapper.convertValue(details, GoogleUserDetails.class);
         userDetails.setAccessToken(accessToken);
         final UserConnection userConnection = UserConnection.valueOf(userDetails);

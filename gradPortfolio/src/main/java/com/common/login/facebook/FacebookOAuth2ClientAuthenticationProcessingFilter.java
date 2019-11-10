@@ -17,6 +17,7 @@ import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
 import com.common.login.entity.UserConnection;
+import com.common.login.facebook.FacebookUserDetails.Picture.Data;
 import com.common.login.service.SocialService;
 
 public class FacebookOAuth2ClientAuthenticationProcessingFilter extends OAuth2ClientAuthenticationProcessingFilter{
@@ -28,7 +29,6 @@ public class FacebookOAuth2ClientAuthenticationProcessingFilter extends OAuth2Cl
         super("/login/facebook");
         this.socialService = socialService;
         mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
     }
     
     @Override
@@ -45,16 +45,15 @@ public class FacebookOAuth2ClientAuthenticationProcessingFilter extends OAuth2Cl
     
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        // super.successfulAuthentication(request, response, chain, authResult);
-        // Nearly a no-op, but if there is a ClientTokenServices then the token will now be stored
 
         final OAuth2AccessToken accessToken = restTemplate.getAccessToken();
         final OAuth2Authentication auth = (OAuth2Authentication) authResult;
         final Object details = auth.getUserAuthentication().getDetails();
-
+        
         final FacebookUserDetails userDetails = mapper.convertValue(details, FacebookUserDetails.class);
+        
         userDetails.setAccessToken(accessToken);
-
+        
         final UserConnection userConnection = UserConnection.valueOf(userDetails);
         final UsernamePasswordAuthenticationToken authenticationToken = socialService.doAuthentication(userConnection);
         

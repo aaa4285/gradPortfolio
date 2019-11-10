@@ -44,10 +44,9 @@
 	</style>
 </head>
 <body>
-	<div class="login container">
-	
+	<div class="login" style="padding-top: 100px">
+		<tiles:insertAttribute name="body"/>	
 	</div>
-
-	<tiles:insertAttribute name="body"/>
+	
 </body>
 </html>

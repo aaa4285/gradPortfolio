@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoT
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -24,6 +25,7 @@ import org.springframework.web.filter.CompositeFilter;
 
 import com.common.login.facebook.FacebookOAuth2ClientAuthenticationProcessingFilter;
 import com.common.login.google.GoogleOAuth2ClientAuthenticationProcessingFilter;
+import com.common.login.handler.LoginFailHandler;
 import com.common.login.handler.LoginSuccessHandler;
 import com.common.login.kakao.KaKaoOAuth2ClientAuthenticationProcessingFilter;
 import com.common.login.service.SocialService;
@@ -47,9 +49,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.antMatcher("/**").authorizeRequests()
         		.antMatchers("/board/**").authenticated()
         		.antMatchers("/**").permitAll()
+        		.and().formLogin().loginPage("/login")
+        		.loginProcessingUrl("/login")
+        		.failureHandler(new LoginFailHandler())
 				.and().exceptionHandling()
 				.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")).and()
 				.addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
+
 
 		// logout
 		http.logout()
@@ -59,6 +65,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/")
                 .permitAll();
 		// @formatter:on
+    }
+    
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    	System.out.println("여기도타나");
+    	super.configure(auth);
     }
 
     @Bean

@@ -9,9 +9,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import com.common.login.entity.User;
-import com.common.login.entity.UserConnection;
-import com.common.login.entity.UserService;
+import com.common.social.login.entity.User;
+import com.common.social.login.entity.UserConnection;
+import com.common.social.login.entity.UserService;
 
 import lombok.AllArgsConstructor;
 

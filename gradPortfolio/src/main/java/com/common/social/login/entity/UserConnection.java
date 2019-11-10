@@ -1,4 +1,4 @@
-package com.common.login.entity;
+package com.common.social.login.entity;
 
 import java.io.Serializable;
 

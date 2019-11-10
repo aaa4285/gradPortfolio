@@ -167,53 +167,31 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
 				<div class="card card-signin my-5">
 					<div class="card-body">
-						<h5 class="card-title text-center">Sign In</h5>
+						<h5 class="card-title text-center">회원가입</h5>
 						<form class="form-signin" method="POST">
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" />
+							<input type ="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
 							<div class="form-label-group">
-								<input type="email" id="email" name="username"
-									class="form-control" placeholder="Email address" required
-									autofocus> <label for="inputEmail"></label>
+								<input type="email" id="email" name="username" class="form-control"
+									placeholder="Email address" required autofocus> <label
+									for="name"></label>
 							</div>
-
 							<div class="form-label-group">
-								<input type="password" id="password" name="password"
-									class="form-control" placeholder="Password" required> <label
-									for="inputPassword"></label>
-								<c:if test="${not empty ERRORMSG}">
-									<font style="float: left;" color="red"> ${ERRORMSG } </font>
-								</c:if>
+								<input type="text" id="name" name="name" class="form-control"
+									placeholder="Full name" required autofocus> <label
+									for="password"></label>
+							</div>
+							<div class="form-label-group">
+								<input type="password" id="password" name="password" class="form-control"
+									placeholder="Password" required> <label
+									for="repatPassword"></label>
+							</div>
+							<div class="form-label-group">
+								<input type="password" id="repatPassword" name="repeatPassword" class="form-control"
+									placeholder="Repeat Password" required> <label
+									for=""></label>
 							</div>
 							<button class="btn btn-lg btn-primary btn-block text-uppercase"
-								type="submit">로그인</button>
-							<div class="custom-control mb-3">
-								<div class="d-flex justify-content-center links">
-									<a href="#" onclick="sign()">회원가입</a>
-								</div>
-							</div>
-							<hr class="my-4">
-							<button class="btn btn-lg btn-google btn-block text-uppercase"
-								type="button" onclick="login('/login/google')">
-								<div class="logo-google"></div>
-								<div>
-									<span>구글 계정으로 로그인</span>
-								</div>
-							</button>
-							<button class="btn btn-lg btn-facebook btn-block text-uppercase"
-								type="button" onclick="login('/login/facebook')">
-								<div class="logo-facebook"></div>
-								<div>
-									<span>페이스북 계정으로 로그인</span>
-								</div>
-							</button>
-							<button class="btn btn-lg btn-kakao btn-block text-uppercase"
-								type="button" onclick="login('/login/kakao')">
-								<div class="logo-kakao"></div>
-								<div>
-									<span>카카오 계정으로 로그인</span>
-								</div>
-							</button>
+								type="submit">회원가입</button>
 						</form>
 					</div>
 				</div>
@@ -222,11 +200,12 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 	</div>
 </body>
 <script type="text/javascript">
+	
 	// 로그인
 	function login(url) {
 		location.href = url;
 	}
-
+	
 	// 회원가입
 	function sign() {
 		location.href = "sign";

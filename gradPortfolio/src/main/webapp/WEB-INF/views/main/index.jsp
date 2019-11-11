@@ -7,7 +7,125 @@
   height: 700px;
 }
 </style>
+<style>
+.findAPetMenu-locationInputContainer:after {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 100%;
+    border-left: 20px solid #2e0152;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+}
+.findAPetMenu-button_other:after {
+    -webkit-transform: rotate(0);
+    -ms-transform: rotate(0);
+    transform: rotate(0);
+    }
+    /* 화살표 */
+    .findAPetMenu-button_other:after {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-left: 10px;
+    background: transparent url(data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' …a3.5 3.5 0 0 0-5 0 3.5 3.5 0 0 0 0 5l8.9 8.9z' fill='%23fff'/%3E%3C/svg%3E) no-repeat 50%;
+    background-size: 14px;
+    -webkit-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    -webkit-transition: -webkit-transform .2s;
+    transition: -webkit-transform .2s;
+    -o-transition: transform .2s;
+    transition: transform .2s;
+    transition: transform .2s, -webkit-transform .2s;
+    vertical-align: middle;
+}
+/* hero */
+.hero-img {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    font-family: "object-fit:cover;object-position:center";
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
+    -webkit-transition: opacity .5s;
+    -o-transition: opacity .5s;
+    transition: opacity .5s;
+    }
+.hero {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    height: 200px;
+    background: transparent no-repeat 50%;
+    background-size: cover;
+}    
 
+@media print, screen and (min-width: 668px){
+.hero {
+    height: 280px;
+}}
+@media print, screen and (min-width: 1024px){
+.hero {
+    height: 320px;
+}}
+/* // hero */
+</style>
+<div class="hero">
+	<img class="hero-img" src="https://d17fnq9dkz9hgj.cloudfront.net/uploads/2017/06/why-are-dogs-scared-of-firework-header.jpg" srcset="https://d17fnq9dkz9hgj.cloudfront.net/uploads/2017/06/why-are-dogs-scared-of-firework-header.jpg 800w, https://d17fnq9dkz9hgj.cloudfront.net/uploads/2017/06/feeding-small-dogs@420.jpg 500w" sizes="(max-width: 500px) 500px, (max-width: 800px) 800px" alt="" aria-hidden="true">
+</div>
+<div class="u-pullUpLarge" style="margin-top: -50px;">
+	<div class="findAPetMenu" style="padding: 0 50px;">
+		<div class="findAPetMenu-inner" data-test="Find_A_Pet_Menu" style="display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; position: relative; width: 100%; background: #6504b5; -ms-flex-wrap: nowrap; flex-wrap: nowrap; height: 100px; max-width: 1220px; margin: 0 auto; border-radius: 10px; -webkit-box-shadow: 0 1px 3px rgba(77, 71, 81, .2); box-shadow: 0 1px 3px rgba(77, 71, 81, .2);">
+			<div class="findAPetMenu-locationInputContainer" style="display: none; position: relative; background-color: #2e0152; border-radius: 10px 0 0 10px; -webkit-box-flex: 1; -ms-flex-positive: 1; flex-grow: 1; height: 100px; -ms-flex-preferred-size: 20%; flex-basis: 20%; display: block;">
+				<div class="u-isVisuallyHidden" aria-live="polite" aria-busy="false" aria-atomic="true" style="overflow: hidden !important; width: 1px !important; height: 1px !important; margin: -1px !important; border: 0 !important; padding: 0 !important; position: absolute !important; clip: rect(1px, 1px, 1px, 1px) !important; clip: rect(1px, 1px, 1px, 1px) !important; -webkit-clip-path: rect(1px, 1px, 1px, 1px) !important; clip-path: rect(1px, 1px, 1px, 1px) !important;"></div>
+				<input class="findAPetMenu-locationInput" placeholder="Enter City, State or ZIP" type="text" aria-label="위치별로 애완 동물 찾기" aria-describedby="FindAPetMenu_Location_Input_Description" data-test="Find_A_Pet_Menu_Location_Input" value="Piti Municipality, Guam" style="display: block; height: 100px; width: 100%; padding: 0 0 0 15%; background-color: #2e0152; border: none; border-radius: 10px 0 0 10px; -webkit-box-sizing: border-box; box-sizing: border-box; color: #fff; font-size: 14px; font-family: Nexa Regular, arial, helvetica, sans-serif;">
+			</div>
+			<button class="findAPetMenu-button findAPetMenu-button_dogs" data-test="Find_A_Pet_Find_Dog_Button" type="button" aria-label="개 찾기" style="border: 1px solid #6504b5;background: #6504b5;display: block;width: 100%;color: #fff;font-size: 13px;-webkit-transition: background-color .25s;-o-transition: background-color .25s;transition: background-color .25s;width: auto;font-size: 14px;text-align: center;-webkit-box-flex: 1;-ms-flex-positive: 1;flex-grow: 1;height: 100px;">
+				<span class="findAPetMenu-buttonIcon" style="
+    display: inline-block;
+    width: 30px;
+    height: 40px;
+    margin-right: 10px;
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+"><svg role="img" focusable="false" style="display: block;width: 100%;height: 100%;overflow: visible;fill: #fff;">
+							<use xlink:href="#icon-dog"></use></svg></span><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">개 찾기</font></font></span>
+			</button>
+			<button class="findAPetMenu-button findAPetMenu-button_cats" data-test="Find_A_Pet_Find_Cat_Button" type="button" aria-label="고양이 찾기" style="border: 1px solid #6504b5;background: #6504b5;display: block;width: 100%;color: #fff;font-size: 13px;-webkit-transition: background-color .25s;-o-transition: background-color .25s;transition: background-color .25s;width: auto;font-size: 14px;text-align: center;-webkit-box-flex: 1;-ms-flex-positive: 1;flex-grow: 1;height: 100px;border-left: 1px solid #2e0152;">
+				<span class="findAPetMenu-buttonIcon" style="
+    display: inline-block;
+    width: 30px;
+    height: 40px;
+    margin-right: 10px;
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+"><svg role="img" focusable="false" style="
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    fill: #fff;
+">
+							<use xlink:href="#icon-cat"></use></svg></span><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">고양이 찾기</font></font></span>
+			</button>
+			<button class="findAPetMenu-button findAPetMenu-button_other" type="button" aria-expanded="false" data-test="Find_A_Pet_Find_Other_Pets_Button" style="color: white;border: 1px solid #6504b5;background: #6504b5;-webkit-box-flex: 1;-ms-flex-positive: 1;flex-grow: 1;height: 100px;background-color: transparent;border-left: 1px solid #2e0152;border-radius: 0 10px 10px 0;border-left: 1px solid #2e0152;font-family: Nexa Regular, arial, helvetica, sans-serif;">
+				<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다른 애완 동물 찾기</font></font>
+			</button>
+		</div>
+	</div>
+</div>
 <!-- Resources -->
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
@@ -15,11 +133,63 @@
 <script src="https://www.amcharts.com/lib/4/geodata/worldHigh.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 <script src="/common/js/common_utils.js"></script>
-<!-- Chart code -->
 <script>
 var mapPolygonTemplate;
 am4core.ready(function() {
-
+	var lv_info = {
+		color:{4:"#ffa68c",3:"#ffd18c",2:"#ffe68c",1:"#a3e4a2",0:"#e0e0e0"},
+		imageURL:{
+			4:"https://www.amcharts.com/lib/images/weather/animated/thunder.svg",
+			3:"https://www.amcharts.com/lib/images/weather/animated/rainy-1.svg",
+			2:"https://www.amcharts.com/lib/images/weather/animated/cloudy-day-1.svg",
+			1:"https://www.amcharts.com/lib/images/weather/animated/day.svg",
+			0:""
+		}
+	};
+	var mapData = [];
+	var pieData = {};
+	${chartData}
+	var mapData2 = {};
+	// pieData = {시도코드:[{멍},{냥},..],..};
+	for (var k in pieData) {
+		for (var i in pieData[k]) {
+			pieData[k][i] = objConcat(pieData[k][i],getMapCodeInfo(k));
+		}
+	}
+	// mapData = [{시도코드,토탈,..},{},..]
+	for (var i in mapData) {
+		var upr_cd = mapData[i].upr_cd;
+		
+		mapData[i] = objConcat(mapData[i],getMapCodeInfo(mapData[i].upr_cd));
+		
+		// lv 설정
+		if (mapData[i].total>150) {
+			mapData[i].lv = 4;
+		} else if (mapData[i].total>100) {
+			mapData[i].lv = 3;
+		} else if (mapData[i].total>50) {
+			mapData[i].lv = 2;
+		} else if (mapData[i].total>0) {
+			mapData[i].lv = 1;
+		} else {
+			mapData[i].lv = 0;
+		}
+		
+		// color image 설정
+		mapData[i].color = lv_info.color[mapData[i].lv];
+		mapData[i].imageURL = lv_info.imageURL[mapData[i].lv];
+		
+		
+		if (!mapData2[upr_cd]) {
+			mapData2[upr_cd] = {};
+		}
+		
+		mapData2[upr_cd] = mapData[i];
+	}
+	// mapData2 = {시도코드:{시도코드,토탈},시도코드:{..}..};
+	console.log("2pieData",pieData);
+	console.log("2mapData",mapData);
+	console.log("2mapData2",mapData2);
 // Themes begin
 am4core.useTheme(am4themes_animated);
 // Themes end
@@ -38,11 +208,6 @@ chart.projection = new am4maps.projections.Mercator();
 chart.seriesContainer.draggable = false;
 chart.seriesContainer.resizable = false;
 chart.maxZoomLevel = 1;
-chart.seriesContainer.events.disableType("doublehit");
-chart.chartContainer.background.events.disableType("doublehit");
-/**/
-// zoomout on background click
-chart.chartContainer.background.events.on("hit", function () { zoomOut() });
 
 var colorSet = new am4core.ColorSet();
 var morphedPolygon;
@@ -63,7 +228,7 @@ mapPolygonTemplate.fillOpacity = map_option.fillOpacity;
 // take a color from color set
 mapPolygonTemplate.adapter.add("fill", function (fill, target) {
 	//target.dataItem.dataContext
-	if (target.dataItem.dataContext&&!getMapCodeInfo(target.dataItem.dataContext.id)) {
+	if (target.dataItem&&target.dataItem.dataContext&&!getMapCodeInfo(target.dataItem.dataContext.id)) {
 		return am4core.color("#e0e0e0");
 	}
 	if (target.dataItem.dataContext) {
@@ -77,238 +242,6 @@ var desaturateFilter = new am4core.DesaturateFilter();
 desaturateFilter.saturation = 1;
 mapPolygonTemplate.filters.push(desaturateFilter);
 
-// 맵차트 호버 스타일
-/*
-var hoverState = mapPolygonTemplate.states.create("hover");
-hoverState.properties.fillOpacity = 0.5;
-*/
-
-
-// what to do when country is clicked
-/*
-mapPolygonTemplate.events.on("hit", function (event) {
-    event.target.zIndex = 1000000;
-    if (event.target.dataItem.dataContext&&getMapCodeInfo(event.target.dataItem.dataContext.id)) {
-    	selectPolygon(event.target);
-    }
-})
-*/
-
-// Pie chart
-var pieChart = chart.seriesContainer.createChild(am4charts.PieChart);
-// Set width/heigh of a pie chart for easier positioning only
-pieChart.width = 100;
-pieChart.height = 100;
-pieChart.hidden = true; // can't use visible = false!
-
-// because defauls are 50, and it's not good with small countries
-pieChart.chartContainer.minHeight = 1;
-pieChart.chartContainer.minWidth = 1;
-
-var pieSeries = pieChart.series.push(new am4charts.PieSeries());
-pieSeries.dataFields.value = "value";
-pieSeries.dataFields.category = "category";
-var a = [417000,422400,429900].map(function(d,i,arr){
-	return {code:d,value:0,category:getUpkindNm(d)};
-	});
-pieSeries.data = a;//[{ value: 0, category: "417000" }, { value: 0, category: "422400" }, { value: 0, category: "429900" }];
-
-var dropShadowFilter = new am4core.DropShadowFilter();
-dropShadowFilter.blur = 4;
-pieSeries.filters.push(dropShadowFilter);
-
-var sliceTemplate = pieSeries.slices.template;
-sliceTemplate.fillOpacity = 1;
-sliceTemplate.strokeOpacity = 0;
-
-var activeState = sliceTemplate.states.getKey("active");
-activeState.properties.shiftRadius = 0; // no need to pull on click, as country circle under the pie won't make it good
-
-var sliceHoverState = sliceTemplate.states.getKey("hover");
-sliceHoverState.properties.shiftRadius = 0; // no need to pull on click, as country circle under the pie won't make it good
-
-// we don't need default pie chart animation, so change defaults
-var hiddenState = pieSeries.hiddenState;
-hiddenState.properties.startAngle = pieSeries.startAngle;
-hiddenState.properties.endAngle = pieSeries.endAngle;
-hiddenState.properties.opacity = 0;
-hiddenState.properties.visible = false;
-
-// series labels
-var labelTemplate = pieSeries.labels.template;
-labelTemplate.nonScaling = true;
-labelTemplate.fill = am4core.color("#FFFFFF");
-labelTemplate.fontSize = 10;
-labelTemplate.background = new am4core.RoundedRectangle();
-labelTemplate.background.fillOpacity = 0.9;
-labelTemplate.padding(4, 9, 4, 9);
-labelTemplate.background.fill = am4core.color("#7678a0");
-
-// we need pie series to hide faster to avoid strange pause after country is clicked
-pieSeries.hiddenState.transitionDuration = 200;
-
-// country label
-var countryLabel = chart.chartContainer.createChild(am4core.Label);
-/*
-countryLabel.text = "Select a country";
-countryLabel.fill = am4core.color("#7678a0");
-countryLabel.fontSize = 40;
-
-countryLabel.hiddenState.properties.dy = 1000;
-countryLabel.defaultState.properties.dy = 0;
-countryLabel.valign = "middle";
-countryLabel.align = "right";
-countryLabel.paddingRight = 50;
-countryLabel.hide(0);
-countryLabel.show();
-*/
-
-// select polygon
-function selectPolygon(mapPolygon) {
-    if (morphedPolygon != mapPolygon) {
-        var animation = pieSeries.hide();
-        console.log("animation",animation);
-        if (animation) {
-            animation.events.on("animationended", function () {
-                morphToCircle(mapPolygon);
-            })
-        }
-        else {
-            morphToCircle(mapPolygon);
-        }
-    }
-}
-
-// fade out all countries except selected
-function fadeOut(exceptPolygon) {
-    for (var i = 0; i < mapPolygonSeries.mapPolygons.length; i++) {
-        var polygon = mapPolygonSeries.mapPolygons.getIndex(i);
-        if (polygon != exceptPolygon) {
-            polygon.defaultState.properties.fillOpacity = map_option.fillOpacity;
-            polygon.animate([{ property: "fillOpacity", to: map_option.fillOpacity }, { property: "strokeOpacity", to: 1 }], polygon.polygon.morpher.morphDuration);
-        }
-    }
-}
-
-function zoomOut() {
-    if (morphedPolygon) {
-        pieSeries.hide();
-        morphBack();
-        fadeOut();
-        countryLabel.hide();
-        morphedPolygon = undefined;
-    }
-}
-
-function morphBack() {
-    if (morphedPolygon) {
-        morphedPolygon.polygon.morpher.morphBack();
-        
-        /*
-        var dsf = morphedPolygon.filters.getIndex(0);
-        dsf.animate({ property: "saturation", to: 0.25 }, morphedPolygon.polygon.morpher.morphDuration);
-        */
-    }
-}
-
-function morphToCircle(mapPolygon) {
-
-    var animationDuration = mapPolygon.polygon.morpher.morphDuration;
-    // if there is a country already morphed to circle, morph it back
-    morphBack();
-    // morph polygon to circle
-    mapPolygon.toFront();
-    mapPolygon.polygon.morpher.morphToSingle = true;
-    var morphAnimation = mapPolygon.polygon.morpher.morphToCircle();
-
-    mapPolygon.strokeOpacity = 0; // hide stroke for lines not to cross countries
-
-    mapPolygon.defaultState.properties.fillOpacity = map_option.fillOpacity;
-    mapPolygon.animate({ property: "fillOpacity", to: map_option.fillOpacity }, animationDuration);
-
-    // animate desaturate filter
-    //var filter = mapPolygon.filters.getIndex(0);
-    //filter.animate({ property: "saturation", to: 1 }, animationDuration);
-
-    // save currently morphed polygon
-    morphedPolygon = mapPolygon;
-
-    // fade out all other
-    fadeOut(mapPolygon);
-
-    // hide country label
-    countryLabel.hide();
-
-    if (morphAnimation) {
-        morphAnimation.events.on("animationended", function () {
-            zoomToCountry(mapPolygon);
-        })
-    }
-    else {
-        zoomToCountry(mapPolygon);
-    }
-}
-
-function zoomToCountry(mapPolygon) {
-	// 포커스 이동하는거인듯
-	/*
-    var zoomAnimation = chart.zoomToMapObject(mapPolygon, 2.2, true);
-    if (zoomAnimation) {
-        zoomAnimation.events.on("animationended", function () {
-            showPieChart(mapPolygon);
-        })
-    }
-    else {*/
-        showPieChart(mapPolygon);
-    //}
-}
-
-function showPieChart(mapPolygon) {
-	// 시도 코드
-	var mapCodeInfo = getMapCodeInfo(mapPolygon.polygon.dataItem.dataContext.id);
-	if (!mapCodeInfo && !pieData[mapCodeInfo.upr_cd]) {
-		return;
-	}
-	// 임시데이터 {시도구분코드:{건수:cnt,많은순서:}}
-	var data = pieData[mapCodeInfo.upr_cd];
-    mapPolygon.polygon.measure();
-    var radius = mapPolygon.polygon.measuredWidth / (2 * mapPolygon.globalScale) / chart.seriesContainer.scale;
-    pieChart.width = radius * 2;
-    pieChart.height = radius * 2;
-    pieChart.radius = radius;
-
-    var centerPoint = am4core.utils.spritePointToSvg(mapPolygon.polygon.centerPoint, mapPolygon.polygon);
-    centerPoint = am4core.utils.svgPointToSprite(centerPoint, chart.seriesContainer);
-
-    pieChart.x = centerPoint.x - radius;
-    pieChart.y = centerPoint.y - radius;
-
-    var fill = mapPolygon.fill;
-    var desaturated = fill.saturate(0.3);
-    for (var i = 0; i < pieSeries.dataItems.length; i++) {
-        var dataItem = pieSeries.dataItems.getIndex(i);
-        var color = am4core.color(upkindObj[dataItem.dataContext.code].color).rgb;
-     	// 데이터 셋팅
-        dataItem.value = data[dataItem.dataContext.code].value;
-     	// 색깔
-        dataItem.slice.fill = am4core.color(am4core.colors.interpolate(
-        		fill.rgb,
-            am4core.color("#ffffff").rgb,
-            0.2 * data[dataItem.dataContext.code].sort // 건수 많은 순으로 색 변화주기
-        ));
-        dataItem.label.text = dataItem.dataContext.category;
-        dataItem.label.background.fill = desaturated;
-        dataItem.tick.stroke = fill;
-    }
-
-    pieSeries.show();
-    pieChart.show();
-
-    countryLabel.text = "{name}";
-    countryLabel.dataItem = mapPolygon.dataItem;
-    countryLabel.fill = desaturated;
-    countryLabel.show();
-}
 /////////////////////////////////////////////////////
 //Image series
 var imageSeries = chart.series.push(new am4maps.MapImageSeries());
@@ -317,8 +250,6 @@ var imageTemplate = imageSeries.mapImages.template;
 imageTemplate.propertyFields.longitude = "longitude";
 imageTemplate.propertyFields.latitude = "latitude";
 imageTemplate.nonScaling = true;
-//imageTemplate.tooltipText = "{name}";
-//imageTemplate.alwaysShowTooltip = true;
 imageTemplate.adapter.add("fill", function (fill, target) {
 	//target.dataItem.dataContext
 	if (target.dataItem.dataContext&&!getMapCodeInfo(target.dataItem.dataContext.upr_cd)) {
@@ -329,6 +260,17 @@ imageTemplate.adapter.add("fill", function (fill, target) {
 	}
     return colorSet.getIndex(target.dataItem.index + 1);
 })
+imageTemplate.events.on("out", function (ev) {
+	ev.target.children.each(function(c){
+		if (c._className == "Label"){
+			c.hide(0);
+		}
+		if (c._className == "Image"){
+			c.width = 50;
+			c.height = 50;
+		}
+	})
+});
 
 var label = imageTemplate.createChild(am4core.Label);
 label.text = "{name}";
@@ -338,7 +280,7 @@ label.dy = -2;
 label.dx = 15;
 label.fill = am4core.color("#FFFFFF");
 label.fontSize = 10;
-label.padding(14, 12, 4, 13);
+label.padding(12, 12, 4, 12);
 label.background = new am4core.RoundedRectangle();
 //label.background.fillOpacity = 0.9;
 label.background.fill = am4core.color("#7678a0");
@@ -464,18 +406,6 @@ label2.verticalCenter = "top";
 label2.text = "";
 label2.fill = am4core.color("#7678a0");
 
-imageTemplate.events.on("out", function (ev) {
-	ev.target.children.each(function(c){
-		if (c._className == "Label"){
-			c.hide(0);
-		}
-		if (c._className == "Image"){
-			c.width = 50;
-			c.height = 50;
-		}
-	})
-});
-
 ///////////////////////////////////////////////////////////////////////////////////////////
 //////								pie 차트											///////
 //////								pie 차트											///////
@@ -578,117 +508,8 @@ imageTemplate.events.on("over", function (ev) {
 </tr>
 </table>
 </div>
-<script>
-// chart data create
-var tmp = {6110000:25, 6290000:10, 5690000:10, 6300000:10, 6280000:19, 6310000:25, 6410000:88, 6420000:14, 6260000:34, 6270000:16};
-var mapData = [];
-var pieData = {};
-for (var upr_cd in tmp) {
-	var dd = [] ;
-	for (var i in upkindArr) {
-		var ddd = getMapCodeInfo(upr_cd);
-		ddd.upkind=upkindArr[i];
-		ddd.upkindNm=getUpkindNm(upkindArr[i]);
-		ddd.code=upkindArr[i];
-		ddd.category=getUpkindNm(upkindArr[i]);
-		ddd.value=Math.round(Math.random()*100)+10;
-		dd.push(ddd);
-	}
-	// 정렬
-	for (var i=1;i<dd.length;i++) {
-		for (var j=0;j<dd.length-i;j++) {
-			if (dd[j].value<dd[j+1].value){
-				var dtmp = dd[j]; 
-				dd[j] = dd[j+1];
-				dd[j+1] = dtmp;
-			}
-		}
-	}
-	var prev = null;
-	var cnt = -1;
-	var total = 0;
-	// 정렬후 순서 셋팅
-	for (var i=0;i<dd.length;i++) {
-		if(prev!=null && dd[i].value == prev){
-			dd[i].sort = cnt;
-		} else {
-			dd[i].sort = ++cnt;
-		}
-		prev = dd[i].value;
-		
-		/*
-		// pieData = {시도코드:{{멍},{냥},..},..};
-		if (!pieData[upr_cd]) {
-			pieData[upr_cd] = {};
-		}
-		pieData[upr_cd][dd[i].upkind] = dd[i];
-		*/
-		
-		// mapData용
-		total += dd[i].value;
-	}
-	// pieData = {시도코드:[{멍},{냥},..],..};
-	pieData[upr_cd] = dd;
-	
-	var ddd = getMapCodeInfo(upr_cd);
-	ddd.total=total;
-	mapData.push(ddd);
-}
-
-for (var i=1;i<mapData.length;i++) {
-	for (var j=0;j<mapData.length-i;j++) {
-		if (mapData[j].total<mapData[j+1].total){
-			var dtmp = mapData[j]; 
-			mapData[j] = mapData[j+1];
-			mapData[j+1] = dtmp;
-		}
-	}
-}
-var mapData2 = {};
-var cnt = -1;
-
-var lv_info = {
-		color:{4:"#ffa68c",3:"#ffd18c",2:"#ffe68c",1:"#a3e4a2",0:"#e0e0e0"},
-		imageURL:{
-			4:"https://www.amcharts.com/lib/images/weather/animated/thunder.svg",
-			3:"https://www.amcharts.com/lib/images/weather/animated/rainy-1.svg",
-			2:"https://www.amcharts.com/lib/images/weather/animated/cloudy-day-1.svg",
-			1:"https://www.amcharts.com/lib/images/weather/animated/day.svg",
-			0:""
-		}
-	};
-var sido_info = [{"upr_cd":"6280000","map_id":"28","name":"인천광역시","latitude":37.55,"longitude":126.65},{"upr_cd":"6110000","map_id":"11","name":"서울특별시","latitude":37.6,"longitude":127.002},{"upr_cd":"6410000","map_id":"41","name":"경기도","latitude":37.3,"longitude":127.3},{"upr_cd":"6420000","map_id":"42","name":"강원도","latitude":37.7,"longitude":128.3},{"upr_cd":"5690000","map_id":"36","name":"세종특별자치시","latitude":36.6,"longitude":127.28167},{"upr_cd":"6300000","map_id":"30","name":"대전광역시","latitude":36.3,"longitude":127.43},{"upr_cd":"6270000","map_id":"27","name":"대구광역시","latitude":35.87222,"longitude":128.6025},{"upr_cd":"6310000","map_id":"31","name":"울산광역시","latitude":35.53889,"longitude":129.31},{"upr_cd":"6260000","map_id":"26","name":"부산광역시","latitude":35.25,"longitude":129},{"upr_cd":"6290000","map_id":"29","name":"광주광역시","latitude":35.18,"longitude":126.85}];
-var sidoMax = 0;
-for (var i=0;i<mapData.length;i++) {
-	// lv 설정
-	if (mapData[i].total>150) {
-		mapData[i].lv = 4;
-	} else if (mapData[i].total>100) {
-		mapData[i].lv = 3;
-	} else if (mapData[i].total>50) {
-		mapData[i].lv = 2;
-	} else if (mapData[i].total>0) {
-		mapData[i].lv = 1;
-	} else {
-		mapData[i].lv = 0;
-	}
-	
-	// color image 설정
-	mapData[i].color = lv_info.color[mapData[i].lv];
-	mapData[i].imageURL = lv_info.imageURL[mapData[i].lv];
-	
-	// max set
-	if (sidoMax<total) {
-		sidoMax = total;
-	}
-	
-	var upr_cd = mapData[i].upr_cd;
-	if (!mapData2[upr_cd]) {
-		mapData2[upr_cd] = {};
-	}
-	mapData2[upr_cd] = mapData[i];
-}
-console.log("pieData",pieData);
-console.log("mapData",mapData);
-console.log("mapData2",mapData2);
-</script>
+<div style="display:none;">
+<svg id="icon-dog" viewBox="0 0 101.8 87.7"><circle cx="21.8" cy="16.3" r="2.7"></circle><path d="M100.1 27.8C81 27.8 81 44.5 81 50v26.8c0 2.9-2.3 5.2-5.2 5.2h-.6c-2.9 0-5.2-2.3-5.2-5.2v-8.5c0-2.6-1.2-5.2-3.1-6.8-1.6-1.4-3.6-2-5.7-1.7l-18.1 2.7c-5.1.9-8.2 4.1-8.2 8.5v5.9c0 2.9-2.3 5.2-5.2 5.2h-.6c-2.9 0-5.2-2.3-5.2-5.2V35.7H25c.9 0 1.7-.7 1.7-1.7 0-.9-.7-1.7-1.7-1.7H14.1c-6.6 0-9.2-6.4-9.4-6.7-1.7-4.1-1.5-5.7-1.4-6.1.4-.3 2-1.2 7.1-2.2 1.7-.4 3-1.3 4-2.9 1.2-1.7 2.5-3.6 2.8-3.9C19.1 8.3 21 7.4 24.9 7c0 0 3.9-.3 7.6 0h.5l7.1-1.4c1.5-.3 1.7-.1 2.5.9l.1.2c2 2.5 5.7 8.1 6.9 13.3-.4.5-2.4 1.4-4.9 1-2.1-.3-5.8-1.6-7.1-7.1-.2-.9-1.1-1.4-2-1.2s-1.4 1.1-1.2 2c1.4 5.8 5.1 8.7 9 9.5v3.4c0 5.6 3.2 8.9 8.9 8.9h9.2c.9 0 1.7-.7 1.7-1.7 0-.9-.7-1.7-1.7-1.7h-9.2c-3.8 0-5.5-1.7-5.5-5.5v-3.1c.6 0 1.2-.1 1.7-.2 3.2-.7 5-2.6 4.5-4.7-1.3-5.4-5-11.4-7.7-14.8l-.1-.1C44 3.2 42.8 2 39.5 2.6L32.7 4c-4-.4-7.8 0-8 0-4.8.5-7.5 1.8-9.9 4.6-.4.5-2.4 3.3-3 4.1-.6.9-1.2 1.3-2 1.5-4.9 1-7.9 2.2-8.9 3.3-.9.9-1.7 3.2.8 9.5.1.4 3.6 8.7 12.4 8.7h6.4v41.1c0 4.7 3.8 8.5 8.5 8.5h.6c4.7 0 8.5-3.8 8.5-8.5v-5.9c0-3.7 3.4-4.9 5.4-5.2l18-2.6c1.3-.2 2.4.4 3 .9 1.2 1 1.9 2.7 1.9 4.3v8.5c0 4.7 3.8 8.5 8.5 8.5h.6c4.7 0 8.5-3.8 8.5-8.5V50c0-8.8 1.8-18.9 15.8-18.9.9 0 1.7-.7 1.7-1.7s-.4-1.6-1.4-1.6z"></path></svg>
+<svg id="icon-cat" viewBox="0 0 101.8 87.7"><path d="M34.1 31.4c-.8 0-1.4-.5-1.6-1.3-.2-.9.4-1.7 1.3-1.9l10.9-2.1c.9-.2 1.7.4 1.9 1.3s-.4 1.7-1.3 1.9l-10.9 2.1h-.3zM45 39h-.3l-10.9-2.2c-.9-.2-1.4-1-1.3-1.9.2-.9 1-1.4 1.9-1.3l10.9 2.1c.9.2 1.4 1 1.3 1.9-.2.9-.8 1.4-1.6 1.4z"></path><circle cx="26.6" cy="25.8" r="2.2"></circle><path d="M87 58.2c-.8-.5-1.8-.3-2.2.5-.5.8-.3 1.8.5 2.2 3.5 2.3 5.6 6.1 5.6 10.2 0 6.7-5.5 12.2-12.2 12.2H22.9v-2.6c0-.7.6-1.3 1.3-1.3h.9c3.6-.1 4-3.2 4-4.5v-29c.6.1 1.1.1 1.6.1h.5c.9 0 1.6-.8 1.5-1.7 0-.9-.8-1.6-1.7-1.6-.4 0-9.7.3-12.8-8.2-.1-.3-.4-1.4 0-2.2.1-.3.3-.6 1.1-.9.6-.2 1.1-.9 1.1-1.5 0-.1-.1-7.7 4.8-12.3l.1-.1s2.3-2.5 6.9-4h.1s.1 0 .2-.1c0 0 .1 0 .1-.1.1 0 .1-.1.1-.1l.1-.1.1-.1.1-.1.1-.1s0-.1.1-.1c0-.1 0-.1.1-.2V11.6l-1.2-5.4c1.3.3 3 1 4.6 2.2.1.1.1.1.2.1.1.5.3.6.5.6.9.2 1.7-.3 2-1.2l.7-3c1.9 1.2 5.5 4.3 8.4 12.2v.1s.1.2.2.3l.1.1s0 .1.1.1c3.2 3.2 5 7.5 5 12 0 4.4-1.7 8.6-4.8 11.8v.1c-.4.3-.6.8-.6 1.3 0 4.9 4 8.9 8.9 8.9h.6c7.9 0 14.3 6.4 14.3 14.3v9.4c0 .9.7 1.6 1.6 1.6.9 0 1.6-.7 1.6-1.6v-9.4c0-9.7-7.9-17.6-17.6-17.6h-.6c-2.9 0-5.3-2.2-5.6-5 3.5-3.7 5.5-8.6 5.5-13.8 0-5.3-2-10.2-5.7-14-4.9-13-11.9-14.5-12.2-14.6-.8-.2-1.7.4-1.9 1.2l-.6 2.6c-3.3-1.9-6.6-2-6.8-2-.5 0-1 .2-1.3.6-.3.4-.4.9-.3 1.4l1.4 6.3c-4.2 1.7-6.4 3.9-6.8 4.3-4.9 4.5-5.7 11.1-5.9 13.6-.8.5-1.5 1.2-1.9 2.1-1 2.1-.1 4.4 0 4.6 2.1 5.7 6.6 8.4 10.6 9.6V75c0 1.3-.3 1.3-.9 1.3h-.7c-2.5 0-4.5 2-4.5 4.5V85c0 .9.7 1.6 1.6 1.6h57.3c8.5 0 15.4-6.9 15.4-15.4 0-5.3-2.6-10.1-7-13z"></path></svg>
+<svg id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><path d="m60 468.027v28.973c0 8.284 6.716 15 15 15h100c8.284 0 15-6.716 15-15v-28.974h-130z"/><path d="m178.245 345.155-40.374-57.66c-10.511-15.013-30.933-19.776-46.494-10.844-4.68 2.687-8.631 6.426-11.592 10.896-.01-.018-.02-.036-.03-.053-7.812 11.66-8.144 27.415.377 39.584l17.225 24.599c4.752 6.786 3.103 16.139-3.683 20.891-6.786 4.752-16.139 3.103-20.891-3.684l-17.224-24.599c-9.95-14.211-13.769-31.459-10.751-48.567 2.914-16.525 11.878-30.977 25.29-40.911-.058-1.172-.098-2.345-.098-3.52v-93.629c0-19.112-15.049-35.195-34.156-35.647-19.683-.466-35.844 15.41-35.844 34.989v137.907c0 2.031.412 4.041 1.212 5.907l58.788 137.213h130v-55.59c0-13.408-4.064-26.3-11.755-37.282z"/><path d="m452 468.027v28.973c0 8.284-6.716 15-15 15h-100c-8.284 0-15-6.716-15-15v-28.974h130z"/><path d="m333.755 345.155 40.374-57.66c10.511-15.013 30.933-19.776 46.494-10.844 4.68 2.687 8.631 6.426 11.592 10.896.01-.018.02-.036.03-.053 7.812 11.66 8.144 27.415-.377 39.584l-17.225 24.599c-4.752 6.786-3.103 16.139 3.683 20.891 6.786 4.752 16.139 3.103 20.891-3.684l17.224-24.599c9.95-14.211 13.769-31.459 10.751-48.567-2.914-16.525-11.878-30.977-25.29-40.911.058-1.172.098-2.346.098-3.521v-93.629c0-19.112 15.049-35.195 34.156-35.647 19.683-.465 35.844 15.411 35.844 34.99v137.907c0 2.031-.412 4.041-1.212 5.907l-58.788 137.213h-130v-55.59c0-13.408 4.065-26.3 11.755-37.282z"/><path d="m241 170h30v80h-30z"/><path d="m395.966 119.345-130-115.556c-5.684-5.053-14.248-5.053-19.932 0l-130 115.556c-6.191 5.503-6.749 14.985-1.245 21.176 5.503 6.191 14.984 6.75 21.177 1.246l15.034-13.364v106.597c0 8.284 6.716 15 15 15h45v-95c0-8.284 6.716-15 15-15h60c8.284 0 15 6.716 15 15v95h45c8.284 0 15-6.716 15-15v-106.597l15.034 13.364c2.858 2.541 6.416 3.789 9.96 3.789 4.136 0 8.254-1.701 11.217-5.035 5.504-6.191 4.946-15.672-1.245-21.176z"/></svg>
+</div>

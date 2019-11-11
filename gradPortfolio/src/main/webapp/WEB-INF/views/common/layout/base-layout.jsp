@@ -19,8 +19,7 @@
 	<script src="/common/test/jquery-2.1.1.js"></script>
 	<script src="/common/js/bootstrap.min.js"></script>
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="/common/js/common_utils.js"></script>
-	<script>
+	<script src="/common/js/common_utils.js"></script>	<script>
   		$(document).ready(function(){
   			// 스크롤 메뉴 fixed 이벤트
   			$(window).scroll(function() {
@@ -46,10 +45,22 @@
   		});
   	</script>
 <title>Insert title here</title>
+<style>
+.body{
+background: #efeef1;
+padding-bottom: 65px;
+padding-top: 20px;
+}
+.body > .container{
+background: #fff;
+}
+</style>
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>
+	<div class="body">
 	<tiles:insertAttribute name="body"/>
+	</div>
 	<tiles:insertAttribute name="footer"/>
 </body>
 </html>

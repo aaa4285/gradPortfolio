@@ -12,7 +12,6 @@ Primary style
 *::after, *::before {
   content: '';
 }
-
 body {
   font-size: 100%;
   font-family: "PT Sans", sans-serif;
@@ -110,7 +109,7 @@ header h1 {
   }
 }
 
-
+li{  list-style-type: none;}
 .cd-item {
   position: relative;
   width:50%;
@@ -182,8 +181,8 @@ header h1 {
   transition: opacity 0.2s, background-color 0.2s;
 }
 .no-touch .cd-trigger:hover {
-  background: rgba(0, 0, 0, 0.2);
-  color:black;
+  /*background: rgba(0, 0, 0, 0.2);
+  color:black;*/
 }
 @media only screen and (min-width: 993px) {
   .cd-trigger {
@@ -216,7 +215,7 @@ header h1 {
   .cd-quick-view {
     display: block;
     position: fixed;
-    max-width: 900px;
+    max-width: 1024px;
     visibility: hidden;
     /* Force Hardware Acceleration in WebKit */
     -webkit-transform: translateZ(0);
@@ -271,7 +270,7 @@ header h1 {
 .cd-slider li img {
   display: block;
   width: 100%;
-  max-width: 400px;
+  /*max-width: 400px;*/
 }
 .cd-slider li.selected {
   position: relative;

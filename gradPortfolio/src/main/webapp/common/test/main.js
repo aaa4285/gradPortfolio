@@ -7,14 +7,10 @@ jQuery(document).ready(function($){
 	//open the quick view panel
 	$('.cd-trigger').on('click', function(event){
 		
-		var selectedImage = $(this).parent('.cd-item').children('div.img-box'),
+		var selectedImage = $(this).parent('.cd-item').children('img.img-box'),
 			slectedImageUrl = selectedImage.attr('src');
 		$('body').addClass('overlay-layer');
 		animateQuickView(selectedImage, sliderFinalWidth, maxQuickWidth, 'open');
-
-		//update the visible slider image in the quick view panel
-		//you don't need to implement/use the updateQuickView if retrieving the quick view data with ajax
-		updateQuickView(slectedImageUrl);
 	});
 
 	//close the quick view panel
@@ -30,13 +26,6 @@ jQuery(document).ready(function($){
 		}
 	});
 
-	//quick view slider implementation
-	/*
-	$('.cd-quick-view').on('click', '.cd-slider-navigation a', function(){
-		updateSlider($(this));
-	});
-	*/
-
 	//center quick-view on window resize
 	$(window).on('resize', function(){
 		if($('.cd-quick-view').hasClass('is-visible')){
@@ -45,21 +34,6 @@ jQuery(document).ready(function($){
 	});
 
 });
-function updateSlider(navigation) {
-	var sliderConatiner = navigation.parents('.cd-slider-wrapper').find('.cd-slider'),
-		activeSlider = sliderConatiner.children('.selected').removeClass('selected');
-	/*
-	if ( navigation.hasClass('cd-next') ) {
-		( !activeSlider.is(':last-child') ) ? activeSlider.next().addClass('selected') : sliderConatiner.children('li').eq(0).addClass('selected'); 
-	} else {
-		( !activeSlider.is(':first-child') ) ? activeSlider.prev().addClass('selected') : sliderConatiner.children('li').last().addClass('selected');
-	} 
-	*/
-}
-
-function updateQuickView(url) {
-	$('.cd-quick-view .cd-slider li').removeClass('selected').find('div.img-box[src="'+ url +'"]').parent('li').addClass('selected');
-}
 
 function resizeQuickView() {
 	
@@ -73,7 +47,7 @@ function resizeQuickView() {
 
 function closeQuickView(finalWidth, maxQuickWidth) {
 	var close = $('.cd-close'),
-		activeSliderUrl = close.siblings('.cd-slider-wrapper').find('.selected div.img-box').attr('src'),
+		activeSliderUrl = close.siblings('.cd-slider-wrapper').find('img.img-box').attr('src'),
 		selectedImage = $('.empty-box').find('div.img-box');
 	//update the image in the gallery
 	if( !$('.cd-quick-view').hasClass('velocity-animating') && $('.cd-quick-view').hasClass('add-content')) {
@@ -88,43 +62,31 @@ function animateQuickView(image, finalWidth, maxQuickWidth, animationType) {
 	var parentListItem = image.parent('.cd-item'),
 		topSelected = image.offset().top - $(window).scrollTop(),
 		leftSelected = image.offset().left,
-		widthSelected = $(".cd-quick-view ul.cd-slider li.selected div.img-box").width(),
-		heightSelected = $(".cd-quick-view ul.cd-slider li.selected div.img-box").height()*1>700?$(".cd-quick-view ul.cd-slider li.selected div.img-box").height():700,
+		widthSelected = $(".cd-quick-view img.img-box").width(),
+		heightSelected = $(".cd-quick-view img.img-box").height(),
 		windowWidth = $(window).width(),
 		windowHeight = $(window).height(),
 		finalLeft = (windowWidth - finalWidth)/2,
-		finalHeight = finalWidth * heightSelected/widthSelected,
-		finalTop = (windowHeight - finalHeight)/2,
+		finalHeight =  finalWidth * heightSelected/widthSelected,
+		finalTop = 100;//(windowHeight - finalHeight)/2,
 		quickViewWidth = ( windowWidth * .8 < maxQuickWidth ) ? windowWidth * .8 : maxQuickWidth ,
 		quickViewLeft = (windowWidth - quickViewWidth)/2;
-
 	if( animationType == 'open') {
 		//hide the image in the gallery
 		parentListItem.addClass('empty-box');
 		//place the quick view over the image gallery and give it the dimension of the gallery image
 		$('.cd-quick-view').css({
-		    "top": topSelected,
-		    "left": leftSelected,
-		    "width": widthSelected
-		})/*.velocity({
+		    "top": topSelected+"px",
+		    "left": leftSelected+"px",
+		    "max-width": widthSelected+"px"
+		}).addClass('is-visible').css({
 		    'top': finalTop+ 'px',
 		    'left': finalLeft+'px',
-		    'width': finalWidth+'px',
-		}, 1000, [ 400, 20 ], function(){
-			$('.cd-quick-view').addClass('animate-width').velocity({
-				'left': quickViewLeft+'px',
-		    	'width': quickViewWidth+'px',
-			}, 300, 'ease' ,function(){
-				$('.cd-quick-view').addClass('add-content');
-			});
-		})*/.addClass('is-visible').css({
-		    'top': finalTop+ 'px',
-		    'left': finalLeft+'px',
-		    'width': finalWidth+'px',
+		    'max-width': finalWidth+'px',
 		});
 		$('.cd-quick-view').addClass('animate-width').velocity({
 			'left': quickViewLeft+'px',
-	    	'width': quickViewWidth+'px',
+	    	'max-width': quickViewWidth+'px',
 		}, 300, 'ease' ,function(){
 			$('.cd-quick-view').addClass('add-content');
 		});
@@ -133,13 +95,13 @@ function animateQuickView(image, finalWidth, maxQuickWidth, animationType) {
 		$('.cd-quick-view').removeClass('add-content').velocity({
 		    'top': finalTop+ 'px',
 		    'left': finalLeft+'px',
-		    'width': finalWidth+'px',
+		    'max-width': finalWidth+'px',
 		}, 300, 'ease', function(){
 			$('body').removeClass('overlay-layer');
 			$('.cd-quick-view').removeClass('animate-width').velocity({
 				"top": topSelected,
 			    "left": leftSelected,
-			    "width": widthSelected,
+			    "max-width": widthSelected,
 			}, 500, 'ease', function(){
 				$('.cd-quick-view').removeClass('is-visible');
 				parentListItem.removeClass('empty-box');
@@ -158,6 +120,6 @@ function closeNoAnimation(image, finalWidth, maxQuickWidth) {
 	$('.cd-quick-view').velocity("stop").removeClass('add-content animate-width is-visible').css({
 		"top": topSelected,
 	    "left": leftSelected,
-	    "width": widthSelected,
+	    "max-width": widthSelected,
 	});
 }

@@ -2,6 +2,8 @@ package com.common.board.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import com.common.board.domain.BoardVO;
 import com.common.board.paging.Criteria;
 import com.common.board.paging.PageMaker;
 import com.common.board.service.BoardService;
+import com.common.util.CommonUtils;
 
 @Controller
 @RequestMapping("/board")
@@ -22,8 +25,9 @@ public class BoardController {
     private BoardService boardService;
     
     @RequestMapping("/list") //게시판 리스트 화면 호출  
-    private String boardList(Model model, @ModelAttribute Criteria criteria) throws Exception{
+    private String boardList(HttpServletRequest request,Model model, @ModelAttribute Criteria criteria) throws Exception{
         
+    	CommonUtils.setSession(request, 5);
         
         PageMaker pageMaker = new PageMaker();
         pageMaker.setCri(criteria);

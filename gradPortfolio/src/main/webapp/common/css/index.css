@@ -2,7 +2,7 @@ body {
   /*min-height: 2000px;*/
 }
 
-/* 怨좎젙 硫붾돱諛�  */
+/* �⑥쥙�젟 筌롫뗀�뤀獄쏉옙  */
 body.fixed {
 	padding-top: 70px;
 }
@@ -16,7 +16,7 @@ body.fixed {
 .fl {float: left;}
 .fr {float: right;}
 
-/* title - 濡쒓렇�씤, �쉶�썝媛��엯 �벑 */
+/* title - 嚥≪뮄�젃占쎌뵥, 占쎌돳占쎌뜚揶쏉옙占쎌뿯 占쎈쾻 */
 .title {
   position: relative;
   min-height: 22px;
@@ -40,7 +40,7 @@ body.fixed {
   padding: 40px 0;
   color: #999;
   text-align: center;
-  background-color: #f9f9f9;
+  background-color: #2e0152;
   border-top: 1px solid #e5e5e5;
 }
 .blog-footer p:last-child {
@@ -60,7 +60,7 @@ div.img-box{
 .h20 {height: 200px !important;}
 .h24 {height: 240px !important;}
 
-/* 寃뚯떆湲� */
+/* 野껊슣�뻻疫뀐옙 */
 .row-col-4 {  position: relative;
   min-height: 1px;
   /*padding-right: 15px;*/
@@ -217,3 +217,61 @@ div {
 }
 
 table th{font-weight: bold;}
+
+table.col_2 th{width:128px;}
+		table.col_2 td{width:calc(100% - 128px);}
+		table.col_4 th{width:60x;}
+		table.col_4 td{width:calc(50% - 60px);}
+	    html.loader::after {
+	    	position:absolute;
+	    	left: calc(50% + 40px);
+	    	top: calc(50% + 40px);
+	    	z-index: 9999;
+	    	margin: -75px 0 0 -75px;
+	    	border: 10px solid #f3f3f3;
+	    	border-radius: 50%;
+	    	border-top: 10px solid #471471;
+	    	width:80px;
+	    	height: 80px;
+	    	-webkit-animation: spin 2s linear infinite;
+	    	animation: spin 2s linear infinite;
+	    }
+	    @-webkitkeyframes spin{
+	    	0% {-webkit-transform: rotate(0deg);}
+	    	100% {-webkit-transform: rotate(360deg);}
+	    }
+	    @keyframes spin{
+	    	0% {-webkit-transform: rotate(0deg);}
+	    	100% {-webkit-transform: rotate(360deg);}
+	    }
+	    .bg {
+	    	display:none;
+		    background: black;
+		    width: 100%;
+		    height: 100%;
+		    top: 0;
+		    position: absolute;
+		    z-index: 1003;
+		    opacity: 0.5;
+    	}
+    	.bg.show{
+    		display:block;
+    	}
+    	li.cd-item .img-box:hover{
+    		border:1px solid #46156f;
+    		cursor:pointer;
+    		opacity:0.8;
+    	}
+    	li.cd-item .img-box{
+    		box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.24);
+    		border-radius: 8px;
+    	}
+    	li.cd-item .cd-trigger{
+    		line-height: 37px;
+		    height: 37px;
+		    color: #471471;
+		    border-radius: 0 0 8px 8px;
+		    background: white;
+		    padding: 0;
+		    margin: 0;
+    	}

@@ -54,6 +54,21 @@ function yyyyMMddFormat(str,c){
 	return y+c+m+c+d;
 }
 
+function objConcat(obj1,obj2,flag) {
+	var tmp = {};
+	for (var k in obj1) {
+		tmp[k] = obj1[k];
+	}
+	for (var k in obj2) {
+		if(flag === true){
+			tmp[k] = obj2[k];
+		} else {
+			if(tmp[k]==undefined) tmp[k] = obj2[k];
+		}
+	}
+	return tmp;
+}
+
 function getMapCodeInfo(cd){
 	//var mapper = [{"name":"강원도","upr_cd":"6420000","map_id":"42"},{"name":"경기도","upr_cd":"6410000","map_id":"41"},{"name":"광주광역시","upr_cd":"6290000","map_id":"29"},{"name":"대구광역시","upr_cd":"6270000","map_id":"27"},{"name":"대전광역시","upr_cd":"6300000","map_id":"30"},{"name":"부산광역시","upr_cd":"6260000","map_id":"26"},{"name":"서울특별시","upr_cd":"6110000","map_id":"11"},{"name":"세종특별자치시","upr_cd":"5690000","map_id":"36"},{"name":"울산광역시","upr_cd":"6310000","map_id":"31"},{"name":"인천광역시","upr_cd":"6280000","map_id":"28"}];
 	// key : upr_cd

@@ -49,7 +49,6 @@
 .body{
 background: #efeef1;
 padding-bottom: 65px;
-padding-top: 20px;
 }
 .body > .container{
 background: #fff;

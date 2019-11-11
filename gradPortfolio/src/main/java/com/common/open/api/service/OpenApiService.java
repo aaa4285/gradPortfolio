@@ -89,13 +89,13 @@ public class OpenApiService {
 			}
 			
 			
-/*
+
 			System.out.println("### map=" + map);
 			System.out.println("### dataResponse=" + dataResponse);
 			System.out.println("### body=" + body);
 			System.out.println("### items=" + items);
 			System.out.println("### itemList=" + itemList);
-*/
+
 
 			resultMap.put("Result", "0000");
 			resultMap.put("numOfRows", body.get("numOfRows"));

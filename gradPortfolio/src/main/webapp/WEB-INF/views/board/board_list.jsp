@@ -9,6 +9,9 @@ padding: 10px 15px;
 box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.24);
 min-height: 626px;
 }
+.body{
+padding-top: 20px;
+}
 </style>
 <div class="container">
     <div class="col-xs-12" style="margin:15px auto;">

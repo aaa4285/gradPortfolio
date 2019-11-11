@@ -34,6 +34,7 @@ public class MainController {
 		// service
 		System.out.println(FileUtils.readFile(chartBatch.path+chartBatch.fileNm));
 		model.addAttribute("chartData",FileUtils.readFile(chartBatch.path+chartBatch.fileNm));
+		model.addAttribute("sido",openApiService.OrganicAnimalsSearch("sido", new HashMap<String, Object>()));
 		return view;
 	}
 	@RequestMapping("/index2.do")

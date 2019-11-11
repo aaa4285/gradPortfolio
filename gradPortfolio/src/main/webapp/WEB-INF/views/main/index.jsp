@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Styles -->
 <style>
 #chartdiv {
@@ -69,7 +70,8 @@
     background: transparent no-repeat 50%;
     background-size: cover;
 }    
-
+.findAPetMenu-locationInputContainer{
+}
 @media print, screen and (min-width: 668px){
 .hero {
     height: 280px;
@@ -78,50 +80,73 @@
 .hero {
     height: 320px;
 }}
-/* // hero */
+button.findAPetMenu-button:hover *{
+color:#2e0152 !important;
+fill:#2e0152 !important;
+}
 </style>
 <div class="hero">
 	<img class="hero-img" src="https://d17fnq9dkz9hgj.cloudfront.net/uploads/2017/06/why-are-dogs-scared-of-firework-header.jpg" srcset="https://d17fnq9dkz9hgj.cloudfront.net/uploads/2017/06/why-are-dogs-scared-of-firework-header.jpg 800w, https://d17fnq9dkz9hgj.cloudfront.net/uploads/2017/06/feeding-small-dogs@420.jpg 500w" sizes="(max-width: 500px) 500px, (max-width: 800px) 800px" alt="" aria-hidden="true">
 </div>
 <div class="u-pullUpLarge" style="margin-top: -50px;">
 	<div class="findAPetMenu" style="padding: 0 50px;">
-		<div class="findAPetMenu-inner" data-test="Find_A_Pet_Menu" style="display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; position: relative; width: 100%; background: #6504b5; -ms-flex-wrap: nowrap; flex-wrap: nowrap; height: 100px; max-width: 1220px; margin: 0 auto; border-radius: 10px; -webkit-box-shadow: 0 1px 3px rgba(77, 71, 81, .2); box-shadow: 0 1px 3px rgba(77, 71, 81, .2);">
-			<div class="findAPetMenu-locationInputContainer" style="display: none; position: relative; background-color: #2e0152; border-radius: 10px 0 0 10px; -webkit-box-flex: 1; -ms-flex-positive: 1; flex-grow: 1; height: 100px; -ms-flex-preferred-size: 20%; flex-basis: 20%; display: block;">
-				<div class="u-isVisuallyHidden" aria-live="polite" aria-busy="false" aria-atomic="true" style="overflow: hidden !important; width: 1px !important; height: 1px !important; margin: -1px !important; border: 0 !important; padding: 0 !important; position: absolute !important; clip: rect(1px, 1px, 1px, 1px) !important; clip: rect(1px, 1px, 1px, 1px) !important; -webkit-clip-path: rect(1px, 1px, 1px, 1px) !important; clip-path: rect(1px, 1px, 1px, 1px) !important;"></div>
-				<input class="findAPetMenu-locationInput" placeholder="Enter City, State or ZIP" type="text" aria-label="위치별로 애완 동물 찾기" aria-describedby="FindAPetMenu_Location_Input_Description" data-test="Find_A_Pet_Menu_Location_Input" value="Piti Municipality, Guam" style="display: block; height: 100px; width: 100%; padding: 0 0 0 15%; background-color: #2e0152; border: none; border-radius: 10px 0 0 10px; -webkit-box-sizing: border-box; box-sizing: border-box; color: #fff; font-size: 14px; font-family: Nexa Regular, arial, helvetica, sans-serif;">
+		<div class="findAPetMenu-inner" data-test="Find_A_Pet_Menu"
+			style="display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; position: relative; width: 100%; background: #6504b5; -ms-flex-wrap: nowrap; flex-wrap: nowrap; height: 100px; max-width: 1220px; margin: 0 auto; border-radius: 10px; -webkit-box-shadow: 0 1px 3px rgba(77, 71, 81, .2); box-shadow: 0 1px 3px rgba(77, 71, 81, .2);">
+			<div class="findAPetMenu-locationInputContainer"
+				style="display: none; position: relative; background-color: #2e0152; border-radius: 10px 0 0 10px; -webkit-box-flex: 1; -ms-flex-positive: 1; flex-grow: 1; height: 100px; -ms-flex-preferred-size: 20%; flex-basis: 20%; display: block;">
+				<div class="u-isVisuallyHidden" aria-live="polite" aria-busy="false"
+					aria-atomic="true"
+					style="overflow: hidden !important; width: 1px !important; height: 1px !important; margin: -1px !important; border: 0 !important; padding: 0 !important; position: absolute !important; clip: rect(1px, 1px, 1px, 1px) !important; clip: rect(1px, 1px, 1px, 1px) !important; -webkit-clip-path: rect(1px, 1px, 1px, 1px) !important; clip-path: rect(1px, 1px, 1px, 1px) !important;"></div>
+				<form id="form">
+					<select class="findAPetMenu-locationInput" id="upr_cd" name="upr_cd"
+						aria-label="위치별로 애완 동물 찾기"
+						aria-describedby="FindAPetMenu_Location_Input_Description"
+						data-test="Find_A_Pet_Menu_Location_Input"
+						style="display: block; height: 100px; width: 50%; float:left;border-right: 1px solid #482367 !important; padding: 0 0 0 15%; background-color: #2e0152; border: none; border-radius: 10px 0 0 10px; -webkit-box-sizing: border-box; box-sizing: border-box; color: #fff; font-size: 14px; font-family: Nexa Regular, arial, helvetica, sans-serif;">
+						<option value="">지역선택</option>
+						<c:forEach var="map" items="${sido.data}" varStatus="status">
+							<option value="${map.orgCd}">${map.orgdownNm}</option>
+						</c:forEach>
+					</select>
+					<select class="findAPetMenu-locationInput"  id="org_cd" name="org_cd"
+						aria-describedby="FindAPetMenu_Location_Input_Description"
+						data-test="Find_A_Pet_Menu_Location_Input"
+						style="display: block; height: 100px; width: 50%; float:left;padding: 0 0 0 15%; background-color: #2e0152; border: none; border-radius: 10px 0 0 10px; -webkit-box-sizing: border-box; box-sizing: border-box; color: #fff; font-size: 14px; font-family: Nexa Regular, arial, helvetica, sans-serif;">
+						<option value="">지역선택</option>
+					</select>
+					<input type="hidden" name="upkind" value="">
+				</form>
 			</div>
-			<button class="findAPetMenu-button findAPetMenu-button_dogs" data-test="Find_A_Pet_Find_Dog_Button" type="button" aria-label="개 찾기" style="border: 1px solid #6504b5;background: #6504b5;display: block;width: 100%;color: #fff;font-size: 13px;-webkit-transition: background-color .25s;-o-transition: background-color .25s;transition: background-color .25s;width: auto;font-size: 14px;text-align: center;-webkit-box-flex: 1;-ms-flex-positive: 1;flex-grow: 1;height: 100px;">
-				<span class="findAPetMenu-buttonIcon" style="
-    display: inline-block;
-    width: 30px;
-    height: 40px;
-    margin-right: 10px;
-    vertical-align: middle;
-    width: 50px;
-    height: 50px;
-"><svg role="img" focusable="false" style="display: block;width: 100%;height: 100%;overflow: visible;fill: #fff;">
-							<use xlink:href="#icon-dog"></use></svg></span><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">개 찾기</font></font></span>
+			<button class="findAPetMenu-button findAPetMenu-button_dogs"
+				data-test="Find_A_Pet_Find_Dog_Button" type="button"
+				aria-label="개 찾기"
+				style="border: none; background: #6504b5; display: block; width: 13%; color: #fff; font-size: 13px; -webkit-transition: background-color .25s; -o-transition: background-color .25s; transition: background-color .25s; font-size: 14px; text-align: center; -webkit-box-flex: 1; -ms-flex-positive: 1; flex-grow: 1; height: 100px;">
+				<span class="findAPetMenu-buttonIcon"
+					style="display: inline-block; width: 30px; height: 40px; margin-right: 10px; vertical-align: middle; width: 50px; height: 50px;"><svg
+						role="img" focusable="false"
+						style="display: block; width: 100%; height: 100%; overflow: visible; fill: #fff;">
+							<use xlink:href="#icon-dog"></use></svg></span><span><font
+					style="vertical-align: inherit;"><font
+						style="vertical-align: inherit;">개 찾기</font></font></span>
 			</button>
-			<button class="findAPetMenu-button findAPetMenu-button_cats" data-test="Find_A_Pet_Find_Cat_Button" type="button" aria-label="고양이 찾기" style="border: 1px solid #6504b5;background: #6504b5;display: block;width: 100%;color: #fff;font-size: 13px;-webkit-transition: background-color .25s;-o-transition: background-color .25s;transition: background-color .25s;width: auto;font-size: 14px;text-align: center;-webkit-box-flex: 1;-ms-flex-positive: 1;flex-grow: 1;height: 100px;border-left: 1px solid #2e0152;">
-				<span class="findAPetMenu-buttonIcon" style="
-    display: inline-block;
-    width: 30px;
-    height: 40px;
-    margin-right: 10px;
-    vertical-align: middle;
-    width: 50px;
-    height: 50px;
-"><svg role="img" focusable="false" style="
-    display: block;
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-    fill: #fff;
-">
-							<use xlink:href="#icon-cat"></use></svg></span><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">고양이 찾기</font></font></span>
+			<button class="findAPetMenu-button findAPetMenu-button_cats"
+				data-test="Find_A_Pet_Find_Cat_Button" type="button"
+				aria-label="고양이 찾기"
+				style="border:none; background: #6504b5; display: block; width: 13%; color: #fff; font-size: 13px; -webkit-transition: background-color .25s; -o-transition: background-color .25s; transition: background-color .25s; font-size: 14px; text-align: center; -webkit-box-flex: 1; -ms-flex-positive: 1; flex-grow: 1; height: 100px; border-left: 1px solid #2e0152;">
+				<span class="findAPetMenu-buttonIcon"
+					style="display: inline-block; width: 30px; height: 40px; margin-right: 10px; vertical-align: middle; width: 50px; height: 50px;"><svg
+						role="img" focusable="false"
+						style="display: block; width: 100%; height: 100%; overflow: visible; fill: #fff;">
+							<use xlink:href="#icon-cat"></use></svg></span><span><font
+					style="vertical-align: inherit;"><font
+						style="vertical-align: inherit;">고양이 찾기</font></font></span>
 			</button>
-			<button class="findAPetMenu-button findAPetMenu-button_other" type="button" aria-expanded="false" data-test="Find_A_Pet_Find_Other_Pets_Button" style="color: white;border: 1px solid #6504b5;background: #6504b5;-webkit-box-flex: 1;-ms-flex-positive: 1;flex-grow: 1;height: 100px;background-color: transparent;border-left: 1px solid #2e0152;border-radius: 0 10px 10px 0;border-left: 1px solid #2e0152;font-family: Nexa Regular, arial, helvetica, sans-serif;">
-				<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다른 애완 동물 찾기</font></font>
+			<button class="findAPetMenu-button findAPetMenu-button_other"
+				type="button" aria-expanded="false"
+				data-test="Find_A_Pet_Find_Other_Pets_Button"
+				style="width:10%;color: white; border:none; background: #6504b5; -webkit-box-flex: 1; -ms-flex-positive: 1; flex-grow: 1; height: 100px; background-color: transparent; border-left: 1px solid #2e0152; border-radius: 0 10px 10px 0; border-left: 1px solid #2e0152; font-family: Nexa Regular, arial, helvetica, sans-serif;">
+				<font style="vertical-align: inherit;"><font
+					style="vertical-align: inherit;">다른 애완 동물 찾기</font></font>
 			</button>
 		</div>
 	</div>
@@ -133,6 +158,35 @@
 <script src="https://www.amcharts.com/lib/4/geodata/worldHigh.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 <script src="/common/js/common_utils.js"></script>
+<script>
+$(document).ready(function(){
+	//시도 change - 시군구 조회
+	$("#upr_cd").on("change", function(){
+		// 시군구,보호소 초기화
+		$("#org_cd option[value!='']").remove();
+		
+		// 공백체크
+		if ($("#upr_cd").val()=="") {
+			return;
+		}
+		$.ajax({
+			type:"POST",
+			url:"/sigungu",
+			contentType:"application/json;charset=UTF-8",
+			data:JSON.stringify({upr_cd:$("#upr_cd").val()}),
+			success : function(data){
+				data.data.forEach(function(map){
+					$("#org_cd").append('<option value="'+map.orgCd+'">'+map.orgdownNm+'</option>');
+				});
+			},
+			error: function(request,status,error){
+	            alert("2code:"+request.status+"\n"+"error:"+error);
+	        }
+	 
+		});
+	});
+})
+</script>
 <script>
 var mapPolygonTemplate;
 am4core.ready(function() {
@@ -498,15 +552,17 @@ imageTemplate.events.on("over", function (ev) {
 </script>
 <!-- HTML -->
 <div class="container">
-<table style="width:100%;">
-<tr>
-<td rowspan="2"><div id="chartdiv" style="float:left;"></div></td>
-<td><div id="chartdiv3" style="height: 400px;width:400px;float:left;"></div></td>
-</tr>
-<tr>
-<td><div id="chartdiv2" style="height: 300px;width:300px;float:left;"></div></td>
-</tr>
-</table>
+	<table style="width: 100%;">
+		<tr>
+			<td rowspan="2"><div id="chartdiv" style="float: left;"></div></td>
+			<td><div id="chartdiv3"
+					style="height: 400px; width: 400px; float: left;"></div></td>
+		</tr>
+		<tr>
+			<td><div id="chartdiv2"
+					style="height: 300px; width: 300px; float: left;"></div></td>
+		</tr>
+	</table>
 </div>
 <div style="display:none;">
 <svg id="icon-dog" viewBox="0 0 101.8 87.7"><circle cx="21.8" cy="16.3" r="2.7"></circle><path d="M100.1 27.8C81 27.8 81 44.5 81 50v26.8c0 2.9-2.3 5.2-5.2 5.2h-.6c-2.9 0-5.2-2.3-5.2-5.2v-8.5c0-2.6-1.2-5.2-3.1-6.8-1.6-1.4-3.6-2-5.7-1.7l-18.1 2.7c-5.1.9-8.2 4.1-8.2 8.5v5.9c0 2.9-2.3 5.2-5.2 5.2h-.6c-2.9 0-5.2-2.3-5.2-5.2V35.7H25c.9 0 1.7-.7 1.7-1.7 0-.9-.7-1.7-1.7-1.7H14.1c-6.6 0-9.2-6.4-9.4-6.7-1.7-4.1-1.5-5.7-1.4-6.1.4-.3 2-1.2 7.1-2.2 1.7-.4 3-1.3 4-2.9 1.2-1.7 2.5-3.6 2.8-3.9C19.1 8.3 21 7.4 24.9 7c0 0 3.9-.3 7.6 0h.5l7.1-1.4c1.5-.3 1.7-.1 2.5.9l.1.2c2 2.5 5.7 8.1 6.9 13.3-.4.5-2.4 1.4-4.9 1-2.1-.3-5.8-1.6-7.1-7.1-.2-.9-1.1-1.4-2-1.2s-1.4 1.1-1.2 2c1.4 5.8 5.1 8.7 9 9.5v3.4c0 5.6 3.2 8.9 8.9 8.9h9.2c.9 0 1.7-.7 1.7-1.7 0-.9-.7-1.7-1.7-1.7h-9.2c-3.8 0-5.5-1.7-5.5-5.5v-3.1c.6 0 1.2-.1 1.7-.2 3.2-.7 5-2.6 4.5-4.7-1.3-5.4-5-11.4-7.7-14.8l-.1-.1C44 3.2 42.8 2 39.5 2.6L32.7 4c-4-.4-7.8 0-8 0-4.8.5-7.5 1.8-9.9 4.6-.4.5-2.4 3.3-3 4.1-.6.9-1.2 1.3-2 1.5-4.9 1-7.9 2.2-8.9 3.3-.9.9-1.7 3.2.8 9.5.1.4 3.6 8.7 12.4 8.7h6.4v41.1c0 4.7 3.8 8.5 8.5 8.5h.6c4.7 0 8.5-3.8 8.5-8.5v-5.9c0-3.7 3.4-4.9 5.4-5.2l18-2.6c1.3-.2 2.4.4 3 .9 1.2 1 1.9 2.7 1.9 4.3v8.5c0 4.7 3.8 8.5 8.5 8.5h.6c4.7 0 8.5-3.8 8.5-8.5V50c0-8.8 1.8-18.9 15.8-18.9.9 0 1.7-.7 1.7-1.7s-.4-1.6-1.4-1.6z"></path></svg>

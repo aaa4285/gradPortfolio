@@ -1,10 +1,13 @@
-function resetHtml(targetId,list) {
+function resetHtml(targetId,list,fn) {
 	// 초기화
 	$("[for='"+targetId+"']").html("");
 	list.forEach(function(data,i){
 		data["_list_idx_"] = i;
 		appendHtml(targetId,data);
 	})
+	if (fn && typeof fn == "function") {
+		fn(targetId,list);
+	}
 }
 function appendHtml(targetId,data) {
 	// 타겟 html

@@ -68,7 +68,7 @@ function animateQuickView(image, finalWidth, maxQuickWidth, animationType) {
 		windowHeight = $(window).height(),
 		finalLeft = (windowWidth - finalWidth)/2,
 		finalHeight =  finalWidth * heightSelected/widthSelected,
-		finalTop = 100;//(windowHeight - finalHeight)/2,
+		finalTop = 25;//(windowHeight - finalHeight)/2,
 		quickViewWidth = ( windowWidth * .8 < maxQuickWidth ) ? windowWidth * .8 : maxQuickWidth ,
 		quickViewLeft = (windowWidth - quickViewWidth)/2;
 	if( animationType == 'open') {
@@ -76,37 +76,70 @@ function animateQuickView(image, finalWidth, maxQuickWidth, animationType) {
 		parentListItem.addClass('empty-box');
 		//place the quick view over the image gallery and give it the dimension of the gallery image
 		$('.cd-quick-view').css({
-		    "top": topSelected+"px",
-		    "left": leftSelected+"px",
-		    "max-width": widthSelected+"px"
+		    "top": 0,
+		    //"left": leftSelected+"px",
+		    "width": quickViewWidth+"px",
+		    overflow:'hidden auto'
 		}).addClass('is-visible').css({
-		    'top': finalTop+ 'px',
-		    'left': finalLeft+'px',
-		    'max-width': finalWidth+'px',
+		    'top': '0',
+		    //'left': finalLeft+'px',
+		    'width': quickViewWidth+'px',
 		});
 		$('.cd-quick-view').addClass('animate-width').velocity({
-			'left': quickViewLeft+'px',
-	    	'max-width': quickViewWidth+'px',
+			'top': finalTop+ 'px',
+			//'left': quickViewLeft+'px',
+	    	'width': quickViewWidth+'px',
 		}, 300, 'ease' ,function(){
 			$('.cd-quick-view').addClass('add-content');
 		});
+		$(".cd-quick-view").animate({scrollTop : 0});
+		$("body").css("overflow","hidden");
 	} else {
-		//close the quick view reverting the animation
+		$(".cd-quick-view").animate({scrollTop : 0});
+		parentListItem.removeClass('empty-box');
+		$('.cd-quick-view').css("overflow","hidden");
+		$('.cd-quick-view').removeClass('add-content');
+		$('body').removeClass('overlay-layer');
+		$('.cd-quick-view').removeClass('animate-width');
+		$('.cd-quick-view').removeClass('is-visible');
+		$("body").css("overflow","auto");
+		/*
 		$('.cd-quick-view').removeClass('add-content').velocity({
 		    'top': finalTop+ 'px',
-		    'left': finalLeft+'px',
-		    'max-width': finalWidth+'px',
+		    //'left': finalLeft+'px',
+		    'width': finalWidth+'px',
+		    'overflow':'hidden'
 		}, 300, 'ease', function(){
 			$('body').removeClass('overlay-layer');
 			$('.cd-quick-view').removeClass('animate-width').velocity({
 				"top": topSelected,
 			    "left": leftSelected,
-			    "max-width": widthSelected,
+			    "width": widthSelected
 			}, 500, 'ease', function(){
 				$('.cd-quick-view').removeClass('is-visible');
 				parentListItem.removeClass('empty-box');
 			});
 		});
+		/*
+		$(".cd-quick-view").animate({scrollTop : 0});
+		$('.cd-quick-view').css("overflow","hidden");
+		$('.cd-quick-view').removeClass('add-content').velocity({
+		    'top': finalTop+ 'px',
+		    //'left': finalLeft+'px',
+		    'width': finalWidth+'px',
+		    'overflow':'hidden'
+		}, 300, 'ease', function(){
+			$('body').removeClass('overlay-layer');
+			$('.cd-quick-view').removeClass('animate-width').velocity({
+				"top": topSelected,
+			    "left": leftSelected,
+			    "width": widthSelected
+			}, 500, 'ease', function(){
+				$('.cd-quick-view').removeClass('is-visible');
+				parentListItem.removeClass('empty-box');
+			});;
+		});
+		*/
 	}
 }
 function closeNoAnimation(image, finalWidth, maxQuickWidth) {

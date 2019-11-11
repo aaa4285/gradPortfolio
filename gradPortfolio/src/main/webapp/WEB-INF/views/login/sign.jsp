@@ -147,8 +147,6 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 	color: #777;
 }
 
-}
-
 /* Fallback for IE
 -------------------------------------------------- */
 @media all and (-ms-high-contrast: none) , ( -ms-high-contrast : active)
@@ -168,30 +166,29 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 				<div class="card card-signin my-5">
 					<div class="card-body">
 						<h5 class="card-title text-center">회원가입</h5>
-						<form class="form-signin" method="POST">
-							<input type ="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
+						<form class="form-signin" id="signForm" method="POST" action="/login/signUp">
 							<div class="form-label-group">
-								<input type="email" id="email" name="username" class="form-control"
+								<input type="email" id="email" name="email" class="form-control"
 									placeholder="Email address" required autofocus> <label
 									for="name"></label>
 							</div>
 							<div class="form-label-group">
-								<input type="text" id="name" name="name" class="form-control"
-									placeholder="Full name" required autofocus> <label
-									for="password"></label>
+								<input type="text" id="nickname" name="nickname"
+									class="form-control" placeholder="Full name" required autofocus>
+								<label for="password"></label>
 							</div>
 							<div class="form-label-group">
-								<input type="password" id="password" name="password" class="form-control"
-									placeholder="Password" required> <label
+								<input type="password" id="password" name="password"
+									class="form-control" placeholder="Password" required> <label
 									for="repatPassword"></label>
 							</div>
 							<div class="form-label-group">
-								<input type="password" id="repatPassword" name="repeatPassword" class="form-control"
-									placeholder="Repeat Password" required> <label
-									for=""></label>
+								<input type="password" id="repatPassword" name="repatPassword"
+									class="form-control" placeholder="Repeat Password" required>
+								<label for=""></label>
 							</div>
 							<button class="btn btn-lg btn-primary btn-block text-uppercase"
-								type="submit">회원가입</button>
+								type="submit" name="signBtn" id="signBtn">회원가입</button>
 						</form>
 					</div>
 				</div>
@@ -200,15 +197,64 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 	</div>
 </body>
 <script type="text/javascript">
-	
-	// 로그인
-	function login(url) {
-		location.href = url;
-	}
-	
-	// 회원가입
-	function sign() {
-		location.href = "sign";
-	}
+	$(document).ready(function() {
+		$("#signForm").validate({
+			//validation이 끝난 이후의 submit 직전 추가 작업할 부분
+			submitHandler : function() {
+				var f = confirm("회원가입을하시겠습니까?");
+				if (f) {
+					$form.submit();
+				} else {
+					return false;
+				}
+			},
+			//규칙
+			rules : {
+				password : {
+					required : true,
+					minlength : 3
+				},
+				repatPassword : {
+					required : true,
+					minlength : 3,
+					equalTo : password
+				},
+				nickname : {
+					required : true,
+					minlength : 2
+				},
+				email : {
+					required : true,
+					minlength : 2,
+					email : true
+				}
+			},
+			//규칙체크 실패시 출력될 메시지
+			messages : {
+				password : {
+					required : "필수로입력하세요",
+					minlength : "최소 {0}글자이상이어야 합니다"
+				},
+				repatPassword : {
+					required : "필수로입력하세요",
+					minlength : "최소 {0}글자이상이어야 합니다",
+					equalTo : "비밀번호가 일치하지 않습니다."
+				},
+				nickname : {
+					required : "필수로입력하세요",
+					minlength : "최소 {0}글자이상이어야 합니다"
+				},
+				email : {
+					required : "필수로입력하세요",
+					minlength : "최소 {0}글자이상이어야 합니다",
+					email : "메일규칙에 어긋납니다"
+				}
+			},
+			tooltip_options : {
+				_all_: {placement: "right"}
+			}
+		});
+
+	});
 </script>
 </html>

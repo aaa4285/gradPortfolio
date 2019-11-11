@@ -25,7 +25,6 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
 //      에러 메세지 저장
 //      String errorMsg = exception.getMessage();
 //      req.setAttribute(errormsgname, errorMsg);
-
         String errorMsg = "로그인실패";
         request.setAttribute("ERRORMSG", errorMsg);
         

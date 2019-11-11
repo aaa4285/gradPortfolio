@@ -189,7 +189,7 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 								type="submit">로그인</button>
 							<div class="custom-control mb-3">
 								<div class="d-flex justify-content-center links">
-									<a href="#" onclick="sign()">회원가입</a>
+									<a href="#" onclick="sign()" class="signUp">회원가입</a>
 								</div>
 							</div>
 							<hr class="my-4">
@@ -220,8 +220,27 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 			</div>
 		</div>
 	</div>
+	<div class="dim-layer">
+		<div class="dimBg"></div>
+		<div id="layer2" class="pop-layer">
+			<div class="pop-container">
+				<div class="pop-conts">
+					<!--content //-->
+					<p class="ctxt mb20">
+						회원가입이 완료 되었습니다
+					</p>
+
+					<div class="btn-r">
+						<a href="#" class="btn-layerClose" onclick="loginFocus()">Close</a>
+					</div>
+					<!--// content-->
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 <script type="text/javascript">
+
 	// 로그인
 	function login(url) {
 		location.href = url;
@@ -231,5 +250,19 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 	function sign() {
 		location.href = "sign";
 	}
+	
+	function loginFocus() {
+		$('#layer2').bPopup().close()
+		$("#email").focus();
+	}
+	
+	// 레이어 팝업 호출
+	(function(){
+		var signResult = "${signUp}";
+		
+		if (signResult == "success") {
+			layer_popup("#layer2");	
+		}
+	})();
 </script>
 </html>

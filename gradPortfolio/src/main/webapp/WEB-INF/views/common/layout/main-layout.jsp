@@ -17,7 +17,14 @@
 	<link href="/common/css/index.css" rel="stylesheet">
 	
 	<script src="/common/test/jquery-2.1.1.js"></script>
+	<script src="/common/js/Popper.js"></script>
+	<script src="/common/js/Tooltip.js"></script>
 	<script src="/common/js/bootstrap.min.js"></script>
+	<script src="/common/js/jquery.validate.js"></script>
+	<script src="/common/js/jquery-validate.bootstrap-tooltip.min.js"></script>
+	<script src="/common/js/common_utils.js"></script>
+	<script src="/common/js/bPopup.js"></script>
+	
 	<style>
 		.login.container {background-size: cover;
 		background-attachment: fixed;
@@ -41,6 +48,82 @@
 		.login.container {
 		    max-width: 540px;
 		}
+		<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.pop-layer .pop-container {
+			padding: 20px 25px;
+		}
+		
+		.pop-layer p.ctxt {
+			color: #666;
+			line-height: 25px;
+		}
+		
+		.pop-layer .btn-r {
+			width: 100%;
+			margin: 10px 0 20px;
+			padding-top: 10px;
+			border-top: 1px solid #DDD;
+			text-align: right;
+		}
+		
+		.pop-layer {
+			display: none;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 410px;
+			height: auto;
+			background-color: #fff;
+			border: 5px solid #3571B5;
+			z-index: 10;
+		}
+		
+		.dim-layer {
+			display: none;
+			position: fixed;
+			_position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 100;
+		}
+		
+		.dim-layer .dimBg {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: #000;
+			opacity: .5;
+			filter: alpha(opacity = 50);
+		}
+		
+		.dim-layer .pop-layer {
+			display: block;
+		}
+		
+		a.btn-layerClose {
+			display: inline-block;
+			height: 25px;
+			padding: 0 14px 0;
+			border: 1px solid #304a8a;
+			background-color: #3f5a9d;
+			font-size: 13px;
+			color: #fff;
+			line-height: 25px;
+		}
+		
+		a.btn-layerClose:hover {
+			border: 1px solid #091940;
+			background-color: #1f326a;
+			color: #fff;
+		}
 	</style>
 </head>
 <body>
@@ -49,4 +132,8 @@
 	</div>
 	
 </body>
+
+<script type="text/javascript">
+	
+</script>
 </html>

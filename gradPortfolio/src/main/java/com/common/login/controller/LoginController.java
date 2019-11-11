@@ -1,22 +1,21 @@
 package com.common.login.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.common.basic.login.entity.BasicMemberDto;
+import com.common.basic.login.entity.BasicUserService;
+
+import lombok.AllArgsConstructor;
 
 @Controller
+@AllArgsConstructor
 public class LoginController {
-	/*
-	@RequestMapping("/login")
-	public String login() {
-		AuthenticationTrustResolver trustResolver = new AuthenticationTrustResolverImpl();
-		if (trustResolver.isAnonymous(SecurityContextHolder.getContext().getAuthentication())) {
-			return "login/login";
-		} else {
-			return "redirect:/main/index.do";
-		}
-	}
-	*/
 	
+	private BasicUserService basicUserService;
 	
 	@RequestMapping("/login")
 	public String login() {
@@ -36,6 +35,15 @@ public class LoginController {
 	@RequestMapping("/")
 	public String main() {
 		return "redirect:/main/index.do";
+	}
+	
+	@RequestMapping("/login/signUp")
+	public String signUp(@ModelAttribute BasicMemberDto memberDto, Model model) {
+		basicUserService.joinUser(memberDto);
+		
+		model.addAttribute("signUp", "success");
+		
+		return "login/login";
 	}
 	
 }

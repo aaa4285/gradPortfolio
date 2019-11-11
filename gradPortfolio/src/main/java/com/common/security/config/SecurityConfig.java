@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
@@ -23,6 +25,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CompositeFilter;
 
+import com.common.basic.login.entity.BasicUserService;
 import com.common.login.facebook.FacebookOAuth2ClientAuthenticationProcessingFilter;
 import com.common.login.google.GoogleOAuth2ClientAuthenticationProcessingFilter;
 import com.common.login.handler.LoginFailHandler;
@@ -39,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final OAuth2ClientContext oauth2ClientContext;
     private final SocialService socialService;
+    private final BasicUserService memberService;
 
 
     @Override
@@ -52,6 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         		.and().formLogin().loginPage("/login")
         		.loginProcessingUrl("/login")
         		.failureHandler(new LoginFailHandler())
+        		.successHandler(new LoginSuccessHandler())
 				.and().exceptionHandling()
 				.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")).and()
 				.addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
@@ -69,8 +74,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    	System.out.println("여기도타나");
-    	super.configure(auth);
+    	auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
+    	System.out.println("userDetailsService");
+    }
+    
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Bean

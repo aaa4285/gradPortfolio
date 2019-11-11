@@ -17,7 +17,7 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class BasicUserDetails implements UserDetailsService{
+public class BasicUserService implements UserDetailsService{
 	private BasicUserRepository memberRepository;
 
 	 @Transactional
@@ -31,6 +31,7 @@ public class BasicUserDetails implements UserDetailsService{
 
 	    @Override
 	    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+	    	System.out.println( email);
 	    	BasicUser userEntity = memberRepository.findByEmail(email);
 	    	
 	    	if (userEntity == null) {
@@ -38,7 +39,6 @@ public class BasicUserDetails implements UserDetailsService{
 			}
 	    	
 	        List<GrantedAuthority> authorities = new ArrayList<>();
-
 	        return new User(userEntity.getEmail(), userEntity.getPassword(), authorities);
 	    }
 }

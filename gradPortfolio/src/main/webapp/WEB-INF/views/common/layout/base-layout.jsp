@@ -48,7 +48,7 @@
 <style>
 .body{
 background: #efeef1;
-padding-bottom: 65px;
+padding-bottom: 40px;
 }
 .body > .container{
 background: #fff;

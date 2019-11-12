@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="/common/test/style.css"> <!-- Resource style -->
 	<script src="/common/test/modernizr.js"></script> <!-- Modernizr -->
 	<style>
+	.cd-items.cd-container{padding-top: 65px;}
 	.search-sec select {
 		-webkit-appearance: none;
 	    border: 1px solid #46156f;
@@ -45,6 +46,13 @@
 	 .cd-item-info {
 	 	width:100%;
 	 }
+	 li.page-item:hover{
+	 	cursor: pointer;
+	 }
+	 li.page-item.active:hover{
+	 	cursor: default;
+	 	color:#fff !important;
+	 }
 	</style>
 	<script>
 		var list = [];
@@ -76,7 +84,7 @@
 				} else {
 					$("#upkind").val("");
 				}
-				search();
+				search(1);
 			});
 			// 동물 선택 활성화
 			$("button.findAPetMenu-button").on("click",function(){
@@ -112,7 +120,7 @@
 			 
 				});
 			});
-			//search();
+			search();
 		});
 	</script>
 	
@@ -214,7 +222,6 @@ fill:#ffc107 !important;
 					style="overflow: hidden !important; width: 1px !important; height: 1px !important; margin: -1px !important; border: 0 !important; padding: 0 !important; position: absolute !important; clip: rect(1px, 1px, 1px, 1px) !important; clip: rect(1px, 1px, 1px, 1px) !important; -webkit-clip-path: rect(1px, 1px, 1px, 1px) !important; clip-path: rect(1px, 1px, 1px, 1px) !important;"></div>
 				<form id="form">
 					<select class="findAPetMenu-locationInput" id="upr_cd" name="upr_cd"
-						aria-label="위치별로 애완 동물 찾기"
 						aria-describedby="FindAPetMenu_Location_Input_Description"
 						data-test="Find_A_Pet_Menu_Location_Input"
 						style="display: block; height: 100px; width: 50%; float:left;border-right: 1px solid #482367 !important; padding: 0 0 0 15%; background-color: #2e0152; border: none; border-radius: 10px 0 0 10px; -webkit-box-sizing: border-box; box-sizing: border-box; color: #fff; font-size: 14px; font-family: Nexa Regular, arial, helvetica, sans-serif;">
@@ -234,7 +241,6 @@ fill:#ffc107 !important;
 			</div>
 			<button class="findAPetMenu-button findAPetMenu-button_dogs" upkind="417000"
 				type="button"
-				aria-label="개 찾기"
 				style="border: none; background: #6504b5; display: block; width: 13%; color: #fff; font-size: 13px; -webkit-transition: background-color .25s; -o-transition: background-color .25s; transition: background-color .25s; font-size: 14px; text-align: center; -webkit-box-flex: 1; -ms-flex-positive: 1; flex-grow: 1; height: 100px;">
 				<span class="findAPetMenu-buttonIcon"
 					style="display: inline-block; width: 30px; height: 40px; margin-right: 10px; vertical-align: middle; width: 50px; height: 50px;"><svg
@@ -246,7 +252,6 @@ fill:#ffc107 !important;
 			</button>
 			<button class="findAPetMenu-button findAPetMenu-button_cats" upkind="422400"
 				type="button"
-				aria-label="고양이 찾기"
 				style="border:none; background: #6504b5; display: block; width: 13%; color: #fff; font-size: 13px; -webkit-transition: background-color .25s; -o-transition: background-color .25s; transition: background-color .25s; font-size: 14px; text-align: center; -webkit-box-flex: 1; -ms-flex-positive: 1; flex-grow: 1; height: 100px; border-left: 1px solid #2e0152;">
 				<span class="findAPetMenu-buttonIcon"
 					style="display: inline-block; width: 30px; height: 40px; margin-right: 10px; vertical-align: middle; width: 50px; height: 50px;"><svg
@@ -269,102 +274,7 @@ fill:#ffc107 !important;
 		</div>
 	</div>
 </div>
-<!-- 검색조건 -->
-<%--
-	<section class="search-sec" style="margin-bottom:50px;background: white;border-bottom: 1px solid #6504b5;border-top: 1px solid #6504b5;">
-		<div class="container">
-			<form id="searchForm" name="searchForm" action="#" method="post" novalidate="novalidate">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="row">
-							<div class="col-lg-3 col-md-3 col-sm-12 p-0">
-								<select class="form-control search-slt" id="upr_cd" name="upr_cd">
-									<option value="">전체</option>
-									<c:forEach var="map" items="${sido.data}" varStatus="status">
-										<option value="${map.orgCd}">${map.orgdownNm}</option>
-									</c:forEach>
-								</select>
-							</div>
-							<div class="col-lg-3 col-md-3 col-sm-12 p-0">
-								<select class="form-control search-slt" id="org_cd" name="org_cd">
-									<option value="">전체</option>
-								</select>
-							</div>
-							<div class="col-lg-3 col-md-3 col-sm-12 p-0">
-								<!-- 축종코드 -->
-								<select class="form-control search-slt" id="upkind" name="upkind">
-									<option value="">전체</option>
-									<option value="417000">강아지</option>
-									<option value="422400">고양이</option>
-									<option value="429900">기타</option>
-								</select>
-							</div>
-							<div class="col-lg-3 col-md-3 col-sm-12 p-0">
-								<button type="button" class="btn btn-primary wrn-btn"
-									id="searchBtn">검색</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
-	</section>
-	 --%>
-	<script type="text/html" id="paging">
-		<li class="page-item" idx="#idx#">
-			<a class="page-link waves-effect waves-effect #fn{pageFormat:idx}#">#idx#</a>
-		</li>
-	</script>
-	<script>
-		function setPaging(total,numOfRows,pageNo) {
-			/*
-			var total = 11604;
-			var numOfRows = 12;
-			var pageNo = 11;
-			*/
-			var pageArr = [];
-			var showpage = 5;
-			// 5단위로 넘기기
-			// i=(Math.floor((pageNo-1)/showpage)*showpage)+1;
-			// 중간에오게
-			// i=pageNo-2<0?1:pageNo-2;
-			for (var i=pageNo-2<1?1:pageNo-2;i<total;i++) {
-				if (pageArr.length>4) {
-					break;
-				}
-				pageArr.push({idx:i});
-			}
-			resetHtml("paging",pageArr,function(){$("li.page-item[idx='"+pageNo+"']").addClass("active");$("li.page-item").not(".active").on("click",function(){search($(this).attr("idx"));})});
-		}
-	</script>
-	<div style="position: relative; text-align: center;width:100%;padding-top:50px;">
-		<nav style="display: inline-block;">
-			<ul class="pagination pg-purple" for="paging">
-			<!-- 
-				<li class="page-item">
-					<a class="page-link waves-effect waves-effect" aria-label="Previous">
-						<span aria-hidden="true">«</span> <span class="sr-only">Previous</span>
-					</a>
-				</li>
-				<li class="page-item active">
-					<a class="page-link waves-effect waves-effect">1</a>
-				</li>
-				<li class="page-item"><a
-					class="page-link waves-effect waves-effect">2</a></li>
-				<li class="page-item"><a
-					class="page-link waves-effect waves-effect">3</a></li>
-				<li class="page-item"><a
-					class="page-link waves-effect waves-effect">4</a></li>
-				<li class="page-item"><a
-					class="page-link waves-effect waves-effect">5</a></li>
-				<li class="page-item"><a
-					class="page-link waves-effect waves-effect" aria-label="Next"> <span
-						aria-hidden="true">»</span> <span class="sr-only">Next</span>
-				</a></li>
-				 -->
-			</ul>
-		</nav>
-	</div>
+	<!-- 
 	<div class="cd-items cd-container">
 		전체 결과수 : <label id="totalCount">0</label>건<br/>
 		조회 건수 : <label id="numOfRows"></label><br/>
@@ -372,7 +282,7 @@ fill:#ffc107 !important;
 		<a href="javascript:void(0)" id="prevBtn" class="btn btn-primary" style="float:left;">이전</a>
 		<a href="javascript:void(0)" id="nextBtn" class="btn btn-primary" style="float:right;">다음</a>
 	</div>
-	
+	 -->
 	<ul class="cd-items cd-container" for="liveList">
 		<%for(int i=0;i<12;i++){%>
 		<li class="cd-item">
@@ -401,6 +311,42 @@ fill:#ffc107 !important;
 		</div> <!-- cd-item-info -->
 		<a href="#0" class="cd-close">Close</a>
 	</div> <!-- cd-quick-view -->
+	<!-- 페이징 -->
+	<script type="text/html" id="paging">
+		<li class="page-item" idx="#idx#">
+			<a class="page-link waves-effect waves-effect #fn{pageFormat:idx}#">#idx#</a>
+		</li>
+	</script>
+	<script>
+		function setPaging(total,numOfRows,pageNo) {
+			/*
+			var total = 11604;
+			var numOfRows = 12;
+			var pageNo = 11;
+			*/
+			var pageArr = [];
+			var showpage = 5;
+			// 5단위로 넘기기
+			// i=(Math.floor((pageNo-1)/showpage)*showpage)+1;
+			// 중간에오게
+			// i=pageNo-2<0?1:pageNo-2;
+			$("#page").children().remove();
+			for (var i=pageNo-2<1?1:pageNo-2;i<Math.ceil(total/numOfRows);i++) {
+				if (pageArr.length>4) {
+					break;
+				}
+				pageArr.push({idx:i});
+			}
+			resetHtml("paging",pageArr,function(){$("li.page-item[idx='"+pageNo+"']").addClass("active");$("#page li.page-item").not(".active").on("click",function(){search($(this).attr("idx"));})});
+		}
+	</script>
+	<div style="position: relative; text-align: center;width:100%;padding-top:25px;">
+		<nav style="display: inline-block;">
+			<ul class="pagination pg-purple fl" id="page" for="paging">
+			</ul>
+		</nav>
+	</div>
+	<!-- //페이징 -->
 <script src="/common/test/velocity.min.js"></script>
 <script src="/common/test/main.js"></script> <!-- Resource jQuery -->
 <script src="/common/js/common_utils.js"></script>

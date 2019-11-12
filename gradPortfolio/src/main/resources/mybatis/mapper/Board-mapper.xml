@@ -8,33 +8,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="boardCount" resultType="int">
         SELECT
             COUNT(*)
-        FROM BOARD
+        FROM board
     </select>
     
     <select id="boardList" resultType="com.common.board.domain.BoardVO" parameterType="com.common.board.paging.Criteria">
         SELECT
             *
-        FROM BOARD
-        ORDER BY BNO DESC
+        FROM board
+        ORDER BY BOARD_ID DESC
 		LIMIT #{pageStart}, #{perPageNum}
     </select>
     
     <select id="boardDetail" parameterType="int" resultType="com.common.board.domain.BoardVO">
         SELECT
             *
-        FROM BOARD
+        FROM board
         WHERE
-            BNO = #{bno}
+            BOARD_ID = #{board_id}
     </select>
     
     <insert id="boardInsert" parameterType="com.common.board.domain.BoardVO">
         INSERT INTO
-        BOARD (BNO, SUBJECT,CONTENT,WRITER,REG_DATE)
-        VALUES(#{bno},#{subject},#{content},#{writer},now()) 
+        board (BOARD_ID, SUBJECT,CONTENT,WRITER,REG_DATE)
+        VALUES(#{board_id},#{subject},#{content},#{writer},now()) 
     </insert>
     
     <update id="boardUpdate" parameterType="com.common.board.domain.BoardVO">
-        UPDATE BOARD
+        UPDATE board
             SET
         <if test="subject != null">
             SUBJECT = #{subject}
@@ -43,11 +43,90 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="content != null">
             CONTENT = #{content}
         </if>
-        WHERE BNO = #{bno}
+        WHERE BOARD_ID = #{board_id}
     </update>
     
     <delete id="boardDelete" parameterType="int">
-        DELETE FROM BOARD WHERE BNO = #{bno}
+        DELETE FROM board WHERE BOARD_ID = #{board_id}
     </delete>
+    
+    <insert id="regReply" parameterType="com.common.board.domain.BoardReplyVo" useGeneratedKeys="true" keyProperty="reply_id">
+        insert into board_reply(
+            board_id,
+            parent_id,
+            depth,
+            reply_content,
+            reply_writer
+        ) values (
+            #{board_id},
+            #{parent_id},
+            #{depth},
+            #{reply_content},
+            #{reply_writer}
+        )
+    </insert>
+    
+    <select id="getReplyList" resultType="com.common.board.domain.BoardReplyVo" parameterType="int">
+        select
+            reply_id,
+            board_id,
+            parent_id,
+            depth,
+            reply_content,
+            reply_writer
+        from
+            board_reply
+        where
+            board_id = #{board_id}
+        order by reply_id asc
+    </select>
+    
+    <delete id="delReply" parameterType="com.common.board.domain.BoardReplyVo">
+        delete
+        from
+            board_reply
+        where
+            reply_id = #{reply_id}
+    </delete>
+    
+    <delete id="deleteBoardReplyAll" parameterType="com.common.board.domain.BoardReplyVo">
+        delete
+        from
+            board_reply
+        where
+            reply_id in (
+                select
+                    reply_id
+                from
+                (select
+                    reply_id
+                from
+                    board_reply
+                where
+                    reply_id = #{reply_id}
+            ) or parent_id in (
+                select
+                    reply_id
+                from
+                (select
+                    reply_id
+                from
+                    board_reply
+                where
+                    reply_id = #{reply_id}
+            )
+    </delete>
+    
+    <update id="updateReply" parameterType="com.common.board.domain.BoardReplyVo">
+        update
+            board_reply
+        set
+            parent_id = #{parent_id},
+            depth = #{depth},
+            reply_content = #{reply_content},
+            reply_writer = #{reply_writer}
+        where
+            reply_id = #{reply_id}
+    </update>
     
 </mapper>

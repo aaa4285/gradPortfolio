@@ -28,7 +28,7 @@ padding-top: 20px;
                 <th>Date</th>
             </tr>
               <c:forEach var="l" items="${list}" varStatus="status" >
-                  <tr onclick="location.href='/board/detail/${l.bno}'" style="cursor:pointer;">
+                  <tr onclick="location.href='/board/detail/${l.board_id}'" style="cursor:pointer;">
                       <td>${status.count}</td>
                       <td>${l.subject}</td>
                       <td>${l.writer}</td>

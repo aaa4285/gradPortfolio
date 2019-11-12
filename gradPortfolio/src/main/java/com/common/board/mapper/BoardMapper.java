@@ -1,9 +1,11 @@
 package com.common.board.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.common.board.domain.BoardReplyVo;
 import com.common.board.domain.BoardVO;
 import com.common.board.paging.Criteria;
 
@@ -26,5 +28,13 @@ public interface BoardMapper {
     
     //게시글 삭제  
     public int boardDelete(int bno) throws Exception;
+    
+    int regReply(BoardReplyVo boardReply);
+    
+    List<BoardReplyVo> getReplyList(int boardId);
+    
+    int delReply(BoardReplyVo boardReply);
+    
+    boolean updateReply(BoardReplyVo boardReply);
     
 }

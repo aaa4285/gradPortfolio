@@ -49,8 +49,6 @@ public class KaKaoOAuth2ClientAuthenticationProcessingFilter extends OAuth2Clien
         final OAuth2Authentication auth = (OAuth2Authentication) authResult;
         final Object details = auth.getUserAuthentication().getDetails();
         
-        System.out.println(mapper.writeValueAsString(details));
-        
         final KaKaoUserDetails userDetails = mapper.convertValue(details, KaKaoUserDetails.class);
         
         userDetails.setAccessToken(accessToken);

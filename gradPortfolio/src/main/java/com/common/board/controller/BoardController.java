@@ -1,6 +1,8 @@
 package com.common.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,7 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.common.board.domain.BoardReplyVo;
 import com.common.board.domain.BoardVO;
 import com.common.board.paging.Criteria;
 import com.common.board.paging.PageMaker;
@@ -40,10 +46,10 @@ public class BoardController {
         return "board/board_list";
     }
     
-    @RequestMapping("/detail/{bno}") 
-    private String boardDetail(@PathVariable int bno, Model model) throws Exception{
-        
-        model.addAttribute("detail", boardService.boardDetail(bno));
+    @RequestMapping("/detail/{boardId}") 
+    private String boardDetail(@PathVariable int boardId, Model model) throws Exception{
+        model.addAttribute("detail", boardService.boardDetail(boardId));
+        model.addAttribute("replyList", boardService.getReplyList(boardId));
         
         return "board/board_detail";
     }
@@ -62,10 +68,10 @@ public class BoardController {
         return "redirect:/board/list";
     }
     
-    @RequestMapping("/update/{bno}") //게시글 수정폼 호출  
-    private String boardUpdateForm(@PathVariable int bno, Model model) throws Exception{
+    @RequestMapping("/update/{boardId}") //게시글 수정폼 호출  
+    private String boardUpdateForm(@PathVariable int boardId, Model model) throws Exception{
         
-        model.addAttribute("detail", boardService.boardDetail(bno));
+        model.addAttribute("detail", boardService.boardDetail(boardId));
         
         return "board/board_update";
     }
@@ -75,14 +81,85 @@ public class BoardController {
         
          boardService.boardUpdate(board);
          
-         return "redirect:/board/detail/"+board.getBno(); 
+         return "redirect:/board/detail/"+board.getBoard_id(); 
     }
  
-    @RequestMapping("/delete/{bno}")
-    private String boardDelete(@PathVariable int bno) throws Exception{
+    @RequestMapping("/delete/{boardId}")
+    private String boardDelete(@PathVariable int boardId) throws Exception{
         
-        boardService.boardDelete(bno);
+        boardService.boardDelete(boardId);
         
         return "redirect:/board/list";
+    }
+    
+  //AJAX 호출 (댓글 등록)
+    @RequestMapping(value="/reply/save", method=RequestMethod.POST)
+    @ResponseBody
+    public Object boardReplySave(@ModelAttribute BoardReplyVo boardReply) {
+ 
+        //리턴값
+        Map<String, Object> retVal = new HashMap<String, Object>();
+ 
+        //정보입력
+        int result = boardService.regReply(boardReply);
+ 
+        if(result > 0){
+            retVal.put("code", "OK");
+            retVal.put("reply_id", boardReply.getReply_id());
+            retVal.put("parent_id", boardReply.getParent_id());
+            retVal.put("message", "등록에 성공 하였습니다.");
+        }else{
+            retVal.put("code", "FAIL");
+            retVal.put("message", "등록에 실패 하였습니다.");
+        }
+ 
+        return retVal;
+ 
+    }
+    
+  //AJAX 호출 (댓글 삭제)
+    @RequestMapping(value="/reply/del", method=RequestMethod.POST)
+    @ResponseBody
+    public Object boardReplyDel(@ModelAttribute BoardReplyVo boardReply) {
+ 
+        //리턴값
+        Map<String, Object> retVal = new HashMap<String, Object>();
+ 
+        //정보입력
+        int result = boardService.delReply(boardReply);
+ 
+        if(result>0){
+            retVal.put("code", "OK");
+        }else{
+            retVal.put("code", "FAIL");
+            retVal.put("message", "삭제에 실패했습니다. 패스워드를 확인해주세요.");
+        }
+ 
+        return retVal;
+ 
+    }
+    
+  //AJAX 호출 (댓글 수정)
+    @RequestMapping(value="/reply/update", method=RequestMethod.POST)
+    @ResponseBody
+    public Object boardReplyUpdate(@ModelAttribute BoardReplyVo boardReply) {
+ 
+        //리턴값
+        Map<String, Object> retVal = new HashMap<String, Object>();
+ 
+        //정보입력
+        boolean check = boardService.updateReply(boardReply);
+ 
+        if(check){
+            retVal.put("code", "OK");
+            retVal.put("reply_id", boardReply.getReply_id());
+            retVal.put("message", "수정에 성공 하였습니다.");
+        }else{
+            retVal.put("code", "FAIL");
+            retVal.put("message", "수정에 실패 하였습니다.");
+        }
+ 
+        return retVal;
+ 
     }
 }

@@ -19,7 +19,7 @@
             <label for="content">내용</label>
             <textarea class="form-control" id="content" name="content" rows="3">${detail.content}</textarea>
           </div>
-          <input type="hidden" name="bno" value="${detail.bno}"/>
+          <input type="hidden" name="board_id" value="${detail.board_id}"/>
           <button type="submit" class="btn btn-primary btn-sm" style="float:right;">수정</button>
         </form>
     </div>

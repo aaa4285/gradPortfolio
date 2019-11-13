@@ -1,42 +1,59 @@
 package com.common.board.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.common.aws.service.AwsService;
 import com.common.board.domain.BoardReplyVo;
 import com.common.board.domain.BoardVO;
+import com.common.board.domain.FileVO;
 import com.common.board.paging.Criteria;
 import com.common.board.paging.PageMaker;
 import com.common.board.service.BoardService;
-import com.common.util.CommonUtils;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/board")
 public class BoardController {
  
-    @Autowired
-    private BoardService boardService;
+    private final BoardService boardService;
+    
+    private final AwsService awsService;
+    
+    @Value("${aws.bucket.img.upload.path}")
+	private String bucketImgUploadPath;
+	
+	@Value("${aws.bucket.json.upload.path}")
+	private String bucketJsonUploadPath;
     
     @RequestMapping("/list") //게시판 리스트 화면 호출  
     private String boardList(HttpServletRequest request,Model model, @ModelAttribute Criteria criteria) throws Exception{
         
-    	CommonUtils.setSession(request, 5);
-        
         PageMaker pageMaker = new PageMaker();
         pageMaker.setCri(criteria);
+        System.out.println(boardService);
         pageMaker.setTotalCount(boardService.boardCount());
             
         List<BoardVO> list = boardService.boardList(criteria);
@@ -61,10 +78,35 @@ public class BoardController {
     }
     
     @RequestMapping("/insertProc")
-    private String boardInsertProc(@ModelAttribute BoardVO board) throws Exception{
-        
-		boardService.boardInsert(board);
-        
+    private String boardInsertProc(@ModelAttribute BoardVO board, MultipartFile[] files) throws Exception{
+    	FileVO file  = new FileVO();
+    	
+    	// Array To List
+    	List<MultipartFile> fileList = new ArrayList<MultipartFile>(Arrays.asList(files));
+
+    	for (MultipartFile multipartFile : fileList) {
+            String originFileName = multipartFile.getOriginalFilename(); // 원본 파일 명
+            
+            String extension = FilenameUtils.getExtension(originFileName);
+            
+            String destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + extension;
+
+            SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
+            String filePath = bucketImgUploadPath + date.format(new Date());
+			awsService.uploadObject(filePath, multipartFile, destinationFileName);
+			
+			file.setBoard_id(board.getBoard_id());
+			file.setFilePath(filePath);
+			file.setFileName(destinationFileName);
+			file.setFileOriName(originFileName);
+			
+			boardService.fileInsert(file);
+        }
+    	
+    	BoardReplyVo b = null;
+    	System.out.println(b);
+    	boardService.boardInsert(board);
+
         return "redirect:/board/list";
     }
     

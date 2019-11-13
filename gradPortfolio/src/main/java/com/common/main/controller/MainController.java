@@ -34,7 +34,10 @@ public class MainController {
 		// service
 		System.out.println(FileUtils.readFile(chartBatch.path+chartBatch.fileNm));
 		model.addAttribute("chartData",FileUtils.readFile(chartBatch.path+chartBatch.fileNm));
-		model.addAttribute("sido",openApiService.OrganicAnimalsSearch("sido", new HashMap<String, Object>()));
+		Map<String, Object> searchJSON = new HashMap();
+		searchJSON.put("pageNo",1);
+		searchJSON.put("numOfRows",4);
+		model.addAttribute("search", openApiService.OrganicAnimalsSearch("abandonmentPublic", searchJSON));
 		return view;
 	}
 	@RequestMapping("/index2.do")

@@ -1,2 +1,2 @@
-web: java -Dspring.server.port=8000 -Dspring.profiles.active=dev  $JAVA_OPTS -jar /app/target/gradPortfolio-0.1.war --aws.access.key=${AWS_ACCESS_KEY} --aws.secret.key=${AWS_SECRET_KEY}
+web: java -Dspring.server.port=8000 -Dspring.profiles.active=dev $JAVA_OPTS -jar /app/target/gradPortfolio-0.1.war
 heroku deploy:jar /app/target/gradPortfolio-0.1.war --app gradPortfolio

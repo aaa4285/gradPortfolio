@@ -142,3 +142,9 @@ naver:
   resource:
     userInfoUri: https://openapi.naver.com/v1/nid/me
 
+aws:
+   access:
+      key: ${?AWS_ACCESS_KEY}
+   secret:
+      key:  ${?AWS_SECRET_KEY}
+   

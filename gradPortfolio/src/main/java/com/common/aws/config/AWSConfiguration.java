@@ -21,7 +21,7 @@ public class AWSConfiguration {
 	
 	@Bean
 	public BasicAWSCredentials AwsCredentials() {
-		BasicAWSCredentials AwsCreds = new BasicAWSCredentials(accessKey, secretKey);	
+		BasicAWSCredentials AwsCreds = new BasicAWSCredentials(accessKey, secretKey);
 		return AwsCreds;
 	}	
 	

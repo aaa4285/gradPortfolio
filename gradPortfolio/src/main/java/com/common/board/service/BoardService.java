@@ -5,12 +5,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.common.board.domain.BoardReplyVo;
 import com.common.board.domain.BoardVO;
+import com.common.board.domain.FileVO;
 import com.common.board.mapper.BoardMapper;
 import com.common.board.paging.Criteria;
 
+@Transactional
 @Service
 public class BoardService {
 
@@ -99,5 +102,10 @@ public class BoardService {
 	public boolean updateReply(BoardReplyVo boardReply) {
 		return boardMapper.updateReply(boardReply);
 	}
+	
+	public int fileInsert(FileVO file) throws Exception{
+	    return boardMapper.fileInsert(file);
+	}
+
 
 }

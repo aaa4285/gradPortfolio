@@ -29,8 +29,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <insert id="boardInsert" parameterType="com.common.board.domain.BoardVO">
         INSERT INTO
-        board (BOARD_ID, SUBJECT,CONTENT,WRITER,REG_DATE)
-        VALUES(#{board_id},#{subject},#{content},#{writer},now()) 
+        board (SUBJECT,CONTENT,WRITER,REG_DATE)
+        VALUES(#{subject},#{content},#{writer},now()) 
     </insert>
     
     <update id="boardUpdate" parameterType="com.common.board.domain.BoardVO">
@@ -128,5 +128,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where
             reply_id = #{reply_id}
     </update>
+    
+    <insert id="fileInsert" parameterType="com.common.board.domain.FileVO">
+	       INSERT INTO
+	       files (board_id, fileName, fileOriName, filePath)
+	    VALUES (#{board_id},#{fileName},#{fileOriName},#{filePath})
+	</insert>
+
     
 </mapper>

@@ -1,12 +1,12 @@
 package com.common.board.mapper;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.common.board.domain.BoardReplyVo;
 import com.common.board.domain.BoardVO;
+import com.common.board.domain.FileVO;
 import com.common.board.paging.Criteria;
 
 @Mapper
@@ -37,4 +37,5 @@ public interface BoardMapper {
     
     boolean updateReply(BoardReplyVo boardReply);
     
+    public int fileInsert(FileVO file) throws Exception;
 }

@@ -22,6 +22,10 @@
             <label for="content">내용</label>
             <textarea class="form-control" id="content" name="content" rows="3"></textarea>
           </div>
+          <div class="form-group">
+            <label for="content">파일 업로드</label>
+            <input multiple="multiple" type="file" name="files" />
+          </div>
 
           <button type="submit" class="btn btn-primary btn-sm" style="float:right;">작성</button>
           

@@ -121,7 +121,7 @@
 <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- 데이터 셋팅 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* -->
 <script>
 var lv_info = {
-		color:{4:"#ffa68c",3:"#ffd18c",2:"#ffe68c",1:"#a3e4a2",0:"#e0e0e0"},
+		color:{4:"#ff3a3a",3:"#ff9a44",2:"#ffe73c",1:"#32b936",0:"#e0e0e0"},
 		imageURL:{
 			4:"https://www.amcharts.com/lib/images/weather/animated/thunder.svg",
 			3:"https://www.amcharts.com/lib/images/weather/animated/rainy-1.svg",

@@ -45,9 +45,6 @@ public class BoardController {
     @Value("${aws.bucket.img.upload.path}")
 	private String bucketImgUploadPath;
 	
-	@Value("${aws.bucket.json.upload.path}")
-	private String bucketJsonUploadPath;
-    
     @RequestMapping("/list") //게시판 리스트 화면 호출  
     private String boardList(HttpServletRequest request,Model model, @ModelAttribute Criteria criteria) throws Exception{
         

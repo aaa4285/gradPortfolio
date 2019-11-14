@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
+
 public class FileUtils {
 	public static String readFile(String filePath) {
 		String fileStr = "";
@@ -26,7 +29,7 @@ public class FileUtils {
 		return fileStr;
 	}
 	
-	public static void writeFile(String str,String path,String fileNm) throws Exception {
+	public static MultipartFile writeFile(String str,String path,String fileNm) throws Exception {
 		
 		File file = new File(path);
 		if (!file.exists()) {
@@ -38,15 +41,15 @@ public class FileUtils {
 		file = new File(path+fileNm);
 		FileWriter writer = null;
         BufferedWriter bWriter = null;
-        
+        MultipartFile multipartFile = null;
         try {
             writer = new FileWriter(file, false);
             bWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, false), "UTF-8"));
             
             bWriter.write(str);
             bWriter.flush();
-            
-            System.out.println("DONE :: " + file.getAbsolutePath());
+
+            multipartFile = new MockMultipartFile(fileNm, new FileInputStream(file));
         } catch(IOException e) {
             e.printStackTrace();
         } finally {
@@ -57,5 +60,6 @@ public class FileUtils {
                 e.printStackTrace();
             }
         }
+        return multipartFile;
 	}
 }

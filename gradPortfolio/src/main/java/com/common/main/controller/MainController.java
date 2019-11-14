@@ -11,8 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.common.batch.FileUtils;
-import com.common.batch.chartBatch;
+import com.common.aws.service.AwsService;
 import com.common.open.api.service.OpenApiService;
 import com.common.util.CommonUtils;
 
@@ -24,6 +23,9 @@ public class MainController {
 	@Autowired
 	OpenApiService openApiService;
 	
+	@Autowired
+	AwsService awsService;
+	
 	@RequestMapping("/index.do")
 	public String goIndex(HttpServletRequest request,Model model) {
 		
@@ -32,8 +34,8 @@ public class MainController {
 		CommonUtils.setSession(request, 1);
 		
 		// service
-		System.out.println(FileUtils.readFile(chartBatch.path+chartBatch.fileNm));
-		model.addAttribute("chartData",FileUtils.readFile(chartBatch.path+chartBatch.fileNm));
+		//	System.out.println(FileUtils.readFile(chartBatch.path+chartBatch.fileNm));
+		//model.addAttribute("chartData",FileUtils.readFile(chartBatch.path+chartBatch.fileNm));
 		Map<String, Object> searchJSON = new HashMap();
 		searchJSON.put("pageNo",1);
 		searchJSON.put("numOfRows",4);

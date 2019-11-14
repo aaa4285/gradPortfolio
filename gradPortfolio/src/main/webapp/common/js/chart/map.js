@@ -107,22 +107,22 @@ axis2.renderer.grid.template.disabled = true;
 var range0 = axis2.axisRanges.create();
 range0.value = 0;
 range0.endValue = 50;
-range0.axisFill.fillOpacity = 1;
+range0.axisFill.fillOpacity = 0.7;
 range0.axisFill.fill = am4core.color(lv_info.color[1]);//colorSet.getIndex(0);
 var range1 = axis2.axisRanges.create();
 range1.value = 50;
 range1.endValue = 100;
-range1.axisFill.fillOpacity = 1;
+range1.axisFill.fillOpacity = 0.7;
 range1.axisFill.fill = am4core.color(lv_info.color[2]);//colorSet.getIndex(0);
 var range2 = axis2.axisRanges.create();
 range2.value = 100;
 range2.endValue = 150;
-range2.axisFill.fillOpacity = 1;
+range2.axisFill.fillOpacity = 0.7;
 range2.axisFill.fill = am4core.color(lv_info.color[3]);//colorSet.getIndex(0);
 var range3 = axis2.axisRanges.create();
 range3.value = 150;
 range3.endValue = 200;
-range3.axisFill.fillOpacity = 1;
+range3.axisFill.fillOpacity = 0.7;
 range3.axisFill.fill = am4core.color(lv_info.color[4]);//colorSet.getIndex(2);
 
 
@@ -181,7 +181,7 @@ pieChart.innerRadius = am4core.percent(30);
 // Put a thick white border around each Slice
 pieSeries.slices.template.stroke = am4core.color("#fff");
 pieSeries.slices.template.strokeWidth = 2;
-pieSeries.slices.template.strokeOpacity = 1;
+pieSeries.slices.template.strokeOpacity = 0.7;
 pieSeries.slices.template
   .cursorOverStyle = [
     {

@@ -12,6 +12,7 @@ min-height: 626px;
 .body{
 padding-top: 20px;
 }
+table tr th{background: #6504b5;color:#fff;}
 </style>
 <div class="container">
     <div class="col-xs-12" style="margin:15px auto;">
@@ -21,6 +22,13 @@ padding-top: 20px;
     
     <div class="col-xs-12">
         <table class="table table-hover">
+        	<colgroup>
+        		<col style="width:10px;">
+        		<col style="width:*;">
+        		<col style="width:120px;">
+        		<col style="width:165px;">
+        	</colgroup>
+        	<tbody>
             <tr>
                 <th>No</th>
                 <th>Subject</th>
@@ -37,6 +45,7 @@ padding-top: 20px;
                     </td>
                   </tr>
               </c:forEach>
+              </tbody>
         </table>
     </div>
     <ul class="btn-group pagination">

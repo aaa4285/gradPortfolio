@@ -203,7 +203,7 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 			submitHandler : function() {
 				var f = confirm("회원가입을하시겠습니까?");
 				if (f) {
-					$form.submit();
+					duplicateCheck($form);
 				} else {
 					return false;
 				}
@@ -254,6 +254,43 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 				_all_: {placement: "right"}
 			}
 		});
+		
+		// ID중복 체크
+		function duplicateCheck($form) {
+			$.ajax({
+				type:"POST",
+				url:"/sign/duplicateCheck",
+				dataType:"json",
+				data: $("#signForm").serialize(),
+				success : function(r){
+					if (r.result) {
+						$form.submit();
+					} else {
+						$.alert({
+                            title: '알림',
+                            content: r.msg,
+                            boxWidth: '300px',
+                            useBootstrap: false,
+                            icon: 'fa fa-question',
+                            theme: 'material',
+                            closeIcon: true,
+                            animation: 'scale',
+                            type: 'orange',
+                            buttons: {
+                                okay: {
+                                    text: '확인',
+                                    btnClass: 'btn-blue'
+                                }
+                            }
+                        });
+					}
+				},
+				error: function(request,status,error){
+				}
+		 
+			});
+		}
+		
 
 	});
 </script>

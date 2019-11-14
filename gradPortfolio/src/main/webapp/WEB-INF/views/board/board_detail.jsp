@@ -1,8 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<style>
+.body .container{
+border-radius: 8px;
+padding: 10px 15px;
+box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.24);
+min-height: 626px;
+}
+.body{
+padding-top: 20px;
+}
+table tr th{background: #6504b5;color:#fff;}
+</style>
 <body>
 <div class="container">
     <div class="col-xs-12" style="margin:15px auto;">
@@ -536,4 +546,3 @@
 	});
 
 </script>
-</html>

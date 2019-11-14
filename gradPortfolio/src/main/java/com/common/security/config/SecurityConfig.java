@@ -25,12 +25,12 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CompositeFilter;
 
-import com.common.basic.login.entity.BasicUserService;
 import com.common.login.facebook.FacebookOAuth2ClientAuthenticationProcessingFilter;
 import com.common.login.google.GoogleOAuth2ClientAuthenticationProcessingFilter;
 import com.common.login.handler.LoginFailHandler;
 import com.common.login.handler.LoginSuccessHandler;
 import com.common.login.kakao.KaKaoOAuth2ClientAuthenticationProcessingFilter;
+import com.common.login.service.BasicUserService;
 import com.common.login.service.SocialService;
 
 import lombok.AllArgsConstructor;

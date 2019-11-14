@@ -1,4 +1,4 @@
-package com.common.security.config;
+package com.common.config;
 
 
 import javax.sql.DataSource;
@@ -9,6 +9,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -30,6 +32,17 @@ public class SpringConfig {
       final SqlSessionTemplate sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory);
       return sqlSessionTemplate;
     }
-
-
+    
+    @Bean 
+    public ReloadableResourceBundleMessageSource messageSource(){
+            ReloadableResourceBundleMessageSource messageSource = new
+                    ReloadableResourceBundleMessageSource();
+            messageSource.setBasename("classpath:messages");
+            return messageSource;
+    }
+    
+    @Bean
+    public MessageSourceAccessor messageSourceAccessor() {
+        return new MessageSourceAccessor(messageSource());
+    }
 }

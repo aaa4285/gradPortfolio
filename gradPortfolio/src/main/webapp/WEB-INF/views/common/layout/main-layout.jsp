@@ -15,15 +15,19 @@
 	
 	<!-- Custom styles for this template -->
 	<link href="/common/css/index.css" rel="stylesheet">
+	<link href="/common/css/jquery-confirm.min.css" rel="stylesheet">
+	<link href="/common/css/bundled.css" rel="stylesheet">
 	
 	<script src="/common/test/jquery-2.1.1.js"></script>
 	<script src="/common/js/Popper.js"></script>
 	<script src="/common/js/Tooltip.js"></script>
+	<script src="/common/js/bundled.js"></script>
 	<script src="/common/js/bootstrap.min.js"></script>
 	<script src="/common/js/jquery.validate.js"></script>
 	<script src="/common/js/jquery-validate.bootstrap-tooltip.min.js"></script>
 	<script src="/common/js/common_utils.js"></script>
 	<script src="/common/js/bPopup.js"></script>
+	<script src="/common/js/jquery-confirm.min.js"></script>
 	
 	<style>
 		.login.container {background-size: cover;

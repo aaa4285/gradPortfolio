@@ -1,4 +1,4 @@
-package com.common.basic.login.entity;
+package com.common.login.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.common.basic.login.entity.BasicMemberDto;
+import com.common.basic.login.entity.BasicUser;
+import com.common.basic.login.entity.BasicUserRepository;
+
 import lombok.AllArgsConstructor;
 
 @Service
@@ -22,6 +26,7 @@ public class BasicUserService implements UserDetailsService{
 
 	 @Transactional
 	    public Long joinUser(BasicMemberDto memberDto) {
+		 	
 	        // 비밀번호 암호화
 		 	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	        memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
@@ -31,7 +36,6 @@ public class BasicUserService implements UserDetailsService{
 
 	    @Override
 	    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-	    	System.out.println( email);
 	    	BasicUser userEntity = memberRepository.findByEmail(email);
 	    	
 	    	if (userEntity == null) {
@@ -41,4 +45,24 @@ public class BasicUserService implements UserDetailsService{
 	        List<GrantedAuthority> authorities = new ArrayList<>();
 	        return new User(userEntity.getEmail(), userEntity.getPassword(), authorities);
 	    }
+	    
+	    /**
+	     * Email 중복체크
+	     * @param email
+	     * @return
+	     * @throws UsernameNotFoundException
+	     */
+	    public boolean isDuplicateCheck(String email) {
+	    	boolean result = false;
+	    	BasicUser userEntity = memberRepository.findByEmail(email);
+	    	
+	    	if (userEntity == null) {
+	    		result = true;
+			}
+	        
+	        return result;
+	    }
+	    
+	    
 }
+		

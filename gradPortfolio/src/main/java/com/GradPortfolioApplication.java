@@ -12,8 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAutoConfiguration
 @EnableScheduling
 @ComponentScan
-@Profile("local")
-@PropertySource("aws.properties")
+@PropertySource(value = {"aws.properties"}, ignoreResourceNotFound = true)
 public class GradPortfolioApplication{
 	
 	public static void main(String[] args) {

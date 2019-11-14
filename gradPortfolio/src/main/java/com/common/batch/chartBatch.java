@@ -83,12 +83,12 @@ public class chartBatch {
 					String upkind_nm = String.valueOf(map2.get("name"));
 					searchJSON.put("upkind", upkind);
 					
+					/*
 					Map<String, Object> searchMap = new HashMap<String, Object>();
 					searchMap.put("totalCount", Math.round(Math.random()*30));
-					/*
+					*/
 					Map<String, Object> searchMap = openApiService.OrganicAnimalsSearch("abandonmentPublic", searchJSON);
 					System.out.println("bar :: "+dt+" | "+ upkind_nm + " ok.");
-					*/
 					
 					if ("417000".equals(upkind)) {
 						upkindMap.put("dog", searchMap.get("totalCount"));
@@ -129,12 +129,12 @@ public class chartBatch {
 					searchJSON.put("upr_cd", upr_cd);
 					searchJSON.put("upkind", upkind);
 					
+					/*
 					Map<String, Object> searchMap = new HashMap<String, Object>();
 					searchMap.put("totalCount", Math.round(Math.random()*30));
-					/*
+					*/
 					Map<String, Object> searchMap = openApiService.OrganicAnimalsSearch("abandonmentPublic", searchJSON);
 					System.out.println("map :: "+upr_nm+" | " + upkind_nm + " ok.");
-					*/
 					
 					total += Integer.parseInt(String.valueOf(searchMap.get("totalCount")));
 					map2 = new HashMap();
@@ -206,12 +206,13 @@ public class chartBatch {
 					String upkind_nm = String.valueOf(map2.get("name"));
 					searchJSON.put("upkind", upkind);
 					
+					/*
 					Map<String, Object> searchMap = new HashMap<String, Object>();
 					searchMap.put("totalCount", Math.round(Math.random()*30));
-					/*
+					*/
 					Map<String, Object> searchMap = openApiService.OrganicAnimalsSearch("abandonmentPublic", searchJSON);
 					System.out.println("line :: "+ upkind_nm + " ok.");
-					*/
+					
 					if ("417000".equals(upkind)) {
 						upkindMap.put("dog", searchMap.get("totalCount"));
 					} else if ("422400".equals(upkind)) {

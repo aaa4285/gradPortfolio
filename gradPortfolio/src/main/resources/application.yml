@@ -146,5 +146,13 @@ aws:
    access:
       key: ${AWS_ACCESS_KEY_ID}
    secret:
-      key:  ${AWS_SECRET_ACCESS_KEY}
-   
+      key: ${AWS_SECRET_ACCESS_KEY}
+   s3:
+      bucket: aaa4285gradportfolio
+   bucket:
+      img:
+         upload:
+            path: aaa4285gradportfolio/board/
+      json:
+         upload:
+            path: aaa4285gradportfolio/json

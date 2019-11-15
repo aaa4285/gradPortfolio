@@ -43,7 +43,7 @@ public class MainController {
 		String view = request.getServletPath().substring(1,request.getServletPath().lastIndexOf("."));
 		
 		CommonUtils.setSession(request, 1);
-		
+		/*
 		try {
 			Resource resource = awsService.getObject(bucketJsonUploadPath, fileNm);
 			String jsonString = FileUtils.readFile(resource);
@@ -52,7 +52,7 @@ public class MainController {
 			//errors.aws.file.not.find
 			e.printStackTrace();
 		}
-		
+		*/
 		// service
 		//	System.out.println(FileUtils.readFile(chartBatch.path+chartBatch.fileNm));
 		//model.addAttribute("chartData",FileUtils.readFile(chartBatch.path+chartBatch.fileNm));

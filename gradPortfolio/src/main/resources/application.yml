@@ -153,6 +153,8 @@ aws:
       img:
          upload:
             path: aaa4285gradportfolio/board/
+         file:
+            path: s3.ap-northeast-2.amazonaws.com
       json:
          upload:
             path: aaa4285gradportfolio/json

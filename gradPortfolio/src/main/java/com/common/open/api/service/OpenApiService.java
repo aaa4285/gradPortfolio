@@ -39,16 +39,12 @@ public class OpenApiService {
 					urlBuilder.append("&" + k + "=" + v);
 				});
 			}
-			
 
 			URL url = new URL(urlBuilder.toString());
-
-			System.out.println("###url=>" + url);
 
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Content-Type", "application/json");
-			System.out.println("Response Code:" + conn.getResponseCode());
 
 			BufferedReader rd;
 			if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
@@ -67,7 +63,6 @@ public class OpenApiService {
 
 			JSONObject xmlJSONObj = XML.toJSONObject(sb.toString());
 			String xmlJSONObjString = xmlJSONObj.toString();
-			System.out.println("### xmlJSONObjString=>" + xmlJSONObjString);
 
 			ObjectMapper objectMapper = new ObjectMapper();
 			Map<String, Object> map = new HashMap<>();
@@ -79,7 +74,6 @@ public class OpenApiService {
 			List<Map<String, Object>> itemList = null;
 			if (body.get("items") != "") {
 				items = (Map<String, Object>) body.get("items");
-				System.out.println("********* "+items.get("item").getClass());
 				if (items.get("item").getClass().toString().lastIndexOf("LinkedHashMap")>-1) {
 					itemList = new ArrayList<Map<String, Object>>();
 					itemList.add((Map<String, Object>) items.get("item"));
@@ -88,15 +82,6 @@ public class OpenApiService {
 				}
 			}
 			
-			
-
-			System.out.println("### map=" + map);
-			System.out.println("### dataResponse=" + dataResponse);
-			System.out.println("### body=" + body);
-			System.out.println("### items=" + items);
-			System.out.println("### itemList=" + itemList);
-
-
 			resultMap.put("Result", "0000");
 			resultMap.put("numOfRows", body.get("numOfRows"));
 			resultMap.put("pageNo", body.get("pageNo"));

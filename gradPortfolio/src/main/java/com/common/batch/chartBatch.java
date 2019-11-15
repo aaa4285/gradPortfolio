@@ -76,10 +76,8 @@ public class chartBatch {
 				searchJSON.put("bgnde", dt); // 시작일
 				searchJSON.put("endde", dt); // 종료일
 				
-				System.out.println("["+dt+"] start*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
 				Map upkindMap = new HashMap();
 				upkindMap.put("date", dt.substring(4,6)+"-"+dt.substring(6));
-				System.out.println(dt.substring(4,6)+"-"+dt.substring(6)+"************************************");
 				for (Map<String, Object> map2 : upkind_list) {
 					// 축종코드
 					String upkind = String.valueOf(map2.get("cd"));
@@ -102,7 +100,6 @@ public class chartBatch {
 					}
 					barData.add(upkindMap);
 				} // 축종 end
-				System.out.println("["+dt+"] end*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
 			} // 시간 end
 			System.out.println("barData :: " + barData);
 			System.out.println("\nbar end~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
@@ -214,7 +211,6 @@ public class chartBatch {
 					searchMap.put("totalCount", Math.round(Math.random()*30));
 					*/
 					Map<String, Object> searchMap = openApiService.OrganicAnimalsSearch("abandonmentPublic", searchJSON);
-					System.out.println("line :: "+ upkind_nm + " ok.");
 					
 					if ("417000".equals(upkind)) {
 						upkindMap.put("dog", searchMap.get("totalCount"));
@@ -225,7 +221,6 @@ public class chartBatch {
 					}
 				} // 축종 end
 				lineData.add(upkindMap);
-				System.out.println(stDt + " ~ " + edDt + " end");
 			}
 			System.out.println("lineData :: " + lineData);
 			System.out.println("\nline end~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");

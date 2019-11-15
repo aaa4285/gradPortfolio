@@ -44,9 +44,8 @@ public class MainController {
 		
 		CommonUtils.setSession(request, 1);
 		
-		Resource resource;
 		try {
-			resource = awsService.getObject(bucketJsonUploadPath, fileNm);
+			Resource resource = awsService.getObject(bucketJsonUploadPath, fileNm);
 			String jsonString = FileUtils.readFile(resource);
 			model.addAttribute("chartData",jsonString);
 		} catch (IOException e) {

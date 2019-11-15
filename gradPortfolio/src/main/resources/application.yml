@@ -157,4 +157,4 @@ aws:
          upload:
             path: aaa4285gradportfolio/json
          file:
-            name: chart_data.jso
+            name: chart_data.json

@@ -1,5 +1,6 @@
 package com.common.board.controller;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,16 +45,22 @@ public class BoardController {
     
     @Value("${aws.bucket.img.upload.path}")
 	private String bucketImgUploadPath;
+    
+    @Value("${aws.bucket.img.file.path}")
+	private String bucketImgFilePath;
+    
+    
 	
     @RequestMapping("/list") //게시판 리스트 화면 호출  
     private String boardList(HttpServletRequest request,Model model, @ModelAttribute Criteria criteria) throws Exception{
         
         PageMaker pageMaker = new PageMaker();
         pageMaker.setCri(criteria);
-        System.out.println(boardService);
+        
         pageMaker.setTotalCount(boardService.boardCount());
             
         List<BoardVO> list = boardService.boardList(criteria);
+        
         model.addAttribute("list", list);
         model.addAttribute("pageMaker", pageMaker);
             
@@ -78,6 +85,10 @@ public class BoardController {
     private String boardInsertProc(@ModelAttribute BoardVO board, MultipartFile[] files) throws Exception{
     	FileVO file  = new FileVO();
     	
+    	boardService.boardInsert(board);
+    	
+    	int boardId = board.getId();
+    	
     	// Array To List
     	List<MultipartFile> fileList = new ArrayList<MultipartFile>(Arrays.asList(files));
 
@@ -92,18 +103,15 @@ public class BoardController {
             String filePath = bucketImgUploadPath + date.format(new Date());
 			awsService.uploadObject(filePath, multipartFile, destinationFileName);
 			
-			file.setBoard_id(board.getBoard_id());
-			file.setFilePath(filePath);
+			file.setBoard_id(boardId);
+			file.setFilePath(filePath + "/" + destinationFileName);
+			file.setFullPath(bucketImgFilePath + "/" + filePath + "/" + destinationFileName);
 			file.setFileName(destinationFileName);
 			file.setFileOriName(originFileName);
 			
 			boardService.fileInsert(file);
         }
     	
-    	BoardReplyVo b = null;
-    	System.out.println(b);
-    	boardService.boardInsert(board);
-
         return "redirect:/board/list";
     }
     

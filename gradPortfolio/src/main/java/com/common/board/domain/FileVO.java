@@ -11,4 +11,5 @@ public class FileVO {
     private String fileName;     //저장할 파일
     private String fileOriName;  //실제 파일
     private String filePath;
+    private String fullPath;
 }

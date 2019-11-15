@@ -53,6 +53,10 @@ public class BoardService {
 	public int regReply(BoardReplyVo boardReply) {
 		return boardMapper.regReply(boardReply);
 	}
+	
+	public int selectBoardId(BoardReplyVo boardReply) {
+		return boardMapper.regReply(boardReply);
+	}
 
 	public List<BoardReplyVo> getReplyList(int boardId) {
 

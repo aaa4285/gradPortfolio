@@ -12,10 +12,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="boardList" resultType="com.common.board.domain.BoardVO" parameterType="com.common.board.paging.Criteria">
-        SELECT
-            *
-        FROM board
-        ORDER BY BOARD_ID DESC
+       SELECT a.*, b.fullPath
+		FROM board a
+		LEFT OUTER JOIN (
+			SELECT a.*
+			FROM files a
+			INNER JOIN (
+			SELECT board_id, MAX(fno) AS fno
+			FROM files
+			GROUP BY board_id) b ON a.fno = b.fno
+		) b ON a.board_id = b.board_id
+	ORDER BY a.board_id DESC
 		LIMIT #{pageStart}, #{perPageNum}
     </select>
     
@@ -27,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             BOARD_ID = #{board_id}
     </select>
     
-    <insert id="boardInsert" parameterType="com.common.board.domain.BoardVO">
+    <insert id="boardInsert" parameterType="com.common.board.domain.BoardVO" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO
         board (SUBJECT,CONTENT,WRITER,REG_DATE)
         VALUES(#{subject},#{content},#{writer},now()) 
@@ -131,8 +138,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <insert id="fileInsert" parameterType="com.common.board.domain.FileVO">
 	       INSERT INTO
-	       files (board_id, fileName, fileOriName, filePath)
-	    VALUES (#{board_id},#{fileName},#{fileOriName},#{filePath})
+	       files (board_id, fileName, fileOriName, filePath, fullPath)
+	    VALUES (#{board_id}, #{fileName}, #{fileOriName}, #{filePath}, #{fullPath} )
 	</insert>
 
     

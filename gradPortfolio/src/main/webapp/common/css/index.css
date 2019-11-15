@@ -305,3 +305,12 @@ table.col_2 th{width:128px;}
 .label-default {
     background-color: #777;
 }
+
+/*페이징*/
+li.page-item:hover{
+ 	cursor: pointer;
+ }
+ li.page-item.active:hover{
+ 	cursor: default;
+ 	color:#fff !important;
+ }

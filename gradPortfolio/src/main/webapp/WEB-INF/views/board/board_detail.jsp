@@ -1,25 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <style>
-.body .container{
-border-radius: 8px;
-padding: 10px 15px;
-box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.24);
-min-height: 626px;
-}
-.body{
-padding-top: 20px;
-}
-table tr th{background: #6504b5;color:#fff;}
+	.body .container{
+		border-radius: 8px;
+		padding: 10px 15px;
+		box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.24);
+		min-height: 626px;
+	}
+	.body{padding-top: 20px;}
+	table tr th{background: #6504b5;color:#fff;}
+	#reply_area tr{border-bottom: 1px solid #efeef1;}
+	#reply_area tr:last-child{border-bottom: 0px;}
 </style>
-<body>
 <div class="container">
     <div class="col-xs-12" style="margin:15px auto;">
         <label style="font-size:20px;"><span class="glyphicon glyphicon-list-alt"></span>게시글 상세</label>
     </div>
+    
+    <div class="row">
+      <div class="col mb-3">
+        <h4>${detail.subject}</h4>
+        <hr>
+        <div class="row">
+      		<div class="col-md-8" style="text-align:left;">${detail.writer}</div>
+      		<div class="col-md-4" style="text-align:right;"><fmt:formatDate value="${detail.reg_date}" pattern="yyyy.MM.dd HH:mm:ss"/></div>
+      	</div>
+        <hr>
+			<div style="height: 210px; width: 100%; overflow: hidden auto;word-break: break-all;">${detail.content}</p>
+			</div>
+		</div>
+	</div>
  
     <div class="col-xs-12">
+    <%--
         <form action="/insertProc" method="post">
             <dl class="dl-horizontal">
               <dt>제목</dt>
@@ -37,50 +52,56 @@ table tr th{background: #6504b5;color:#fff;}
               <dd>${detail.content}</dd>
             </dl>
         </form>
-        <table border="1" width="1200px" id="reply_area">
-            <tr reply_type="all"  style="display:none"><!-- 뒤에 댓글 붙이기 쉽게 선언 -->
-                <td colspan="4"></td>
-            </tr>
-            <!-- 댓글이 들어갈 공간 -->
-            <c:forEach var="replyList" items="${replyList}" varStatus="status">
-             <tr reply_type="<c:if test="${replyList.depth == '0'}">main</c:if><c:if test="${replyList.depth == '1'}">sub</c:if>"><!-- 댓글의 depth 표시 -->
-                 <td width="820px">
-                     <c:if test="${replyList.depth == '1'}"> → </c:if>${replyList.reply_content}
-                 </td>
-                 <td width="100px">
-                     ${replyList.reply_writer}
-                 </td>
-                 <td align="center">
-                     <c:if test="${replyList.depth != '1'}">
-                         <button name="reply_reply" parent_id = "${replyList.reply_id}" reply_id = "${replyList.reply_id}">댓글</button><!-- 첫 댓글에만 댓글이 추가 대댓글 불가 -->
-                     </c:if>
-                     <button name="reply_modify" parent_id = "${replyList.parent_id}" r_type = "<c:if test="${replyList.depth == '0'}">main</c:if><c:if test="${replyList.depth == '1'}">sub</c:if>" reply_id = "${replyList.reply_id}">수정</button>
-                     <button name="reply_del" r_type = "<c:if test="${replyList.depth == '0'}">main</c:if><c:if test="${replyList.depth == '1'}">sub</c:if>" reply_id = "${replyList.reply_id}">삭제</button>
-                 </td>
-             </tr>
-         </c:forEach>
-        </table>
-        <table border="1" width="1200px" bordercolor="#46AA46">
-            <tr>
-                <td width="500px">
-                 이름: <input type="text" id="reply_writer" name="reply_writer" style="width:170px;" maxlength="10" placeholder="작성자"/>
-                 <button id="reply_save" name="reply_save">댓글 등록</button>
-             </td>
-            </tr>
-            <tr>
-                <td>
-                    <textarea id="reply_content" name="reply_content" rows="4" cols="50" placeholder="댓글을 입력하세요."></textarea>
-                </td>
-            </tr>
-        </table>
-		<div class="btn-group btn-group-sm" role="group" style="float:right;">
+         --%>
+         <!-- 댓글목록 -->
+		<div class="mb-2" style="border: 1px solid #efeef1;border-radius:8px;width:100%;padding:8px;">
+	        <table id="reply_area" style="width:100%;">
+	            <tr reply_type="all"  style="display:none"><!-- 뒤에 댓글 붙이기 쉽게 선언 -->
+	                <td colspan="4"></td>
+	            </tr>
+	            <!-- 댓글이 들어갈 공간 -->
+	            <c:forEach var="replyList" items="${replyList}" varStatus="status">
+	             <tr reply_type="<c:if test="${replyList.depth == '0'}">main</c:if><c:if test="${replyList.depth == '1'}">sub</c:if>"><!-- 댓글의 depth 표시 -->
+	                 <td width="820px">
+	                     <c:if test="${replyList.depth == '1'}"> → </c:if>${replyList.reply_content}
+	                 </td>
+	                 <td width="100px">
+	                     ${replyList.reply_writer}
+	                 </td>
+	                 <td align="center">
+	                     <c:if test="${replyList.depth != '1'}">
+	                         <button class="btn btn-sm btn-info" name="reply_reply" parent_id = "${replyList.reply_id}" reply_id = "${replyList.reply_id}">댓글</button><!-- 첫 댓글에만 댓글이 추가 대댓글 불가 -->
+	                     </c:if>
+	                     <button class="btn btn-sm btn-success" name="reply_modify" parent_id = "${replyList.parent_id}" r_type = "<c:if test="${replyList.depth == '0'}">main</c:if><c:if test="${replyList.depth == '1'}">sub</c:if>" reply_id = "${replyList.reply_id}">수정</button>
+	                     <button class="btn btn-sm btn-warning" name="reply_del" r_type = "<c:if test="${replyList.depth == '0'}">main</c:if><c:if test="${replyList.depth == '1'}">sub</c:if>" reply_id = "${replyList.reply_id}">삭제</button>
+	                 </td>
+	             </tr>
+	         </c:forEach>
+	        </table>
+        </div>
+        <!-- 댓글작성 -->
+        <div class="mb-2" style="border-radius:8px;width:100%;padding:8px;background:#efeef1;">
+	        <table style="width:100%;">
+	            <tr>
+	                <td width="500px">
+	                 	이름: <input type="text" id="reply_writer" name="reply_writer" style="width:170px;" maxlength="10" placeholder="작성자"/>
+	             	</td>
+	            </tr>
+	            <tr>
+	                <td>
+	                    <textarea id="reply_content" name="reply_content" rows="4" cols="50" placeholder="댓글을 입력하세요." style="display: inline-block;float: left;width: calc(100% - 87px);"></textarea>
+	                    <button type="button" id="reply_save" class="btn btn-primary btn-lg" style="float: left;margin-top: 30px;margin-left: 10px;">등록</button>
+	                </td>
+	            </tr>
+	        </table>
+        </div>
+		<div role="group" style="width:100%;text-align:right;">
 			<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/board/delete/${detail.board_id}'" style="margin-left: 3px;">삭제</button>
 			<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/board/update/${detail.board_id}'" style="margin-left: 3px;">수정</button>
 			<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/board/list'" style="margin-left: 3px;"> 목록 </button>
 		</div>
     </div>
 </div>
-</body>
 <script type="text/javascript">
 	$(document).ready(function() {
 

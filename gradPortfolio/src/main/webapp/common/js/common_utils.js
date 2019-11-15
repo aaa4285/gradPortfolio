@@ -1,3 +1,51 @@
+function ajax(url,data,callback){
+	var ajaxData = "";
+	var contentType = "application/x-www-form-urlencoded;charset=UTF-8";
+	if (data != null && data != undefined) {
+		if (typeof data == "object") {
+			// form element
+			if (data instanceof HTMLFormElement) {
+				ajaxData = data.serialize();
+			}
+			// form이 아니면 json string으로 간주
+			else {
+				contentType = "application/json;charset=UTF-8";
+				ajaxData = JSON.stringify(data);
+			}
+		} else if (typeof data == "string") {
+			ajaxData = data;
+			try {
+				JSON.parse(data);
+				contentType = "application/json;charset=UTF-8";
+			} catch (e) {
+				// json parse오류 발생시 form serialize로 간주
+			}
+		}
+	}
+	
+	$('body').addClass('overlay-layer');
+	$('html').addClass('loader');
+	$.ajax({
+		type:"POST",
+		url:url,
+		contentType:contentType,
+		dataType:"json",
+		data:ajaxData,
+		success : function(data){
+			$('body').removeClass('overlay-layer');
+			$('html').removeClass('loader');
+			if (callback && typeof callback == "function") {
+				callback(data);
+			}
+		},
+		error: function(request,status,error){
+			$('body').removeClass('overlay-layer');
+			$('html').removeClass('loader');
+            alert("code:"+request.status+"\n"+"error:"+error);
+        }
+ 
+	});
+}
 function resetHtml(targetId,list,fn) {
 	// 초기화
 	$("[for='"+targetId+"']").html("");

@@ -257,37 +257,28 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 		
 		// ID중복 체크
 		function duplicateCheck($form) {
-			$.ajax({
-				type:"POST",
-				url:"/sign/duplicateCheck",
-				dataType:"json",
-				data: $("#signForm").serialize(),
-				success : function(r){
-					if (r.result) {
-						$form.submit();
-					} else {
-						$.alert({
-                            title: '알림',
-                            content: r.msg,
-                            boxWidth: '300px',
-                            useBootstrap: false,
-                            icon: 'fa fa-question',
-                            theme: 'material',
-                            closeIcon: true,
-                            animation: 'scale',
-                            type: 'orange',
-                            buttons: {
-                                okay: {
-                                    text: '확인',
-                                    btnClass: 'btn-blue'
-                                }
+			ajax("/sign/duplicateCheck",$("#signForm"),function(r){
+				if (r.result) {
+					$form.submit();
+				} else {
+					$.alert({
+                        title: '알림',
+                        content: r.msg,
+                        boxWidth: '300px',
+                        useBootstrap: false,
+                        icon: 'fa fa-question',
+                        theme: 'material',
+                        closeIcon: true,
+                        animation: 'scale',
+                        type: 'orange',
+                        buttons: {
+                            okay: {
+                                text: '확인',
+                                btnClass: 'btn-blue'
                             }
-                        });
-					}
-				},
-				error: function(request,status,error){
+                        }
+                    });
 				}
-		 
 			});
 		}
 		

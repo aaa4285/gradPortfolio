@@ -4,15 +4,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
 .body .container{
-border-radius: 8px;
-padding: 10px 15px;
-box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.24);
-min-height: 626px;
+	border-radius: 8px;
+	padding: 10px 15px;
+	box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.24);
+	min-height: 626px;
 }
 .body{
-padding-top: 20px;
+	padding-top: 20px;
 }
-table tr th{background: #6504b5;color:#fff;}
+table tr th{
+	background: #6504b5;
+	color:#fff;
+}
 </style>
 <div class="container">
     <div class="col-xs-12" style="margin:15px auto;">
@@ -48,6 +51,18 @@ table tr th{background: #6504b5;color:#fff;}
               </tbody>
         </table>
     </div>
+	<div style="position: relative; text-align: center;width:100%;padding-top:25px;">
+		<nav style="display: inline-block;">
+			<ul class="pagination pg-purple fl" id="page" for="paging">
+				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+					<li class="page-item ${pageMaker.cri.page eq idx?" active":""}">
+						<a class="page-link waves-effect waves-effect" href='<c:url value="/board/list?page=${idx }"/>'>${idx}</a>
+					</li>
+				</c:forEach>
+			</ul>
+		</nav>
+	</div>
+	<%-- 기존 흐접 페이징
     <ul class="btn-group pagination">
 	    <c:if test="${pageMaker.prev}">
 	    <li>
@@ -56,7 +71,7 @@ table tr th{background: #6504b5;color:#fff;}
 	    </c:if>
 	    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 	    <li>
-	        <a href='<c:url value="/board/list?page=${idx }"/>'><i class="fa">${idx }</i></a>
+	        <a href='<c:url value="/board/list?page=${idx }"/>'><i class="fa">${idx}</i></a>
 	    </li>
 	    </c:forEach>
 	    <c:if test="${pageMaker.next && pageMaker.endPage >0 }">
@@ -65,4 +80,5 @@ table tr th{background: #6504b5;color:#fff;}
 	    </li>
 	    </c:if>
 	</ul>
+	 --%>
 </div>

@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
-
 	<link rel="stylesheet" href="/common/test/style.css"> <!-- Resource style -->
 	<script src="/common/test/modernizr.js"></script> <!-- Modernizr -->
 	<style>
@@ -46,37 +44,10 @@
 	 .cd-item-info {
 	 	width:100%;
 	 }
-	 li.page-item:hover{
-	 	cursor: pointer;
-	 }
-	 li.page-item.active:hover{
-	 	cursor: default;
-	 	color:#fff !important;
-	 }
 	</style>
 	<script>
 		var list = [];
 		$(document).ready(function(){
-			// 이전 버튼
-			$("#prevBtn").on("click",function(){
-				var pageNo = $("#pageNo").html()*1;
-				if (pageNo==1) {
-					alert("첫페이지입니다.");
-					return;
-				}
-				search($("#pageNo").html()*1-1);
-			});
-			// 이후 버튼
-			$("#nextBtn").on("click",function(){
-				var pageNo = $("#pageNo").html()*1;
-				var totalCount = $("#totalCount").html()*1;
-				var numOfRows = $("#numOfRows").html()*1;
-				if (Math.ceil(totalCount/numOfRows)<=pageNo) {
-					alert("마지막페이지입니다.");
-					return;
-				}
-				search(pageNo+1);
-			});
 			// 검색 버튼 click
 			$("#btnSearch").on("click",function(){
 				if ($("button.findAPetMenu-button.active").length>0) {
@@ -104,21 +75,13 @@
 				if ($("#upr_cd").val()=="") {
 					return;
 				}
-				$.ajax({
-					type:"POST",
-					url:"/sigungu",
-					contentType:"application/json;charset=UTF-8",
-					data:JSON.stringify({upr_cd:$("#upr_cd").val()}),
-					success : function(data){
+				
+				ajax("/sigungu",{upr_cd:$("#upr_cd").val()},
+					function(data){
 						data.data.forEach(function(map){
 							$("#org_cd").append('<option value="'+map.orgCd+'">'+map.orgdownNm+'</option>');
 						});
-					},
-					error: function(request,status,error){
-			            alert("2code:"+request.status+"\n"+"error:"+error);
-			        }
-			 
-				});
+					});
 			});
 			search();
 		});
@@ -314,7 +277,7 @@ fill:#ffc107 !important;
 	<!-- 페이징 -->
 	<script type="text/html" id="paging">
 		<li class="page-item" idx="#idx#">
-			<a class="page-link waves-effect waves-effect #fn{pageFormat:idx}#">#idx#</a>
+			<a class="page-link waves-effect waves-effect">#idx#</a>
 		</li>
 	</script>
 	<script>
@@ -337,7 +300,15 @@ fill:#ffc107 !important;
 				}
 				pageArr.push({idx:i});
 			}
-			resetHtml("paging",pageArr,function(){$("li.page-item[idx='"+pageNo+"']").addClass("active");$("#page li.page-item").not(".active").on("click",function(){search($(this).attr("idx"));})});
+			var callback = function(){
+				$("li.page-item[idx='"+pageNo+"']").addClass("active");
+				$("#page li.page-item").not(".active").on("click",function(){
+					$("#page li.page-item").removeClass("active");
+					$(this).addClass("active");
+					search($(this).attr("idx"));
+				});
+			}
+			resetHtml("paging",pageArr,callback);
 		}
 	</script>
 	<div style="position: relative; text-align: center;width:100%;padding-top:25px;">
@@ -359,32 +330,11 @@ function myinfo(obj){
 	if (w/h<1 && h>833) {
 		$(obj).css("height","833px");
 	}
-	
-	/*
-	if (w<500 && h<700) {
-		$(obj).css("width","500px");
-		$(obj).css("height","auto");
-	} else {
-		$(obj).css("width","auto");
-		$(obj).css("height","auto");
-	}
-	
-	$(obj).css("max-width","500px");
-	$(obj).css("max-height","700px");*/
-	
 }
 function search(pageNo){
-	$('body').addClass('overlay-layer');
-	$('html').addClass('loader');
-	$.ajax({
-		type:"POST",
-		url:"/abandonmentPublic",
-		contentType:"application/json;charset=UTF-8",
-		data:JSON.stringify({upr_cd:$("#upr_cd").val(),org_cd:$("#org_cd").val(),upkind:$("#upkind").val(),pageNo:(pageNo||1),numOfRows:12}),
-		success : function(data){
-			$('body').removeClass('overlay-layer');
-			$('html').removeClass('loader');
-			
+	ajax("/abandonmentPublic",
+		{upr_cd:$("#upr_cd").val(),org_cd:$("#org_cd").val(),upkind:$("#upkind").val(),pageNo:(pageNo||1),numOfRows:12},
+		function(data){
 			list = data.data;
 			$("#numOfRows").html(data.numOfRows);
 			$("#pageNo").html(data.pageNo);
@@ -411,14 +361,7 @@ function search(pageNo){
 				animateQuickView(selectedImage, sliderFinalWidth, maxQuickWidth, 'open');
 			});
 			setPaging(data.totalCount,data.numOfRows,data.pageNo);
-		},
-		error: function(request,status,error){
-			$('body').removeClass('overlay-layer');
-			$('html').removeClass('loader');
-            alert("1code:"+request.status+"\n"+"error:"+error);
-        }
- 
-	});
+		});
 }
 function processStateFormat(d){
 	if (d == "보호중") {

@@ -37,7 +37,8 @@ public class chartBatch {
 	@Value("${aws.bucket.json.upload.path}")
 	private String bucketJsonUploadPath;
 	
-	@Scheduled(cron="0 0 02 * * ?")
+//	@Scheduled(cron="0 0 02 * * ?")
+	@Scheduled(cron = "0  0/15  *  *  *")
 	private void chardBatch() {
 		List<Map<String, Object>> upr_cd_list = null;
 		List<Map<String, Object>> upkind_list = null;

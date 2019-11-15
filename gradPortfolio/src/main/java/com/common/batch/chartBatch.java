@@ -29,7 +29,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class chartBatch {
 	private final String path = "/app/data/data/batch/chart/";
-	private final String fileNm = "chart_data.json";
 	private OpenApiService openApiService = new OpenApiService();
 	
 	private final AwsService awsService;
@@ -37,8 +36,11 @@ public class chartBatch {
 	@Value("${aws.bucket.json.upload.path}")
 	private String bucketJsonUploadPath;
 	
+	@Value("${aws.bucket.json.file.name}")
+	private String fileNm;
+	
 //	@Scheduled(cron="0 0 02 * * ?")
-	@Scheduled(cron = "0  0/15  *  *  *")
+	@Scheduled(cron = "0  0/15  *  *  * *")
 	private void chardBatch() {
 		List<Map<String, Object>> upr_cd_list = null;
 		List<Map<String, Object>> upkind_list = null;

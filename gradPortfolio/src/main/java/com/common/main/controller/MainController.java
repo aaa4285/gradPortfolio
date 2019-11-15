@@ -1,17 +1,22 @@
 package com.common.main.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.common.aws.service.AwsService;
+import com.common.batch.FileUtils;
+import com.common.batch.chartBatch;
 import com.common.open.api.service.OpenApiService;
 import com.common.util.CommonUtils;
 
@@ -26,12 +31,28 @@ public class MainController {
 	@Autowired
 	AwsService awsService;
 	
+	@Value("${aws.bucket.json.upload.path}")
+	private String bucketJsonUploadPath;
+	
+	@Value("${aws.bucket.json.file.name}")
+	private String fileNm;
+	
 	@RequestMapping("/index.do")
 	public String goIndex(HttpServletRequest request,Model model) {
 		
 		String view = request.getServletPath().substring(1,request.getServletPath().lastIndexOf("."));
 		
 		CommonUtils.setSession(request, 1);
+		
+		Resource resource;
+		try {
+			resource = awsService.getObject(bucketJsonUploadPath, fileNm);
+			String jsonString = FileUtils.readFile(resource);
+			model.addAttribute("chartData",jsonString);
+		} catch (IOException e) {
+			//errors.aws.file.not.find
+			e.printStackTrace();
+		}
 		
 		// service
 		//	System.out.println(FileUtils.readFile(chartBatch.path+chartBatch.fileNm));

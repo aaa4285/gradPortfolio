@@ -13,6 +13,7 @@ public class FacebookUserDetails {
     private String email;
     private long expiration;
     private String access_token;
+    private String imageUrl;
 
     public void setAccessToken(OAuth2AccessToken accessToken) {
         this.access_token = accessToken.getValue();

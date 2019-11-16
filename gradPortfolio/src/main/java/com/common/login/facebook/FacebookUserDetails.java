@@ -2,8 +2,6 @@ package com.common.login.facebook;
 
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.Getter;
 
 @Getter

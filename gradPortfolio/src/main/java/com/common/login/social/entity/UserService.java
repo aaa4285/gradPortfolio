@@ -1,4 +1,4 @@
-package com.common.social.login.entity;
+package com.common.login.social.entity;
 
 import org.springframework.stereotype.Service;
 

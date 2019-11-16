@@ -1,4 +1,4 @@
-package com.common.basic.login.entity;
+package com.common.login.basic;
 
 import java.time.LocalDateTime;
 
@@ -19,7 +19,7 @@ public class BasicMemberDto {
     private String nickname;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
-
+    
     public BasicUser toEntity(){
         return BasicUser.builder()
                 .id(id)

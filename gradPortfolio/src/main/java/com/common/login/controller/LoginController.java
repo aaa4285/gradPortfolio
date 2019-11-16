@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.common.basic.login.entity.BasicMemberDto;
+import com.common.login.basic.BasicMemberDto;
 import com.common.login.service.BasicUserService;
 
 import lombok.AllArgsConstructor;

@@ -3,5 +3,5 @@ package com.common.login.basic;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BasicUserRepository extends JpaRepository<BasicUser, Long> {
-	BasicUser findByEmail(String email);
+	BasicUser findByEmailAndProviderIdIsNull(String email);
 }

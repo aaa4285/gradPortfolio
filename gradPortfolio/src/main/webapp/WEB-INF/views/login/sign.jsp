@@ -203,7 +203,7 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 			submitHandler : function() {
 				var f = confirm("회원가입을하시겠습니까?");
 				if (f) {
-					duplicateCheck($form);
+					duplicateCheck();
 				} else {
 					return false;
 				}
@@ -256,10 +256,10 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 		});
 		
 		// ID중복 체크
-		function duplicateCheck($form) {
-			ajax("/sign/duplicateCheck",$("#signForm"),function(r){
+		function duplicateCheck() {
+			ajax("/sign/duplicateCheck",$("#signForm").serialize(),function(r){
 				if (r.result) {
-					$form.submit();
+					$("#signForm").submit();
 				} else {
 					$.alert({
                         title: '알림',

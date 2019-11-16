@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import com.common.login.basic.BasicMemberDto;
 import com.common.login.basic.BasicUser;
+import com.common.login.basic.BasicUserDetails;
 import com.common.login.basic.BasicUserRepository;
 
 import lombok.AllArgsConstructor;
@@ -40,15 +41,22 @@ public class BasicUserService implements UserDetailsService{
 
 	    @Override
 	    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-	    	BasicUser userEntity = memberRepository.findByEmail(email);
+	    	BasicUser userEntity = memberRepository.findByEmailAndProviderIdIsNull(email);
 	    	
 	    	if (userEntity == null) {
 	    		throw new UsernameNotFoundException(email);
 			}
-
+	    	
+	    	BasicUserDetails basicUserDetails = new BasicUserDetails();
 	    	List<GrantedAuthority> authorities = new ArrayList<>();
+	    	
+	    	BeanUtils.copyProperties(userEntity, basicUserDetails);
+	    	
+	    	basicUserDetails.setUsername(email);
+	    	basicUserDetails.setAuthorities(authorities);
 	        
-	        return new User(userEntity.getEmail(), userEntity.getPassword(), authorities);
+//	        return new User(userEntity.getEmail(), userEntity.getPassword(), authorities);
+	        return basicUserDetails;
 	    }
 	    
 	    
@@ -61,7 +69,7 @@ public class BasicUserService implements UserDetailsService{
 	     */
 	    public boolean isDuplicateCheck(String email) {
 	    	boolean result = false;
-	    	BasicUser userEntity = memberRepository.findByEmail(email);
+	    	BasicUser userEntity = memberRepository.findByEmailAndProviderIdIsNull(email);
 	    	
 	    	if (userEntity == null) {
 	    		result = true;

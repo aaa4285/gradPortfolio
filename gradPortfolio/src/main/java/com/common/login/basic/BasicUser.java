@@ -13,30 +13,34 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "basic_user")
+@Table(name = "user")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class BasicUser {
 
 	@Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 255, nullable = false)
     private String email;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 300, nullable = false)
     private String password;
     
-    @Column(length = 100, nullable = false)
+    @Column(length = 255, nullable = false)
     private String nickname;
+    
+    @Column(name = "provider_id", length = 255) 
+    private String providerId;
 
     @Builder
-    public BasicUser(Long id, String email, String password, String nickname) {
+    public BasicUser(Long id, String email, String password, String nickname, String providerId) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+        this.providerId = providerId;
     }
 
 

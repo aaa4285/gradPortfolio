@@ -1,12 +1,17 @@
 package com.common.login.handler;
 
+import java.awt.print.Printable;
 import java.io.IOException;
-import java.util.Enumeration;
+import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -15,6 +20,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
+import org.springframework.util.StringUtils;
 
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
@@ -26,16 +32,23 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
 		ObjectMapper mapper = new ObjectMapper();
-		
-		Enumeration params = request.getParameterNames();
-		System.out.println("----------------------------");
-		while (params.hasMoreElements()){
-		    String name = (String)params.nextElement();
-		    System.out.println(name + " : " +request.getParameter(name));
-		}
-		System.out.println("----------------------------");
 
 		System.out.println(mapper.writeValueAsString(authentication));
+		
+		Map<String, Object> principalMap = mapper.convertValue(authentication.getPrincipal(), Map.class);
+		
+		Map<String, Object> sessionVo = new HashMap<String, Object>();
+		
+		// 소셜 로그인
+		if (StringUtils.isEmpty(principalMap.get("displayName"))) {
+			Map<String, Object> sosialMap = mapper.convertValue(principalMap.get("social"), Map.class);
+			sessionVo.putAll(sosialMap);
+		} else {
+			sessionVo.putAll(principalMap);
+		}
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("sessionVo", sessionVo);
 		
 		resultRedirectStrategy(request, response, authentication);
     }

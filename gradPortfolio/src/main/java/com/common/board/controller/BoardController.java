@@ -149,7 +149,9 @@ public class BoardController {
  
         //리턴값
         Map<String, Object> retVal = new HashMap<String, Object>();
- 
+        
+        //boardReply.setReply_writer(reply_writer);
+        
         //정보입력
         int result = boardService.regReply(boardReply);
  

@@ -69,7 +69,7 @@ public class MainController {
 		*/
 		// service
 		//System.out.println(FileUtils.readFile(chartBatch.path+chartBatch.fileNm));
-		model.addAttribute("chartData",FileUtils.readFile("/app/data/data/batch/chart/"+"chart_data.json"));
+
 		return view;
 	}
 	@RequestMapping("/index2.do")

@@ -31,6 +31,7 @@ import com.common.board.domain.FileVO;
 import com.common.board.paging.Criteria;
 import com.common.board.paging.PageMaker;
 import com.common.board.service.BoardService;
+import com.common.util.CommonUtils;
 
 import lombok.RequiredArgsConstructor;
 
@@ -54,6 +55,8 @@ public class BoardController {
     @RequestMapping("/list") //게시판 리스트 화면 호출  
     private String boardList(HttpServletRequest request,Model model, @ModelAttribute Criteria criteria) throws Exception{
         
+    	CommonUtils.setSession(request, 1);
+    	
         PageMaker pageMaker = new PageMaker();
         pageMaker.setCri(criteria);
         

@@ -18,9 +18,11 @@
 	 .cd-quick-view{
 	    height: calc(100% - 50px);
 	    top: 25px;
-	    left: calc(50% - 512px);
+	    /*left: calc(50% - 512px);*/
 	    width: 1024px;
 	    border-radius: 10px;
+	    left: 50%;
+    	transform: translate(-50%, 0%);
 	 }
 	 .cd-slider-wrapper{
 	    position: relative;
@@ -259,7 +261,7 @@ fill:#ffc107 !important;
 		</li>
 		<%} %>
 	</ul> <!-- cd-items -->
-	<div class="cd-quick-view">
+	<div class="cd-quick-view" style="width:90%;max-width:1024px;">
 		<div class="cd-slider-wrapper">
 			
 		</div> <!-- cd-slider-wrapper -->
@@ -294,7 +296,9 @@ fill:#ffc107 !important;
 			// 중간에오게
 			// i=pageNo-2<0?1:pageNo-2;
 			$("#page").children().remove();
-			for (var i=pageNo-2<1?1:pageNo-2;i<Math.ceil(total/numOfRows);i++) {
+			
+			var startNo = (Math.ceil(total/numOfRows)==pageNo?pageNo-5:pageNo-2);
+			for (var i=startNo<1?1:startNo;i<Math.ceil(total/numOfRows);i++) {
 				if (pageArr.length>4) {
 					break;
 				}
@@ -339,7 +343,6 @@ function search(pageNo){
 			$("#numOfRows").html(data.numOfRows);
 			$("#pageNo").html(data.pageNo);
 			$("#totalCount").html(data.totalCount);
-			console.log(data);
 			
 			// list 셋팅
 			resetHtml("liveList",data.data);
@@ -354,9 +357,8 @@ function search(pageNo){
 				// 상세 데이터 셋팅
 				$(".cd-quick-view .cd-slider-wrapper").html("");
 				$(".cd-quick-view .cd-slider-wrapper").append('<img src="'+slectedImageUrl+'" class="img-box" onload="javascript:myinfo(this);"></li>');
-				
-				resetHtml("detail",[list[$(this).parent().attr("idx")]]);
 				$('body').addClass('overlay-layer');
+				resetHtml("detail",[list[$(this).parent().attr("idx")]]);
 				
 				animateQuickView(selectedImage, sliderFinalWidth, maxQuickWidth, 'open');
 			});
@@ -373,7 +375,9 @@ function processStateFormat(d){
 
 <script type="text/html" id="liveList">
 <li class="cd-item"  idx="#_list_idx_#">
-	<div src="#popfile#" class="img-box w24 h24" style="background-image: url(#popfile#);"></div>
+	<div src="#popfile#" class="img-box w24 h24" style="background-image: url(#popfile#);">
+		<span style="float:left;" class="label #fn{processStateFormat:processState}#">#processState#</span>
+	</div>
 </li>
 </script>
 <script type="text/html" id="detail">

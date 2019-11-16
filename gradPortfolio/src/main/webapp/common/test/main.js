@@ -78,17 +78,17 @@ function animateQuickView(image, finalWidth, maxQuickWidth, animationType) {
 		$('.cd-quick-view').css({
 		    "top": 0,
 		    //"left": leftSelected+"px",
-		    "width": quickViewWidth+"px",
+		    //"width": quickViewWidth+"px",
 		    overflow:'hidden auto'
 		}).addClass('is-visible').css({
 		    'top': '0',
 		    //'left': finalLeft+'px',
-		    'width': quickViewWidth+'px',
+		    //'width': quickViewWidth+'px',
 		});
 		$('.cd-quick-view').addClass('animate-width').velocity({
 			'top': finalTop+ 'px',
 			//'left': quickViewLeft+'px',
-	    	'width': quickViewWidth+'px',
+	    	//'width': quickViewWidth+'px',
 		}, 300, 'ease' ,function(){
 			$('.cd-quick-view').addClass('add-content');
 		});

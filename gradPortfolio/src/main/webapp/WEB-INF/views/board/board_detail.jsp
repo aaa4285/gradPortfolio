@@ -34,30 +34,17 @@
 	</div>
  
     <div class="col-xs-12">
-    <%--
-        <form action="/insertProc" method="post">
-            <dl class="dl-horizontal">
-              <dt>제목</dt>
-              <dd>${detail.subject}</dd>
-              
-              <dt>작성자</dt>
-              <dd>${detail.writer}</dd>
-              
-              <dt>작성날짜</dt>
-              <dd>
-                  <fmt:formatDate value="${detail.reg_date}" pattern="yyyy.MM.dd HH:mm:ss"/>
-              </dd>
-
-              <dt>내용</dt>
-              <dd>${detail.content}</dd>
-            </dl>
-        </form>
-         --%>
          <!-- 댓글목록 -->
 		<div class="mb-2" style="border: 1px solid #efeef1;border-radius:8px;width:100%;padding:8px;">
 	        <table id="reply_area" style="width:100%;">
 	            <tr reply_type="all"  style="display:none"><!-- 뒤에 댓글 붙이기 쉽게 선언 -->
 	                <td colspan="4"></td>
+	            </tr>
+	            <tr reply_type="title"><!-- 뒤에 댓글 붙이기 쉽게 선언 -->
+	                <td colspan="4"><h4>댓글 목록</h4></td>
+	            </tr>
+	            <tr reply_type="empty" style="display:${empty replyList?"":"none"};">
+	                <td colspan="4">등록된 댓글이 없습니다.</td>
 	            </tr>
 	            <!-- 댓글이 들어갈 공간 -->
 	            <c:forEach var="replyList" items="${replyList}" varStatus="status">
@@ -103,6 +90,13 @@
     </div>
 </div>
 <script type="text/javascript">
+	function setEmptyReply(){
+		if ($("#reply_area tr[reply_type='main']").length == 0) {
+        	$("#reply_area tr[reply_type='empty']").css("display",""); // 댓글없음 보이기
+        } else {
+        	$("#reply_area tr[reply_type='empty']").css("display","none"); // 댓글없음 숨기기
+        }
+	}
 	$(document).ready(function() {
 
 		//댓글 저장
@@ -147,6 +141,7 @@
                         
                         return false;
                     }else{
+                    	location.href = location.href;
                         reply_id = retVal.reply_id;
                         
 						var reply_area = $("#reply_area");
@@ -171,6 +166,9 @@
                          }else{
                              $('#reply_area tr:last').after(reply);
                          }
+                         
+                      	// 댓글 없음 셋팅 처리
+                         setEmptyReply();
 
                         //댓글 초기화
                         $("#reply_writer").val("");
@@ -224,6 +222,9 @@
                             }else{ //아니면 자기만 지움
                             	_this.parent().parent().remove();    
                             }
+                            
+                            // 댓글 없음 셋팅 처리
+                            setEmptyReply();
                         }
                     }
                 },

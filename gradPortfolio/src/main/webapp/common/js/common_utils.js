@@ -46,6 +46,15 @@ function ajax(url,data,callback){
  
 	});
 }
+function loder_show(){
+	$('body').addClass('overlay-layer');
+	$('html').addClass('loader');
+}
+function loder_hide(){
+	$('body').removeClass('overlay-layer');
+	$('html').removeClass('loader');
+}
+
 function resetHtml(targetId,list,fn) {
 	// 초기화
 	$("[for='"+targetId+"']").html("");

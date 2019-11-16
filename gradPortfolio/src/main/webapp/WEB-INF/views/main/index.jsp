@@ -44,14 +44,6 @@
 	min-height: 250px;
 	/*background: black;*/
 }
-*, *::after, *::before {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-.chart::before{
-	/*content: '';*/
-}
 .card .inner{
 	width:25%;display:inline-block;height:100%;padding:5px;
 }

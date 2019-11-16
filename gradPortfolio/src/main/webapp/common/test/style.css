@@ -3,20 +3,8 @@
 Primary style
 
 -------------------------------- */
-body {
-  font-size: 100%;
-  font-family: "PT Sans", sans-serif;
-  /*color: #3e585f;
-  background-color: #47374e;*/
-}
 .cd-quick-view{
 	z-index:1031 !important
-}
-
-
-a {
-  color: #f82f53;
-  text-decoration: none;
 }
 
 img {
@@ -45,37 +33,6 @@ Modules - reusable parts of our design
 Main components 
 
 -------------------------------- */
-html, body {
-  height: 100%;
-}
-
-header {
-  position: relative;
-  height: 160px;
-  line-height: 170px;
-  text-align: center;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-header h1 {
-  color: #ffffff;
-  font-size: 20px;
-  font-size: 1.25rem;
-}
-@media only screen and (min-width: 768px) {
-  header {
-    line-height: 180px;
-  }
-  header h1 {
-    font-size: 26px;
-    font-size: 1.625rem;
-  }
-}
-@media only screen and (min-width: 1024px) {
-  header {
-    line-height: 220px;
-  }
-}
 
 li{  list-style-type: none;}
 .cd-item {

@@ -1,6 +1,7 @@
-function ajax(url,data,callback){
+function ajax(url,data,callback,loding){
 	var ajaxData = "";
 	var contentType = "application/x-www-form-urlencoded;charset=UTF-8";
+	loding = (loding == null || loding == undefined)? true : loding;
 	if (data != null && data != undefined) {
 		if (typeof data == "object") {
 			// form element
@@ -23,8 +24,10 @@ function ajax(url,data,callback){
 		}
 	}
 	
-	$('body').addClass('overlay-layer');
-	$('html').addClass('loader');
+	if (loding) {
+		$('body').addClass('overlay-layer');
+		$('html').addClass('loader');
+	}
 	$.ajax({
 		type:"POST",
 		url:url,
@@ -32,15 +35,19 @@ function ajax(url,data,callback){
 		dataType:"json",
 		data:ajaxData,
 		success : function(data){
-			$('body').removeClass('overlay-layer');
-			$('html').removeClass('loader');
+			if (loding) {
+				$('body').removeClass('overlay-layer');
+				$('html').removeClass('loader');
+			}
 			if (callback && typeof callback == "function") {
 				callback(data);
 			}
 		},
 		error: function(request,status,error){
-			$('body').removeClass('overlay-layer');
-			$('html').removeClass('loader');
+			if (loding) {
+				$('body').removeClass('overlay-layer');
+				$('html').removeClass('loader');
+			}
             alert("code:"+request.status+"\n"+"error:"+error);
         }
  

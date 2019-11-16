@@ -43,7 +43,7 @@ public class CommonUtils {
 			menuList.add(menuVO);
 			menuVO = new MenuVO();
 			menuVO.setIdx(5);
-			menuVO.setTitle("FREE BORD");
+			menuVO.setTitle("FREE BOARD");
 			menuVO.setUrl("/board/list");
 			menuList.add(menuVO);
 			sessionVO = new SessionVO();

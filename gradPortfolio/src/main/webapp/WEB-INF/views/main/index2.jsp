@@ -271,10 +271,10 @@ fill:#ffc107 !important;
 			<p>sdds</p>
 			<ul class="cd-item-action">
 				<li><button class="add-to-cart">Add to cart</button></li>					
-				<li><a href="#0">Learn more</a></li>	
+				<li><a href="javascript:void(0);">Learn more</a></li>	
 			</ul> <!-- cd-item-action -->
 		</div> <!-- cd-item-info -->
-		<a href="#0" class="cd-close">Close</a>
+		<a href="javascript:void(0);" class="cd-close">Close</a>
 	</div> <!-- cd-quick-view -->
 	<!-- 페이징 -->
 	<script type="text/html" id="paging">
@@ -296,9 +296,10 @@ fill:#ffc107 !important;
 			// 중간에오게
 			// i=pageNo-2<0?1:pageNo-2;
 			$("#page").children().remove();
+			var maxNo = Math.ceil(total/numOfRows);
 			
-			var startNo = (Math.ceil(total/numOfRows)==pageNo?pageNo-5:pageNo-2);
-			for (var i=startNo<1?1:startNo;i<Math.ceil(total/numOfRows);i++) {
+			var startNo = (maxNo-pageNo<2?maxNo-4:pageNo-2);
+			for (var i=startNo<1?1:startNo;i<maxNo+1;i++) {
 				if (pageArr.length>4) {
 					break;
 				}
@@ -331,8 +332,13 @@ function myinfo(obj){
 	var w = obj.naturalWidth;
 	var hl = h/w;
 	var wl = w/h;
-	if (w/h<1 && h>833) {
-		$(obj).css("height","833px");
+	
+	if (w/h<1) {
+		$(obj).css("min-height","500px");
+		$(obj).css("max-height","833px");
+	} else {
+		$(obj).css("width","100%");
+		$(obj).css("max-height","833px");
 	}
 }
 function search(pageNo){

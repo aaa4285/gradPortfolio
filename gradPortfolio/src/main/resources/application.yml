@@ -6,12 +6,12 @@ spring:
          prefix: /WEB-INF/views/ 
          suffix: .jsp
    datasource:
-        #url: jdbc:mysql://nkpl8b2jg68m87ht.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/yvkycdergykwvkp4?autoReconnect=true
-        url: jdbc:log4jdbc:mysql://nkpl8b2jg68m87ht.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/yvkycdergykwvkp4?autoReconnect=true
+        url: jdbc:mysql://nkpl8b2jg68m87ht.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/yvkycdergykwvkp4?autoReconnect=true
+        #url: jdbc:log4jdbc:mysql://nkpl8b2jg68m87ht.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/yvkycdergykwvkp4?autoReconnect=true
         username: g49ghwo2qt9ms0a0
         password: ts6plmm9bwlv7wmn
-        #driver-class-name: org.mariadb.jdbc.Driver
-        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+        driver-class-name: org.mariadb.jdbc.Driver
+        #driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
         max-active: 1
         type: org.apache.tomcat.jdbc.pool.DataSource
         tomcat:
@@ -28,12 +28,6 @@ spring:
          hibernate.format_sql: true
          hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
          hibernate.hbm2ddl.import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
-
-# log4j
-logging:
-   level:
-      jdbc: OFF
-      jdbc.sqlonly: DEBUG ## 이부분 추가.
 
 --- #local
 spring:

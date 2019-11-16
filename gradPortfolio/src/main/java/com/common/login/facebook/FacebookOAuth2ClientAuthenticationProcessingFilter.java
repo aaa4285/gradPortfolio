@@ -49,10 +49,12 @@ public class FacebookOAuth2ClientAuthenticationProcessingFilter extends OAuth2Cl
         final OAuth2Authentication auth = (OAuth2Authentication) authResult;
         final Object details = auth.getUserAuthentication().getDetails();
         
-        final FacebookUserDetails userDetails = mapper.convertValue(details, FacebookUserDetails.class);
-        
         System.out.println("=================================");
+        System.out.println(mapper.writeValueAsString(details));
+        
+        final FacebookUserDetails userDetails = mapper.convertValue(details, FacebookUserDetails.class);
         System.out.println(mapper.writeValueAsString(userDetails));
+        
         userDetails.setAccessToken(accessToken);
         
         final UserConnection userConnection = UserConnection.valueOf(userDetails);

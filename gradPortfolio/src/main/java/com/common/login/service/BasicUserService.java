@@ -1,11 +1,15 @@
 package com.common.login.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,9 +17,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.common.basic.login.entity.BasicMemberDto;
-import com.common.basic.login.entity.BasicUser;
-import com.common.basic.login.entity.BasicUserRepository;
+import com.common.login.basic.BasicMemberDto;
+import com.common.login.basic.BasicUser;
+import com.common.login.basic.BasicUserRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -41,10 +45,13 @@ public class BasicUserService implements UserDetailsService{
 	    	if (userEntity == null) {
 	    		throw new UsernameNotFoundException(email);
 			}
-	    	
-	        List<GrantedAuthority> authorities = new ArrayList<>();
+
+	    	List<GrantedAuthority> authorities = new ArrayList<>();
+	        
 	        return new User(userEntity.getEmail(), userEntity.getPassword(), authorities);
 	    }
+	    
+	    
 	    
 	    /**
 	     * Email 중복체크

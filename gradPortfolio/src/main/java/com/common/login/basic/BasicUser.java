@@ -1,4 +1,4 @@
-package com.common.basic.login.entity;
+package com.common.login.basic;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

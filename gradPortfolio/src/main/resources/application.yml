@@ -7,9 +7,11 @@ spring:
          suffix: .jsp
    datasource:
         url: jdbc:mysql://nkpl8b2jg68m87ht.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/yvkycdergykwvkp4?autoReconnect=true
+        #url: jdbc:log4jdbc:mysql://nkpl8b2jg68m87ht.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/yvkycdergykwvkp4?autoReconnect=true
         username: g49ghwo2qt9ms0a0
         password: ts6plmm9bwlv7wmn
         driver-class-name: org.mariadb.jdbc.Driver
+        #driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
         max-active: 1
         type: org.apache.tomcat.jdbc.pool.DataSource
         tomcat:

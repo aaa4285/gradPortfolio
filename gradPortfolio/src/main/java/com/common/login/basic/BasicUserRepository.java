@@ -1,4 +1,4 @@
-package com.common.basic.login.entity;
+package com.common.login.basic;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

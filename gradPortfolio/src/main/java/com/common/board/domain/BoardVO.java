@@ -17,6 +17,6 @@ public class BoardVO {
 	private String fullPath;
 	private String telNo;
 	private String location;
-	private char kinds;
-	private char gender;
+	private String kinds;
+	private String gender;
 }

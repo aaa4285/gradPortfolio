@@ -18,16 +18,51 @@
     <div class="col-xs-12" style="margin:15px auto;">
         <label style="font-size:20px;"><span class="glyphicon glyphicon-list-alt"></span>게시글 상세</label>
     </div>
-    
     <div class="row">
-      <div class="col mb-3">
-        <h4>${detail.subject}</h4>
-        <hr>
-        <div class="row">
-      		<div class="col-md-8" style="text-align:left;">${detail.writer}</div>
-      		<div class="col-md-4" style="text-align:right;"><fmt:formatDate value="${detail.reg_date}" pattern="yyyy.MM.dd HH:mm:ss"/></div>
-      	</div>
-        <hr>
+    	<div class="col mb-3">
+    	${detail.fullPath}
+      		<c:if test="${!empty detail.fullPath}">
+		      	<div class="card">
+		        	<img class="card-img-top" src="http://${empty detail.fullPath?"toeic.ybmclass.com/toeic/img/noimage.gif":detail.fullPath}">
+		        	<a href="javascript:window.open('http://${detail.fullPath}','detail_img');">원본보기</a>
+		        </div>
+	        </c:if>
+	      	<table class="table" style="width:100%;">
+		    	<colgroup>
+		    		<col style="width:80px;">
+		    		<col style="width:200px;">
+		    		<col style="width:80px;">
+		    		<col style="width:200px;">
+		    	</colgroup>
+		    	<tbody>
+		    	<tr>
+		    		<th>제목</th>
+		    		<td colspan="3">${detail.subject}</td>
+		    	</tr>
+		    	<tr>
+		    		<th>작성자</th>
+		    		<td><%-- ${detail.displayName}  --%></td>
+		    		<th>작성일자</th>
+		    		<td><fmt:formatDate value="${detail.reg_date}" pattern="yyyy.MM.dd HH:mm:ss"/></td>
+		    	</tr>
+		    	<tr>
+		    		<th>연락처</th>
+		    		<td>${detail.telNo}</td>
+		    		<th>잃어버린장소</th>
+		    		<td>${detail.location}</td>
+		    	</tr>
+		    	<tr>
+		    		<th>종류</th>
+		    		<td>
+		    			${detail.kinds+""}/${detail.kinds}/${detail.kinds+"1"}/${detail.kinds*10}/${detail.kinds+"1" eq "21"}${detail.kinds eq "50"}
+		    		</td>
+		    		<th>성별</th>
+		    		<td>
+		    			[${detail.gender}]${detail.gender eq "0"}
+		    		</td>
+		    	</tr>
+	    	</tbody>
+	    	</table>
 			<div style="height: 210px; width: 100%; overflow: hidden auto;word-break: break-all;">${detail.content}</p>
 			</div>
 		</div>
@@ -49,18 +84,20 @@
 	            <!-- 댓글이 들어갈 공간 -->
 	            <c:forEach var="replyList" items="${replyList}" varStatus="status">
 	             <tr reply_type="<c:if test="${replyList.depth == '0'}">main</c:if><c:if test="${replyList.depth == '1'}">sub</c:if>"><!-- 댓글의 depth 표시 -->
-	                 <td width="820px">
+	                 <td width="*">
 	                     <c:if test="${replyList.depth == '1'}"> → </c:if>${replyList.reply_content}
 	                 </td>
-	                 <td width="100px">
+	                 <td width="80px">
 	                     ${replyList.reply_writer}
 	                 </td>
-	                 <td align="center">
+	                 <td width="172px" style="text-align:right;">
 	                     <c:if test="${replyList.depth != '1'}">
 	                         <button class="btn btn-sm btn-info" name="reply_reply" parent_id = "${replyList.reply_id}" reply_id = "${replyList.reply_id}">댓글</button><!-- 첫 댓글에만 댓글이 추가 대댓글 불가 -->
 	                     </c:if>
-	                     <button class="btn btn-sm btn-success" name="reply_modify" parent_id = "${replyList.parent_id}" r_type = "<c:if test="${replyList.depth == '0'}">main</c:if><c:if test="${replyList.depth == '1'}">sub</c:if>" reply_id = "${replyList.reply_id}">수정</button>
-	                     <button class="btn btn-sm btn-warning" name="reply_del" r_type = "<c:if test="${replyList.depth == '0'}">main</c:if><c:if test="${replyList.depth == '1'}">sub</c:if>" reply_id = "${replyList.reply_id}">삭제</button>
+	                     <c:if test="${replyList.reply_writer eq sessionScope.userSession.id}">
+		                     <button class="btn btn-sm btn-success" name="reply_modify" parent_id = "${replyList.parent_id}" r_type = "<c:if test="${replyList.depth == '0'}">main</c:if><c:if test="${replyList.depth == '1'}">sub</c:if>" reply_id = "${replyList.reply_id}">수정</button>
+		                     <button class="btn btn-sm btn-warning" name="reply_del" r_type = "<c:if test="${replyList.depth == '0'}">main</c:if><c:if test="${replyList.depth == '1'}">sub</c:if>" reply_id = "${replyList.reply_id}">삭제</button>
+		                 </c:if>
 	                 </td>
 	             </tr>
 	         </c:forEach>
@@ -70,11 +107,6 @@
         <div class="mb-2" style="border-radius:8px;width:100%;padding:8px;background:#efeef1;">
 	        <table style="width:100%;">
 	            <tr>
-	                <td width="500px">
-	                 	이름: <input type="text" id="reply_writer" name="reply_writer" style="width:170px;" maxlength="10" placeholder="작성자"/>
-	             	</td>
-	            </tr>
-	            <tr>
 	                <td>
 	                    <textarea id="reply_content" name="reply_content" rows="4" cols="50" placeholder="댓글을 입력하세요." style="display: inline-block;float: left;width: calc(100% - 87px);"></textarea>
 	                    <button type="button" id="reply_save" class="btn btn-primary btn-lg" style="float: left;margin-top: 30px;margin-left: 10px;">등록</button>
@@ -83,8 +115,11 @@
 	        </table>
         </div>
 		<div role="group" style="width:100%;text-align:right;">
-			<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/board/delete/${detail.board_id}'" style="margin-left: 3px;">삭제</button>
-			<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/board/update/${detail.board_id}'" style="margin-left: 3px;">수정</button>
+			${sessionScope.userSession.id}/${detail.writer}
+			<c:if test="${sessionScope.userSession.id eq detail.writer}">
+				<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/board/delete/${detail.board_id}'" style="margin-left: 3px;">삭제</button>
+				<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/board/update/${detail.board_id}'" style="margin-left: 3px;">수정</button>
+			</c:if>
 			<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/board/list'" style="margin-left: 3px;"> 목록 </button>
 		</div>
     </div>
@@ -103,12 +138,6 @@
         $("#reply_save").click(function(){
             
             //널 검사
-            if($("#reply_writer").val().trim() == ""){
-                alert("이름을 입력하세요.");
-                $("#reply_writer").focus();
-                return false;
-            }
-            
             if($("#reply_content").val().trim() == ""){
                 alert("내용을 입력하세요.");
                 $("#reply_content").focus();
@@ -122,13 +151,25 @@
                     board_id        : "${detail.board_id}",
                     parent_id        : "0",    
                     depth            : "0",
-                    reply_writer    : $("#reply_writer").val(),
                     reply_content    : reply_content
             };
             
             var reply_id;
             
             //ajax 호출
+            ajax(
+            	"/board/reply/save",
+            	objParams,
+            	function(retVal){
+            		 if(retVal.code != "OK") {
+                         alert(retVal.message);
+                     } else {
+                    	loder_show();
+                     	location.href = location.href;
+                     }
+            	}
+            );
+            /*
             $.ajax({
                 url            :    "/board/reply/save",
                 dataType    :    "json",
@@ -142,37 +183,6 @@
                         return false;
                     }else{
                     	location.href = location.href;
-                        reply_id = retVal.reply_id;
-                        
-						var reply_area = $("#reply_area");
-                        
-                        var reply = 
-                            '<tr reply_type="main">'+
-                            '    <td width="820px">'+
-                            reply_content+
-                            '    </td>'+
-                            '    <td width="100px">'+
-                            $("#reply_writer").val()+
-                            '    </td>'+
-                            '    <td align="center">'+
-                            '       <button name="reply_reply" reply_id = "'+reply_id+'">댓글</button>'+
-                            '       <button name="reply_modify" r_type = "main" parent_id = "0" reply_id = "'+reply_id+'">수정</button>      '+
-                            '       <button name="reply_del" r_type = "main" reply_id = "'+reply_id+'">삭제</button>      '+
-                            '    </td>'+
-                            '</tr>';
-                            
-                         if($('#reply_area').contents().size()==0){
-                             $('#reply_area').append(reply);
-                         }else{
-                             $('#reply_area tr:last').after(reply);
-                         }
-                         
-                      	// 댓글 없음 셋팅 처리
-                         setEmptyReply();
-
-                        //댓글 초기화
-                        $("#reply_writer").val("");
-                        $("#reply_content").val("");
                     }
                     
                 },
@@ -180,6 +190,7 @@
                     console.log("AJAX_ERROR");
                 }
             });
+            */
         });
         
         //댓글 삭제
@@ -197,6 +208,19 @@
             };
             
             //ajax 호출
+            ajax(
+            	"/board/reply/del",
+            	objParams,
+            	function(retVal){
+            		if(retVal.code != "OK") {
+                        alert(retVal.message);
+                    } else {
+                    	loder_show();
+                        location.href = location.href;
+                    }
+            	}
+            );
+            /*
             $.ajax({
                 url :    "/board/reply/del",
                 dataType    :    "json",
@@ -207,31 +231,14 @@
                     if(retVal.code != "OK") {
                         alert(retVal.message);
                     } else {
-                        check = true;
-                        
-                        if(check){
-                            if(r_type=="main"){//depth가 0이면 하위 댓글 다 지움
-                                //삭제하면서 하위 댓글도 삭제
-                                var prevTr = _this.parent().parent().next(); //댓글의 다음
-                                while(prevTr.attr("reply_type")=="sub"){//댓글의 다음이 sub면 계속 넘어감
-                                    prevTr.remove();
-                                    prevTr = _this.parent().parent().next();
-                                }
-								console.log(_this.parent().parent());
-                                _this.parent().parent().remove();    
-                            }else{ //아니면 자기만 지움
-                            	_this.parent().parent().remove();    
-                            }
-                            
-                            // 댓글 없음 셋팅 처리
-                            setEmptyReply();
-                        }
+                        location.href = location.href;
                     }
                 },
                 error        :    function(request, status, error){
                     
                 }
             });
+            */
         });
         
         //댓글 수정 입력
@@ -249,19 +256,15 @@
                 }
                 
                 var txt_reply_writer = $(this).parent().prev().html().trim(); //댓글작성자 가져오기
-                
                 //입력받는 창 등록
                 var replyEditor = 
                    '<tr id="reply_add" class="reply_modify">'+
-                   '   <td width="820px">'+
-                   '       <textarea name="reply_modify_content_'+reply_id+'" id="reply_modify_content_'+reply_id+'" rows="3" cols="50">'+txt_reply_content+'</textarea>'+ //기존 내용 넣기
+                   '   <td width="*" colspan="2">'+
+                   '       <textarea style="width:100%;" name="reply_modify_content_'+reply_id+'" id="reply_modify_content_'+reply_id+'" rows="3" cols="50">'+txt_reply_content+'</textarea>'+ //기존 내용 넣기
                    '   </td>'+
-                   '   <td width="100px">'+
-                   '       <input type="text" name="reply_modify_writer_'+reply_id+'" id="reply_modify_writer_'+reply_id+'" style="width:100%;" maxlength="10" placeholder="작성자" value="'+txt_reply_writer+'"/>'+ //기존 작성자 넣기
-                   '   </td>'+
-                   '   <td align="center">'+
-                   '       <button name="reply_modify_save" r_type = "'+r_type+'" parent_id="'+parent_id+'" reply_id="'+reply_id+'">등록</button>'+
-                   '       <button name="reply_modify_cancel" r_type = "'+r_type+'" r_content = "'+txt_reply_content+'" r_writer = "'+txt_reply_writer+'" parent_id="'+parent_id+'"  reply_id="'+reply_id+'">취소</button>'+
+                   '   <td width="172px" style="text-align:right;">'+
+                   '       <button class="btn btn-sm btn-info" name="reply_modify_save" r_type = "'+r_type+'" parent_id="'+parent_id+'" reply_id="'+reply_id+'">등록</button>'+
+                   '       <button class="btn btn-sm btn-warning" name="reply_modify_cancel" r_type = "'+r_type+'" r_content = "'+txt_reply_content+'" r_writer = "'+txt_reply_writer+'" parent_id="'+parent_id+'"  reply_id="'+reply_id+'">취소</button>'+
                    '   </td>'+
                    '</tr>';
                 var prevTr = $(this).parent().parent();
@@ -331,14 +334,8 @@
         $(document).on("click","button[name='reply_modify_save']", function(){
             
             var reply_id = $(this).attr("reply_id");
-            
+         	
             //널 체크
-            if($("#reply_modify_writer_"+reply_id).val().trim() == ""){
-                alert("이름을 입력하세요.");
-                $("#reply_modify_writer_"+reply_id).focus();
-                return false;
-            }
-             
             if($("#reply_modify_content_"+reply_id).val().trim() == ""){
                 alert("내용을 입력하세요.");
                 $("#reply_modify_content_"+reply_id).focus();
@@ -366,72 +363,22 @@
                     reply_id        : reply_id,
                     parent_id       : parent_id, 
                     depth           : depth,
-                    reply_writer    : $("#reply_modify_writer_"+reply_id).val(),
                     reply_content   : reply_content
             };
 
-            $.ajax({
-                url         :   "/board/reply/update",
-                dataType    :   "json",
-                contentType :   "application/x-www-form-urlencoded; charset=UTF-8",
-                type        :   "post",
-                data        :   objParams,
-                success     :   function(retVal){
-
-                    if(retVal.code != "OK") {
+            ajax(
+            	"/board/reply/update",
+            	objParams,
+            	function(retVal){
+            		if(retVal.code != "OK") {
                         alert(retVal.message);
                         return false;
                     }else{
-                        reply_id = retVal.reply_id;
-                        parent_id = retVal.parent_id;
+                    	loder_show();
+                    	location.href = location.href;
                     }
-                     
-                },
-                error       :   function(request, status, error){
-                    console.log("AJAX_ERROR");
-                }
-            });
-            
-            //수정된댓글 내용을 적고
-            if(r_type=="main"){
-                reply = 
-                    '<tr reply_type="main">'+
-                    '   <td width="820px">'+
-                    $("#reply_modify_content_"+reply_id).val()+
-                    '   </td>'+
-                    '   <td width="100px">'+
-                    $("#reply_modify_writer_"+reply_id).val()+
-                    '   </td>'+
-                    '   <td align="center">'+
-                    '       <button name="reply_reply" reply_id = "'+reply_id+'">댓글</button>'+
-                    '       <button name="reply_modify" r_type = "main" parent_id = "0" reply_id = "'+reply_id+'">수정</button>      '+
-                    '       <button name="reply_del" r_type = "main" reply_id = "'+reply_id+'">삭제</button>      '+
-                    '   </td>'+
-                    '</tr>';
-            }else{
-                reply = 
-                    '<tr reply_type="sub">'+
-                    '   <td width="820px"> → '+
-                    $("#reply_modify_content_"+reply_id).val()+
-                    '   </td>'+
-                    '   <td width="100px">'+
-                    $("#reply_modify_writer_"+reply_id).val()+
-                    '   </td>'+
-                    '   <td align="center">'+
-                    '       <button name="reply_modify" r_type = "sub" parent_id = "'+parent_id+'" reply_id = "'+reply_id+'">수정</button>'+
-                    '       <button name="reply_del" r_type = "sub" reply_id = "'+reply_id+'">삭제</button>'+
-                    '   </td>'+
-                    '</tr>';
-            }
-            
-            var prevTr = $(this).parent().parent();
-            //자기 위에 붙이기
-            prevTr.after(reply);
-               
-            //자기 자신 삭제
-            $(this).parent().parent().remove(); 
-              
-            status = false;
+            	}
+            );
             
         });
           
@@ -446,15 +393,12 @@
             //입력받는 창 등록
              var replyEditor = 
                 '<tr id="reply_add" class="reply_reply">'+
-                '    <td width="820px">'+
-                '        <textarea name="reply_reply_content" rows="3" cols="50"></textarea>'+
+                '    <td width="*" colspan="2">'+
+                '        <textarea name="reply_reply_content" rows="3" cols="50" style="width:100%;"></textarea>'+
                 '    </td>'+
-                '    <td width="100px">'+
-                '        <input type="text" name="reply_reply_writer" style="width:100%;" maxlength="10" placeholder="작성자"/>'+
-                '    </td>'+
-                '    <td align="center">'+
-                '        <button name="reply_reply_save" parent_id="'+reply_id+'">등록</button>'+
-                '        <button name="reply_reply_cancel">취소</button>'+
+                '    <td align="center" width="172px">'+
+                '        <button class="btn btn-sm btn-info" name="reply_reply_save" parent_id="'+reply_id+'">등록</button>'+
+                '        <button class="btn btn-sm btn-warning" name="reply_reply_cancel">취소</button>'+
                 '    </td>'+
                 '</tr>';
                 
@@ -488,19 +432,12 @@
         //대댓글 등록
         $(document).on("click","button[name='reply_reply_save']",function(){
                                 
-            var reply_reply_writer = $("input[name='reply_reply_writer']");
             var reply_reply_content = $("textarea[name='reply_reply_content']");
             var reply_reply_content_val = reply_reply_content.val().replace("\n", "<br>"); //개행처리
             
             var _this = $(this);
 
             //널 검사
-            if(reply_reply_writer.val().trim() == ""){
-                alert("이름을 입력하세요.");
-                reply_reply_writer.focus();
-                return false;
-            }
-            
             if(reply_reply_content.val().trim() == ""){
                 alert("내용을 입력하세요.");
                 reply_reply_content.focus();
@@ -512,7 +449,6 @@
                     board_id        : "${detail.board_id}",
                     parent_id        : $(this).attr("parent_id"),    
                     depth            : "1",
-                    reply_writer    : reply_reply_writer.val(),
                     reply_content    : reply_reply_content_val
             };
             
@@ -520,6 +456,20 @@
             var parent_id;
             
             //ajax 호출
+            ajax(
+            	"/board/reply/save",
+            	objParams,
+            	function(retVal){
+            		if(retVal.code != "OK") {
+                        alert(retVal.message);
+                        status = false;
+                    }else{
+                    	loder_show();
+                    	location.href = location.href; 
+                    }
+            	}
+            );
+            /*
             $.ajax({
                 url            :    "/board/reply/save",
                 dataType    :    "json",
@@ -532,31 +482,14 @@
                         alert(retVal.message);
                         status = false;
                     }else{
-                        reply_id = retVal.reply_id;
-                        parent_id = retVal.parent_id;
-                       
-                        var reply = 
-                            '<tr reply_type="sub">'+
-                            '    <td width="820px"> → '+
-                            reply_reply_content_val+
-                            '    </td>'+
-                            '    <td width="100px">'+
-                            reply_reply_writer.val()+
-                            '    </td>'+
-                            '    <td align="center">'+
-                            '       <button name="reply_modify" r_type = "sub" parent_id = "'+parent_id+'" reply_id = "'+reply_id+'">수정</button>'+
-                            '       <button name="reply_del" r_type = "sub" reply_id = "'+reply_id+'">삭제</button>'+
-                            '    </td>'+
-                            '</tr>';
-                            
-                        var prevTr = _this.parent().parent().prev();
-                        prevTr.after(reply);
+                    	location.href = location.href; 
                     }
                 },
                 error        :    function(request, status, error){
                     console.log("AJAX_ERROR");
                 }
             });
+            */
         });
         
         //대댓글 입력창 취소

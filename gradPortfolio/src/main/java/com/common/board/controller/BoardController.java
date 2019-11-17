@@ -71,7 +71,7 @@ public class BoardController {
     }
     
     @RequestMapping("/detail/{boardId}") 
-    private String boardDetail(@PathVariable int boardId, Model model) throws Exception{
+    private String boardDetail(HttpServletRequest request,@PathVariable int boardId, Model model) throws Exception{
         model.addAttribute("detail", boardService.boardDetail(boardId));
         model.addAttribute("replyList", boardService.getReplyList(boardId));
         
@@ -177,10 +177,16 @@ public class BoardController {
   //AJAX 호출 (댓글 삭제)
     @RequestMapping(value="/reply/del", method=RequestMethod.POST)
     @ResponseBody
-    public Object boardReplyDel(@ModelAttribute BoardReplyVo boardReply) {
+    public Object boardReplyDel(HttpServletRequest request, @ModelAttribute BoardReplyVo boardReply) {
  
         //리턴값
         Map<String, Object> retVal = new HashMap<String, Object>();
+        
+        Map<String, Object> sessionMap = new HashMap<String, Object>();
+        
+        HttpSession session = request.getSession();
+        sessionMap = (Map<String, Object>) session.getAttribute(BaseConstantes.USER_SESSION_ID);
+        boardReply.setReply_writer((int) (long) sessionMap.get("id"));
  
         //정보입력
         int result = boardService.delReply(boardReply);
@@ -199,10 +205,15 @@ public class BoardController {
   //AJAX 호출 (댓글 수정)
     @RequestMapping(value="/reply/update", method=RequestMethod.POST)
     @ResponseBody
-    public Object boardReplyUpdate(@ModelAttribute BoardReplyVo boardReply) {
+    public Object boardReplyUpdate(HttpServletRequest request, @ModelAttribute BoardReplyVo boardReply) {
  
         //리턴값
         Map<String, Object> retVal = new HashMap<String, Object>();
+        Map<String, Object> sessionMap = new HashMap<String, Object>();
+        
+        HttpSession session = request.getSession();
+        sessionMap = (Map<String, Object>) session.getAttribute(BaseConstantes.USER_SESSION_ID);
+        boardReply.setReply_writer((int) (long) sessionMap.get("id"));
  
         //정보입력
         boolean check = boardService.updateReply(boardReply);

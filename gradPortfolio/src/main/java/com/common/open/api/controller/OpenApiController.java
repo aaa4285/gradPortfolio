@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.common.open.api.service.OpenApiService;
@@ -21,7 +22,7 @@ public class OpenApiController {
 	 * 시도조회
 	 */
 	@RequestMapping("/sido")
-	public Map<String, Object> sidoSearch(@RequestBody(required = false) Map<String, Object> searchJSON) {
+	public Map<String, Object> sidoSearch(@RequestParam Map<String, Object> searchJSON) {
 		return openApiService.OrganicAnimalsSearch("sido", searchJSON);
 	}
 	
@@ -29,7 +30,7 @@ public class OpenApiController {
 	 * 시군구 조회
 	 */
 	@RequestMapping("/sigungu")
-	public Map<String, Object> sigunguSearch(@RequestBody(required = false) Map<String, Object> searchJSON) {
+	public Map<String, Object> sigunguSearch(@RequestParam Map<String, Object> searchJSON) {
 		return openApiService.OrganicAnimalsSearch("sigungu", searchJSON);
 	}
 	
@@ -37,7 +38,7 @@ public class OpenApiController {
 	 * 보호소 조회
 	 */
 	@RequestMapping("/shelter")
-	public Map<String, Object> shelterSearch(@RequestBody(required = false) Map<String, Object> searchJSON) {
+	public Map<String, Object> shelterSearch(@RequestParam Map<String, Object> searchJSON) {
 		return openApiService.OrganicAnimalsSearch("shelter", searchJSON);
 	}
 	
@@ -45,7 +46,7 @@ public class OpenApiController {
 	 * 품종조회
 	 */
 	@RequestMapping("/kind")
-	public Map<String, Object> kindSearch(@RequestBody(required = false) Map<String, Object> searchJSON) {
+	public Map<String, Object> kindSearch(@RequestParam Map<String, Object> searchJSON) {
 		return openApiService.OrganicAnimalsSearch("kind", searchJSON);
 	}
 	
@@ -53,7 +54,7 @@ public class OpenApiController {
 	 * 유기동물 조회
 	 */
 	@RequestMapping("/abandonmentPublic")
-	public Map<String, Object> abandonmentPublicSearch(@RequestBody(required = false) Map<String, Object> searchJSON) {
+	public Map<String, Object> abandonmentPublicSearch(@RequestParam Map<String, Object> searchJSON) {
 		Map<String, Object> map = openApiService.OrganicAnimalsSearch("abandonmentPublic", searchJSON);
 		if (map!=null) {
 			if(map.containsKey("data") && map.get("data")!=null && map.get("data").getClass().toString().lastIndexOf("ArrayList")>-1) {

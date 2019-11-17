@@ -200,10 +200,11 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 	$(document).ready(function() {
 		$("#signForm").validate({
 			//validation이 끝난 이후의 submit 직전 추가 작업할 부분
-			submitHandler : function() {
+			submitHandler : function(frm) {
 				var f = confirm("회원가입을하시겠습니까?");
 				if (f) {
-					duplicateCheck();
+					console.log(frm);	
+					duplicateCheck(frm);
 				} else {
 					return false;
 				}
@@ -256,10 +257,10 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 		});
 		
 		// ID중복 체크
-		function duplicateCheck() {
+		function duplicateCheck(frm) {
 			ajax("/sign/duplicateCheck",$("#signForm").serialize(),function(r){
 				if (r.result) {
-					$("#signForm").submit();
+					frm.submit();
 				} else {
 					$.alert({
                         title: '알림',

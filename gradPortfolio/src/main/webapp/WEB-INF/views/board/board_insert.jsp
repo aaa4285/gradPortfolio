@@ -28,7 +28,7 @@ table tr th{
           </div>
           <div class="form-group">
             <label for="writer">작성자</label>
-            <input type="text" class="form-control" id="writer" name="writer" placeholder="내용을 입력하세요.">
+            <div class="col">${sessionScope.userSession.displayName}</div>
           </div>
           <div class="form-group">
             <label for="writer">연락처</label>
@@ -40,11 +40,18 @@ table tr th{
           </div>
           <div class="form-group">
             <label for="writer">찾는 반려동물 종류</label>
-            <input type="text" class="form-control" id="kinds" name="kinds" placeholder="내용을 입력하세요.">
+            <div class="cal">
+	            <input type="radio" name="kinds" value="1">강아지
+	   			<input type="radio" name="kinds" value="2">고양이
+	   			<input type="radio" name="kinds" value="3">기타
+   			</div>
           </div>
           <div class="form-group">
             <label for="writer">성별</label>
-            <input type="text" class="form-control" id="gender" name="gender" placeholder="내용을 입력하세요.">
+            <div class="cal">
+	            <input type="radio" name="gender" value="0">암컷
+	   			<input type="radio" name="gender" value="1">수컷
+   			</div>
           </div>
           <div class="form-group">
             <label for="content">내용</label>

@@ -1,17 +1,16 @@
 function ajax(url,data,callback,loding){
 	var ajaxData = "";
-	var contentType = "application/x-www-form-urlencoded;charset=UTF-8";
+	var contentType = "application/x-www-form-urlencoded; charset=UTF-8";
 	loding = (loding == null || loding == undefined)? true : loding;
 	if (data != null && data != undefined) {
 		if (typeof data == "object") {
 			// form element
+			console.log("isForm?",data instanceof HTMLFormElement);
 			if (data instanceof HTMLFormElement) {
 				ajaxData = data.serialize();
 			}
-			// form이 아니면 json string으로 간주
 			else {
-				contentType = "application/json;charset=UTF-8";
-				ajaxData = JSON.stringify(data);
+				ajaxData = data;
 			}
 		} else if (typeof data == "string") {
 			ajaxData = data;
@@ -23,7 +22,8 @@ function ajax(url,data,callback,loding){
 			}
 		}
 	}
-	
+	console.log(typeof ajaxData,ajaxData);
+	console.log(contentType);
 	if (loding) {
 		$('body').addClass('overlay-layer');
 		$('html').addClass('loader');

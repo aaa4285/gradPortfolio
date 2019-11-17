@@ -41,9 +41,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-web</artifactId>
+	    </dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -208,7 +208,6 @@
 		    <version>3.0-alpha-1</version>
 		    <scope>provided</scope>
 		</dependency>
-
 	</dependencies>
 
 	<build>

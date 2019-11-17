@@ -1,3 +1,9 @@
+logging:
+   level:
+      jdbc.sqlonly: DEBUG ## 이부분 추가.
+      org.springframework: INFO
+      org.springframework.web: DEBUG
+
 spring:
    profiles:
       active: local
@@ -28,7 +34,6 @@ spring:
          hibernate.format_sql: true
          hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
          hibernate.hbm2ddl.import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
-
 --- #local
 spring:
    profiles: local

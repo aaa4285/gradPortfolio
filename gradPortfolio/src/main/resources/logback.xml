@@ -1,0 +1,39 @@
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+	<logger name="com.common.board.mapper.BoardMapper" level="ALL">
+        <appender-ref ref="STDOUT" />
+    </logger>
+    
+    <!-- Application Loggers -->
+    <logger name="com" additivity="false">
+        <level value="info" />
+    </logger>
+    
+    <!-- 3rdparty Loggers -->
+    <logger name="org.springframework.core" additivity="false">
+        <level value="info" />
+    </logger>
+    
+    <logger name="org.springframework.beans" additivity="false">
+        <level value="info" />
+    </logger>
+    
+    <logger name="org.springframework.context" additivity="false">
+        <level value="info" />
+    </logger>
+ 
+    <logger name="org.springframework.web" additivity="false">
+        <level value="info" />
+    </logger>
+
+    <root level="INFO" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+</configuration>

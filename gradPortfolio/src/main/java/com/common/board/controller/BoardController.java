@@ -95,7 +95,7 @@ public class BoardController {
         HttpSession session = request.getSession();
         sessionMap = (Map<String, Object>) session.getAttribute(BaseConstantes.USER_SESSION_ID);
         
-        board.setBoard_id((int) (long) sessionMap.get("id"));
+        board.setWriter((int) (long) sessionMap.get("id"));
     	
     	boardService.boardInsert(board);
     	

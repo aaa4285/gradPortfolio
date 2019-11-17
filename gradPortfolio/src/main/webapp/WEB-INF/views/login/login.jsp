@@ -160,6 +160,10 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 		color: #777;
 	}
 }
+.signUp{
+position:absolute;
+right:0;
+}
 </style>
 <body>
 	<div class="container">

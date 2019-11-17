@@ -55,7 +55,7 @@ function goPage(url,_this) {
 	          <h4 class="card-title">
 	            <a href="javascript:void(0);">${l.subject}</a>
 	          </h4>
-	          <p class="card-text">${l.writer}</p>
+	          <p class="card-text">${l.displayName}</p>
 	          <p class="card-text"><fmt:formatDate value="${l.reg_date}" pattern="yyyy.MM.dd HH:mm:ss"/></p>
 	        </div>
 	      </div>

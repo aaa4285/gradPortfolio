@@ -13,8 +13,22 @@
 	table tr th{background: #6504b5;color:#fff;}
 	#reply_area tr{border-bottom: 1px solid #efeef1;}
 	#reply_area tr:last-child{border-bottom: 0px;}
-	tr[reply_type="sub"] td:first-child{padding-left:18px;}
-	tr[reply_type="sub"] td:first-child::before{
+	/* 원본보기 */
+	#imgOpen{    
+		right: 0;
+    	opacity: 0.5;
+    	position: absolute;
+    	z-index: 2;
+    }
+    #imgOpen:hover{
+    	opacity: 1;
+    }
+    /* //원본보기 */
+	tr[reply_type="sub"] td:first-child, #reply_add.sub td:first-child, #reply_modify.sub td:first-child{padding-left:18px;position: relative;}
+	tr[reply_type="sub"] td:nth-child(2), #reply_add.sub td:nth-child(2), #reply_modify.sub td:nth-child(2){padding-left:18px;}
+	tr[reply_type="sub"] td:first-child::before, #reply_add.sub td:first-child::before, #reply_modify.sub td:first-child::before{
+		position:absolute;
+		left:0;
 		content:'->';
 		color: transparent;
 		background:url(https://image.flaticon.com/icons/svg/992/992697.svg) no-repeat left top;
@@ -27,9 +41,9 @@
     <div class="row">
     	<div class="col mb-3">
       		<c:if test="${!empty detail.fullPath}">
+      			<a class="btn btn-primary btn-sm" href="javascript:window.open('http://${detail.fullPath}','detail_img');" id="imgOpen">원본보기</a>
 		      	<div class="card">
 		        	<img class="card-img-top" src="http://${empty detail.fullPath?"toeic.ybmclass.com/toeic/img/noimage.gif":detail.fullPath}">
-		        	<a href="javascript:window.open('http://${detail.fullPath}','detail_img');">원본보기</a>
 		        </div>
 	        </c:if>
 	      	<table class="table" style="width:100%;">
@@ -92,8 +106,8 @@
 	            <!-- 댓글이 들어갈 공간 -->
 	            <c:forEach var="replyList" items="${replyList}" varStatus="status">
 	             <tr reply_type="<c:if test="${replyList.depth == '0'}">main</c:if><c:if test="${replyList.depth == '1'}">sub</c:if>"><!-- 댓글의 depth 표시 -->
-	                 <td width="*">${replyList.reply_content}</td>
 	                 <td width="80px">${replyList.displayName}</td>
+	                 <td width="*">${replyList.reply_content}</td>
 	                 <td width="172px" style="text-align:right;">
 	                     <c:if test="${replyList.depth != '1'}">
 	                         <button class="btn btn-sm btn-info" name="reply_reply" parent_id = "${replyList.reply_id}" reply_id = "${replyList.reply_id}">댓글</button><!-- 첫 댓글에만 댓글이 추가 대댓글 불가 -->
@@ -220,22 +234,21 @@
                 if(r_type=="sub"){
                     txt_reply_content = txt_reply_content.replace("→ ","");//대댓글의 뎁스표시(화살표) 없애기
                 }
-                
                 var txt_reply_writer = $(this).parent().prev().html().trim(); //댓글작성자 가져오기
                 //입력받는 창 등록
                 var replyEditor = 
-                   '<tr id="reply_add" class="reply_modify">'+
+                   '<tr id="reply_modify" class="reply_modify '+r_type+'">'+
+                   '   <td width="80px">${sessionScope.userSession.displayName}</td>'+
                    '   <td width="*">'+
                    '       <textarea style="width:100%;height:50px;" name="reply_modify_content_'+reply_id+'" id="reply_modify_content_'+reply_id+'" rows="3" cols="50">'+txt_reply_content+'</textarea>'+ //기존 내용 넣기
                    '   </td>'+
-                   '   <td width="80px">${sessionScope.userSession.displayName}</td>'+
                    '   <td width="172px" style="text-align:right;">'+
-                   '       <button class="btn btn-sm btn-info" name="reply_modify_save" r_type = "'+r_type+'" parent_id="'+parent_id+'" reply_id="'+reply_id+'">등록</button>'+
+                   '       <button class="btn btn-sm btn-success" name="reply_modify_save" r_type = "'+r_type+'" parent_id="'+parent_id+'" reply_id="'+reply_id+'">수정</button>'+
                    '       <button class="btn btn-sm btn-warning" name="reply_modify_cancel" r_type = "'+r_type+'" r_content = "'+txt_reply_content+'" r_writer = "'+txt_reply_writer+'" parent_id="'+parent_id+'"  reply_id="'+reply_id+'">취소</button>'+
                    '   </td>'+
                    '</tr>';
                 var prevTr = $(this).parent().parent();
-                   //자기 위에 붙이기
+                //자기 위에 붙이기
                 prevTr.after(replyEditor);
                 
                 //자기 자신 삭제
@@ -258,10 +271,10 @@
             if(r_type=="main"){
                 reply = 
                     '<tr reply_type="main">'+
+                    '   <td width="80px">${sessionScope.userSession.displayName}</td>'+
                     '   <td width="*">'+
                     r_content+
                     '   </td>'+
-                    '   <td width="80px">${sessionScope.userSession.displayName}</td>'+
                     '   <td width="172px" style="text-align:right;">'+
                     '       <button class="btn btn-sm btn-info" name="reply_reply" reply_id = "'+reply_id+'">댓글</button>'+
                     '       <button class="btn btn-sm btn-success" name="reply_modify" r_type = "main" parent_id="0" reply_id = "'+reply_id+'">수정</button>      '+
@@ -271,10 +284,10 @@
             }else{
                 reply = 
                     '<tr reply_type="sub">'+
+                    '   <td width="80px">${sessionScope.userSession.displayName}</td>'+
                     '   <td width="*">'+
                     r_content+
                     '   </td>'+
-                    '   <td width="80px">${sessionScope.userSession.displayName}</td>'+
                     '   <td width="172px" style="text-align:right;">'+
                     '       <button class="btn btn-sm btn-success" name="reply_modify" r_type = "sub" parent_id="'+parent_id+'" reply_id = "'+reply_id+'">수정</button>'+
                     '       <button class="btn btn-sm btn-warning" name="reply_del" reply_id = "'+reply_id+'">삭제</button>'+
@@ -355,12 +368,12 @@
             
             //입력받는 창 등록
              var replyEditor = 
-                '<tr id="reply_add" class="reply_reply">'+
+                '<tr id="reply_add" class="reply_reply sub">'+
+                '    <td width="80px">${sessionScope.userSession.displayName}</td>'+
                 '    <td width="*">'+
                 '        <textarea name="reply_reply_content" rows="3" cols="50" style="width:100%;"></textarea>'+
                 '    </td>'+
-                '    <td width="80px">${sessionScope.userSession.displayName}</td>'+
-                '    <td align="center" width="172px">'+
+                '    <td align="center" width="172px" style="text-align:right;">'+
                 '        <button class="btn btn-sm btn-info" name="reply_reply_save" parent_id="'+reply_id+'">등록</button>'+
                 '        <button class="btn btn-sm btn-warning" name="reply_reply_cancel">취소</button>'+
                 '    </td>'+

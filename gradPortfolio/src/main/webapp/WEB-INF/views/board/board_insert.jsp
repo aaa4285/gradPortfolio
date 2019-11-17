@@ -21,7 +21,7 @@ table tr th{
     </div>
     
     <div class="col-xs-12">
-        <form action="/board/insertProc" method="post" enctype="multipart/form-data"> <!-- 추가 -->
+        <form id="form" action="/board/insertProc" method="post" enctype="multipart/form-data"> <!-- 추가 -->
           <div class="form-group">
             <label for="subject">제목</label>
             <input type="text" class="form-control" id="subject" name="subject" placeholder="제목을 입력하세요.">
@@ -40,7 +40,7 @@ table tr th{
           </div>
           <div class="form-group">
             <label for="writer">찾는 반려동물 종류</label>
-            <div class="cal">
+            <div class="col">
 	            <input type="radio" name="kinds" value="1">강아지
 	   			<input type="radio" name="kinds" value="2">고양이
 	   			<input type="radio" name="kinds" value="3">기타
@@ -48,7 +48,7 @@ table tr th{
           </div>
           <div class="form-group">
             <label for="writer">성별</label>
-            <div class="cal">
+            <div class="col">
 	            <input type="radio" name="gender" value="0">암컷
 	   			<input type="radio" name="gender" value="1">수컷
    			</div>
@@ -58,12 +58,57 @@ table tr th{
             <textarea class="form-control" id="content" name="content" rows="3"></textarea>
           </div>
           <div class="form-group">
-            <label for="content">파일 업로드</label>
-            <input multiple="multiple" type="file" name="files" />
+            <label for="content">이미지 업로드</label>
+            <div class="input-group input-file">
+				<span class="input-group-btn">
+					<button class="btn btn-primary btn-choose" type="button">Choose</button>
+				</span>
+				<input type="text" class="form-control" placeholder='이미지를 선택해주세요.' />
+				<span class="input-group-btn">
+					<button class="btn btn-warning btn-reset" type="button">Reset</button>
+				</span>
+			</div>
           </div>
-
-          <button type="submit" class="btn btn-primary btn-sm" style="float:right;">작성</button>
-          
+<script>
+function sldjfrnf(){
+	loder_show();
+	$("#form").submit();
+}
+function bs_input_file() {
+	$(".input-file").before(
+		function() {
+			if ( ! $(this).prev().hasClass('input-ghost') ) {
+				var element = $("<input multiple='multiple' type='file' name='files' class='input-ghost' style='visibility:hidden; height:0'>");
+				element.attr("name",$(this).attr("name"));
+				element.change(function(){
+					element.next(element).find('input').val((element.val()).split('\\').pop());
+				});
+				$(this).find("button.btn-choose").click(function(){
+					element.click();
+				});
+				$(this).find("button.btn-reset").click(function(){
+					element.val(null);
+					$(this).parents(".input-file").find('input').val('');
+				});
+				$(this).find('input').css("cursor","pointer");
+				$(this).find('input').mousedown(function() {
+					$(this).parents('.input-file').prev().click();
+					return false;
+				});
+				return element;
+			}
+		}
+	);
+}
+$(function() {
+	bs_input_file();
+});
+</script>
+			<div class="row">
+				<div class="col">
+					<button type="button" onclick="sldjfrnf();" class="btn btn-primary btn-sm" style="float:right;">작성</button>
+				</div>
+			</div>
         </form>
     </div>
 </div> 

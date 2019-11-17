@@ -27,11 +27,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="boardDetail" parameterType="int" resultType="com.common.board.domain.BoardVO">
-        SELECT
-            *
-        FROM board
+        SELECT a.*, b.fullPath
+		FROM board a
+		LEFT OUTER JOIN (
+			SELECT a.*
+			FROM files a
+			INNER JOIN (
+			SELECT board_id, MAX(fno) AS fno
+			FROM files
+			GROUP BY board_id) b ON a.fno = b.fno
+		) b ON a.board_id = b.board_id
         WHERE
-            BOARD_ID = #{board_id}
+            a.BOARD_ID = #{board_id}
     </select>
     
     <insert id="boardInsert" parameterType="com.common.board.domain.BoardVO" useGeneratedKeys="true" keyProperty="id">
@@ -94,6 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             board_reply
         where
             reply_id = #{reply_id}
+        and reply_writer = #{reply_writer}
     </delete>
     
     <delete id="deleteBoardReplyAll" parameterType="com.common.board.domain.BoardReplyVo">
@@ -130,10 +138,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         set
             parent_id = #{parent_id},
             depth = #{depth},
-            reply_content = #{reply_content},
-            reply_writer = #{reply_writer}
+            reply_content = #{reply_content}
         where
             reply_id = #{reply_id}
+        and reply_writer = #{reply_writer}
     </update>
     
     <insert id="fileInsert" parameterType="com.common.board.domain.FileVO">

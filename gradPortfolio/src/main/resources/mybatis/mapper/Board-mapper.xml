@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="boardList" resultType="com.common.board.domain.BoardVO" parameterType="com.common.board.paging.Criteria">
-       SELECT a.*, b.fullPath
+		SELECT a.*, b.fullPath, c.nickname AS displayName
 		FROM board a
 		LEFT OUTER JOIN (
 			SELECT a.*
@@ -22,12 +22,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			FROM files
 			GROUP BY board_id) b ON a.fno = b.fno
 		) b ON a.board_id = b.board_id
-	ORDER BY a.board_id DESC
+		INNER JOIN user c ON c.id = a.board_id
+		ORDER BY a.board_id DESC
 		LIMIT #{pageStart}, #{perPageNum}
     </select>
     
     <select id="boardDetail" parameterType="int" resultType="com.common.board.domain.BoardVO">
-        SELECT a.*, b.fullPath
+		SELECT a.*, b.fullPath, c.nickname AS displayName
 		FROM board a
 		LEFT OUTER JOIN (
 			SELECT a.*
@@ -37,8 +38,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			FROM files
 			GROUP BY board_id) b ON a.fno = b.fno
 		) b ON a.board_id = b.board_id
-        WHERE
-            a.BOARD_ID = #{board_id}
+		INNER JOIN user c ON c.id = a.writer
+		WHERE
+			a.BOARD_ID = #{board_id}
     </select>
     
     <insert id="boardInsert" parameterType="com.common.board.domain.BoardVO" useGeneratedKeys="true" keyProperty="id">
@@ -97,18 +99,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
     
     <select id="getReplyList" resultType="com.common.board.domain.BoardReplyVo" parameterType="int">
-        select
-            reply_id,
-            board_id,
-            parent_id,
-            depth,
-            reply_content,
-            reply_writer
-        from
-            board_reply
-        where
+    	SELECT 
+    		a.*, 
+    		b.nickname AS displayName
+        FROM
+            board_reply a
+		INNER JOIN user b ON
+		a.reply_writer = b.id
+		WHERE
             board_id = #{board_id}
-        order by reply_id asc
+		order by reply_id ASC
     </select>
     
     <delete id="delReply" parameterType="com.common.board.domain.BoardReplyVo">

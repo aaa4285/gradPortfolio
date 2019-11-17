@@ -33,7 +33,7 @@ body {
 
 /* �⑥쥙�젟 筌롫뗀�뤀獄쏉옙  */
 body.fixed {
-	padding-top: 70px;
+	padding-top: 48px;
 }
 .navbar-static-top {
   margin-bottom: 19px;
@@ -252,6 +252,24 @@ table.col_2 th{width:128px;}
 		table.col_4 th{width:60x;}
 		table.col_4 td{width:calc(50% - 60px);}
 	    html.loader::after {
+	    	-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			content: '';
+	    	position:absolute;
+	    	left: calc(50% + 40px);
+	    	top: calc(50% + 40px);
+	    	z-index: 9999;
+	    	margin: -75px 0 0 -75px;
+	    	border: 10px solid #f3f3f3;
+	    	border-radius: 50%;
+	    	border-top: 10px solid #471471;
+	    	width:80px;
+	    	height: 80px;
+	    	-webkit-animation: spin 2s linear infinite;
+	    	animation: spin 2s linear infinite;
+	    }
+	    html>div.loader {
 	    	-webkit-box-sizing: border-box;
 			-moz-box-sizing: border-box;
 			box-sizing: border-box;

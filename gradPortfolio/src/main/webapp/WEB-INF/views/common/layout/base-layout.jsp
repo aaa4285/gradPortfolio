@@ -20,17 +20,19 @@
   		$(document).ready(function(){
   			// 스크롤 메뉴 fixed 이벤트
   			$(window).scroll(function() {
-  				var nav = $("body > nav.navbar.navbar-expand-lg");
+  				var nav = $("body > div.root");
   				if(!nav || !nav.offset()){return;}
-  			  if (!$("body").hasClass("fixed") && $(document).scrollTop() >= nav.offset().top) {
-  			    nav.addClass('fixed-top');
-  				nav.removeClass('static-top');
-  				$("body").addClass('fixed');
-  			  } else if ($("body").hasClass("fixed") && $(document).scrollTop()<=$("body > div.title").height()) {
-  			    nav.removeClass('fixed-top');
-  				nav.addClass('static-top');
-  				$("body").removeClass('fixed');
-  			  }
+  				if (!$("body").hasClass("fixed") && $(document).scrollTop() >= nav.offset().top) {
+  					nav.addClass('fixed-top');
+					nav.removeClass('static-top');
+					$("body").addClass('fixed');
+				} else if ($("body").hasClass("fixed") && $(document).scrollTop()<=$("body > div.title").height()) {
+					nav.removeClass('fixed-top');
+					nav.addClass('static-top');
+					$("body").removeClass('fixed');
+				}
+  			  
+  				setLoderTop();
   			});
   			
   			// 메뉴 click 이벤트

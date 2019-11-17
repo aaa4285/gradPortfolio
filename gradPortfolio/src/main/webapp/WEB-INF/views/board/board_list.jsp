@@ -51,6 +51,7 @@ function goPage(url,_this) {
 	    <div class="col-lg-4 col-sm-6 mb-4">
 	      <div class="card h-100" onclick="goDetail('${l.board_id}',this);">
 	        <img class="card-img-top" src="http://${empty l.fullPath?"toeic.ybmclass.com/toeic/img/noimage.gif":l.fullPath}" alt="" height="348px">
+	        <label class="label btn-primary btn-sm">${l.replyCnt} 댓글</label>
 	        <div class="card-body">
 	          <h4 class="card-title">
 	            <a href="javascript:void(0);">${l.subject}</a>

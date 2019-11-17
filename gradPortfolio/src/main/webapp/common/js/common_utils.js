@@ -25,8 +25,7 @@ function ajax(url,data,callback,loding){
 	console.log(typeof ajaxData,ajaxData);
 	console.log(contentType);
 	if (loding) {
-		$('body').addClass('overlay-layer');
-		$('html').addClass('loader');
+		loder_show();
 	}
 	$.ajax({
 		type:"POST",
@@ -36,8 +35,7 @@ function ajax(url,data,callback,loding){
 		data:ajaxData,
 		success : function(data){
 			if (loding) {
-				$('body').removeClass('overlay-layer');
-				$('html').removeClass('loader');
+				loder_hide();
 			}
 			if (callback && typeof callback == "function") {
 				callback(data);
@@ -45,21 +43,34 @@ function ajax(url,data,callback,loding){
 		},
 		error: function(request,status,error){
 			if (loding) {
-				$('body').removeClass('overlay-layer');
-				$('html').removeClass('loader');
+				loder_hide();
 			}
             alert("code:"+request.status+"\n"+"error:"+error);
         }
  
 	});
 }
+function setLoderTop() {
+	var loader = $("html > div.loader");
+	if (loader.length == 1) {
+		var h = loader.height();
+		var iH = window.innerHeight;
+		var hh = (iH/2+h);
+		loader.css("top",$(document).scrollTop()+hh+"px");
+	}
+}
 function loder_show(){
 	$('body').addClass('overlay-layer');
-	$('html').addClass('loader');
+	if ($("html>div.loader").length < 1) {
+		$("html").append('<div class="loader"></div>');
+		setLoderTop();
+	}
+	//$('html').addClass('loader');
 }
 function loder_hide(){
 	$('body').removeClass('overlay-layer');
-	$('html').removeClass('loader');
+	$("html>div.loader").remove();
+	//$('html').removeClass('loader');
 }
 
 function resetHtml(targetId,list,fn) {

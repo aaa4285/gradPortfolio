@@ -77,12 +77,12 @@ text-align: left;background: #6504b5;width: 100%;height: 30px;margin: 0 3px;bord
 			<div class="radius card" style="display: block;height:250px;">
 				<c:forEach var="l" items="${list}" varStatus="status">
 				<div class="fl inner">
-					<img class="fl" src="http://${l.fullPath}">
+					<img class="fl" src="http://${empty l.fullPath?"toeic.ybmclass.com/toeic/img/noimage.gif":l.fullPath}">
 					<div class="fl">${l.subject}</div>
 				</div>
 				</c:forEach>
 				<div style="position:absolute;top:-1px;right:0;">
-					<a href="/board/list" class="btn btn-secondary btn-rounded waves-effect waves-light" style="float:left;cursor:pointer;">더보기></a>
+					<a href="/board/list" class="btn btn-secondary btn-rounded waves-effect waves-light btn-sm" style="float:left;cursor:pointer;">more></a>
 				</div>
 			</div>
 		</div>
@@ -90,6 +90,11 @@ text-align: left;background: #6504b5;width: 100%;height: 30px;margin: 0 3px;bord
 	<div class="row" id="abandonmentPublic">
 		<div class="title"><h4>FIND PAT</h4></div>
 		<div class="col">
+		<!-- 
+			<div class="radius card init" style="z-index: 1;width:calc(100% - 5px);display: block;height: 250px;position: absolute;background:rgba(255, 255, 255, 0.52);padding-top: 111px;">
+				<h4>조회중..</h4>
+			</div>
+			 -->
 			<div class="radius card" style="display: block;height:250px;">
 				<div class="fl inner">
 					<div class="fake">
@@ -132,7 +137,7 @@ text-align: left;background: #6504b5;width: 100%;height: 30px;margin: 0 3px;bord
 					<div class="processState"></div>
 				</div>
 				<div style="position:absolute;top:-1px;right:0;">
-					<a href="/main/index2.do" class="btn btn-secondary btn-rounded waves-effect waves-light" style="float:left;cursor:pointer;">더보기></a>
+					<a href="/main/index2.do" class="btn btn-secondary btn-rounded waves-effect waves-light btn-sm" style="float:left;cursor:pointer;">more></a>
 				</div>
 			</div>
 		</div>
@@ -162,6 +167,7 @@ text-align: left;background: #6504b5;width: 100%;height: 30px;margin: 0 3px;bord
 ajax("/abandonmentPublic",{pageNo:1,numOfRows:4},
 	function(data){
 		data.data.forEach(function(d,i){
+			//$("#abandonmentPublic .radius.card.init").hide();
 			var p = $("#abandonmentPublic .radius.card > div.inner").eq(i);
 			if (!p) {
 				return;

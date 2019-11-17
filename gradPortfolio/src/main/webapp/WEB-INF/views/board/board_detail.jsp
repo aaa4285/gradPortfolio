@@ -446,27 +446,6 @@
                     }
             	}
             );
-            /*
-            $.ajax({
-                url            :    "/board/reply/save",
-                dataType    :    "json",
-                contentType :    "application/x-www-form-urlencoded; charset=UTF-8",
-                type         :    "post",
-                data        :    objParams,
-                success     :    function(retVal){
-					console.log(retVal);
-                    if(retVal.code != "OK") {
-                        alert(retVal.message);
-                        status = false;
-                    }else{
-                    	location.href = location.href; 
-                    }
-                },
-                error        :    function(request, status, error){
-                    console.log("AJAX_ERROR");
-                }
-            });
-            */
         });
         
         //대댓글 입력창 취소

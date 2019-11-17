@@ -15,4 +15,8 @@ public class BoardVO {
 	private String writer;
 	private Date reg_date;
 	private String fullPath;
+	private String telNo;
+	private String location;
+	private char kinds;
+	private char gender;
 }

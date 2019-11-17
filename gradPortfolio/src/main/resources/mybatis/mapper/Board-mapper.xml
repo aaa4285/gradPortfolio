@@ -36,8 +36,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <insert id="boardInsert" parameterType="com.common.board.domain.BoardVO" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO
-        board (SUBJECT,CONTENT,WRITER,REG_DATE)
-        VALUES(#{subject},#{content},#{writer},now()) 
+        board (SUBJECT, CONTENT, WRITER, TELNO, LOCATION, KINDS, GENDER, REG_DATE)
+        VALUES(#{subject},#{content},#{writer}, ${telNo}, ${location}, ${kinds}, ${gender}, now()) 
     </insert>
     
     <update id="boardUpdate" parameterType="com.common.board.domain.BoardVO">

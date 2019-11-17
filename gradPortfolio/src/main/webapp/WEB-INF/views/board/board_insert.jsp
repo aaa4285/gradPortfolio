@@ -31,6 +31,22 @@ table tr th{
             <input type="text" class="form-control" id="writer" name="writer" placeholder="내용을 입력하세요.">
           </div>
           <div class="form-group">
+            <label for="writer">연락처</label>
+            <input type="text" class="form-control" id="telNo" name="telNo" placeholder="내용을 입력하세요.">
+          </div>
+          <div class="form-group">
+            <label for="writer">잃어버린 장소</label>
+            <input type="text" class="form-control" id="location" name="location" placeholder="내용을 입력하세요.">
+          </div>
+          <div class="form-group">
+            <label for="writer">찾는 반려동물 종류</label>
+            <input type="text" class="form-control" id="kinds" name="kinds" placeholder="내용을 입력하세요.">
+          </div>
+          <div class="form-group">
+            <label for="writer">성별</label>
+            <input type="text" class="form-control" id="gender" name="gender" placeholder="내용을 입력하세요.">
+          </div>
+          <div class="form-group">
             <label for="content">내용</label>
             <textarea class="form-control" id="content" name="content" rows="3"></textarea>
           </div>

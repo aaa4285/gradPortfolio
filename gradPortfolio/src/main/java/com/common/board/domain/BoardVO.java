@@ -20,4 +20,5 @@ public class BoardVO {
 	private String kinds;
 	private String gender;
 	private String displayName;
+	private int replyCnt;
 }

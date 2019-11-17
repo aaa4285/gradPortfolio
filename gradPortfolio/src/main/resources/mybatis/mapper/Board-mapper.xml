@@ -12,17 +12,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="boardList" resultType="com.common.board.domain.BoardVO" parameterType="com.common.board.paging.Criteria">
-		SELECT a.*, b.fullPath, c.nickname AS displayName
+		SELECT a.*, b.fullPath, c.nickname AS displayName, f.*
 		FROM board a
 		LEFT OUTER JOIN (
 			SELECT a.*
 			FROM files a
 			INNER JOIN (
-			SELECT board_id, MAX(fno) AS fno
-			FROM files
-			GROUP BY board_id) b ON a.fno = b.fno
+				SELECT board_id, MAX(fno) AS fno
+				FROM files
+				GROUP BY board_id) b ON a.fno = b.fno
 		) b ON a.board_id = b.board_id
 		INNER JOIN user c ON c.id = a.writer
+		LEFT OUTER JOIN (
+			SELECT board_id, COUNT(*) AS replyCnt
+				FROM board_reply
+				GROUP BY board_id
+		) f ON a.board_id = f.board_id
 		ORDER BY a.board_id DESC
 		LIMIT #{pageStart}, #{perPageNum}
     </select>

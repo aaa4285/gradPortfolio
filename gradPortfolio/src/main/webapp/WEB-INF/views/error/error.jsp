@@ -77,6 +77,6 @@ body {
 		<h3>error msg : <span>${msg}</span></h3>
 		<h2>timestamp: <span>${timestamp}</span></h2>
 		<!-- use window.history.back(); to go back -->
-		<button>Go Home</button>
+		<button type="button" onclick="location.href='/main/index.do'">Go Home</button>
 	</div>
 </body>

@@ -45,7 +45,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		if (StringUtils.isEmpty(principalMap.get("displayName"))) {
 			Map<String, Object> sosialMap = mapper.convertValue(principalMap.get("social"), Map.class);
 			sessionMap.putAll(sosialMap);
-			sosialMap.put("id", principalMap.get("id"));
+			sessionMap.put("id", principalMap.get("id"));
 		} else {
 			sessionMap.putAll(principalMap);
 		}

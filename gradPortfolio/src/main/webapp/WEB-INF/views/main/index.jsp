@@ -59,6 +59,12 @@
 .row .title{
 text-align: left;background: #6504b5;width: 100%;height: 30px;margin: 0 3px;border-top-right-radius: 8px;color: white;border-top-left-radius: 8px;padding-left: 14px;
 }
+.row .title a{
+color: white;float: right;cursor:pointer;
+}
+.row .title a:hover{
+	color:#e6c7ff;
+}
 </style>
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
@@ -72,7 +78,10 @@ text-align: left;background: #6504b5;width: 100%;height: 30px;margin: 0 3px;bord
 <!-- Chart code -->
 <div class="inner radius">
 	<div class="row">
-		<div class="title"><h4>FREE BOARD</h4></div>
+		<div class="title">
+			<h4 style="float:left;">FREE BOARD</h4>
+			<a href="/board/list">more&gt;</a>
+		</div>
 		<div class="col">
 			<div class="radius card" style="display: block;height:250px;">
 				<c:forEach var="l" items="${list}" varStatus="status">
@@ -81,14 +90,14 @@ text-align: left;background: #6504b5;width: 100%;height: 30px;margin: 0 3px;bord
 					<div class="fl">${l.subject}</div>
 				</div>
 				</c:forEach>
-				<div style="position:absolute;top:-1px;right:0;">
-					<a href="/board/list" class="btn btn-secondary btn-rounded waves-effect waves-light btn-sm" style="float:left;cursor:pointer;">more></a>
-				</div>
 			</div>
 		</div>
 	</div>
 	<div class="row" id="abandonmentPublic">
-		<div class="title"><h4>FIND PAT</h4></div>
+		<div class="title">
+			<h4 style="float:left;">FIND PAT</h4>
+			<a href="/main/index2.do">more&gt;</a>
+		</div>
 		<div class="col">
 		<!-- 
 			<div class="radius card init" style="z-index: 1;width:calc(100% - 5px);display: block;height: 250px;position: absolute;background:rgba(255, 255, 255, 0.52);padding-top: 111px;">
@@ -135,9 +144,6 @@ text-align: left;background: #6504b5;width: 100%;height: 30px;margin: 0 3px;bord
 						</span>
 					</div>
 					<div class="processState"></div>
-				</div>
-				<div style="position:absolute;top:-1px;right:0;">
-					<a href="/main/index2.do" class="btn btn-secondary btn-rounded waves-effect waves-light btn-sm" style="float:left;cursor:pointer;">more></a>
 				</div>
 			</div>
 		</div>

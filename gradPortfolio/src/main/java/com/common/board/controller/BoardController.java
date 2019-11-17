@@ -110,7 +110,7 @@ public class BoardController {
                 
                 String extension = FilenameUtils.getExtension(originFileName);
                 
-                String destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + extension;
+                String destinationFileName = RandomStringUtils.randomAlphanumeric(20) + "." + extension;
 
                 SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
                 String filePath = bucketImgUploadPath + date.format(new Date());

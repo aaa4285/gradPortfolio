@@ -60,6 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{kinds},
 			#{gender},
 			now()
+		)
 	</insert>
     
     <update id="boardUpdate" parameterType="com.common.board.domain.BoardVO">

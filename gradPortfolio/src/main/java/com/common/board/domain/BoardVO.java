@@ -12,7 +12,7 @@ public class BoardVO {
 	private int board_id;
 	private String subject;
 	private String content;
-	private String writer;
+	private int writer;
 	private Date reg_date;
 	private String fullPath;
 	private String telNo;

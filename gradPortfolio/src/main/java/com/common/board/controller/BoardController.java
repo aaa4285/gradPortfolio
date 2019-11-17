@@ -16,6 +16,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,7 +72,7 @@ public class BoardController {
     }
     
     @RequestMapping("/detail/{boardId}") 
-    private String boardDetail(HttpServletRequest request,@PathVariable int boardId, Model model) throws Exception{
+    private String boardDetail(HttpServletRequest request, @PathVariable int boardId, Model model) throws Exception{
         model.addAttribute("detail", boardService.boardDetail(boardId));
         model.addAttribute("replyList", boardService.getReplyList(boardId));
         
@@ -85,34 +86,44 @@ public class BoardController {
     }
     
     @RequestMapping("/insertProc")
-    private String boardInsertProc(@ModelAttribute BoardVO board, MultipartFile[] files) throws Exception{
+    private String boardInsertProc(HttpServletRequest request, @ModelAttribute BoardVO board, MultipartFile[] files) throws Exception{
     	FileVO file  = new FileVO();
+    	
+    	Map<String, Object> sessionMap = new HashMap<String, Object>();
+        
+        
+        HttpSession session = request.getSession();
+        sessionMap = (Map<String, Object>) session.getAttribute(BaseConstantes.USER_SESSION_ID);
+        
+        board.setBoard_id((int) (long) sessionMap.get("id"));
     	
     	boardService.boardInsert(board);
     	
     	int boardId = board.getId();
-    	
+    
     	// Array To List
     	List<MultipartFile> fileList = new ArrayList<MultipartFile>(Arrays.asList(files));
 
     	for (MultipartFile multipartFile : fileList) {
-            String originFileName = multipartFile.getOriginalFilename(); // 원본 파일 명
-            
-            String extension = FilenameUtils.getExtension(originFileName);
-            
-            String destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + extension;
+    		if (!StringUtils.isEmpty(multipartFile.getOriginalFilename())) {
+    			String originFileName = multipartFile.getOriginalFilename(); // 원본 파일 명
+                
+                String extension = FilenameUtils.getExtension(originFileName);
+                
+                String destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + extension;
 
-            SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
-            String filePath = bucketImgUploadPath + date.format(new Date());
-			awsService.uploadObject(filePath, multipartFile, destinationFileName);
-			
-			file.setBoard_id(boardId);
-			file.setFilePath(filePath + "/" + destinationFileName);
-			file.setFullPath(bucketImgFilePath + "/" + filePath + "/" + destinationFileName);
-			file.setFileName(destinationFileName);
-			file.setFileOriName(originFileName);
-			
-			boardService.fileInsert(file);
+                SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
+                String filePath = bucketImgUploadPath + date.format(new Date());
+    			awsService.uploadObject(filePath, multipartFile, destinationFileName);
+    			
+    			file.setBoard_id(boardId);
+    			file.setFilePath(filePath + "/" + destinationFileName);
+    			file.setFullPath(bucketImgFilePath + "/" + filePath + "/" + destinationFileName);
+    			file.setFileName(destinationFileName);
+    			file.setFileOriName(originFileName);
+    			
+    			boardService.fileInsert(file);
+			}
         }
     	
         return "redirect:/board/list";

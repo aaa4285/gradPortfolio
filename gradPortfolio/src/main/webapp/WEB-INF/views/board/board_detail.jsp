@@ -13,6 +13,12 @@
 	table tr th{background: #6504b5;color:#fff;}
 	#reply_area tr{border-bottom: 1px solid #efeef1;}
 	#reply_area tr:last-child{border-bottom: 0px;}
+	tr[reply_type="sub"] td:first-child{padding-left:18px;}
+	tr[reply_type="sub"] td:first-child::before{
+		content:'->';
+		color: transparent;
+		background:url(https://image.flaticon.com/icons/svg/992/992697.svg) no-repeat left top;
+	}
 </style>
 <div class="container">
     <div class="col-xs-12" style="margin:15px auto;">
@@ -20,7 +26,6 @@
     </div>
     <div class="row">
     	<div class="col mb-3">
-    	${detail.fullPath}
       		<c:if test="${!empty detail.fullPath}">
 		      	<div class="card">
 		        	<img class="card-img-top" src="http://${empty detail.fullPath?"toeic.ybmclass.com/toeic/img/noimage.gif":detail.fullPath}">
@@ -41,7 +46,7 @@
 		    	</tr>
 		    	<tr>
 		    		<th>작성자</th>
-		    		<td><%-- ${detail.displayName}  --%></td>
+		    		<td>${detail.displayName}</td>
 		    		<th>작성일자</th>
 		    		<td><fmt:formatDate value="${detail.reg_date}" pattern="yyyy.MM.dd HH:mm:ss"/></td>
 		    	</tr>
@@ -54,11 +59,14 @@
 		    	<tr>
 		    		<th>종류</th>
 		    		<td>
-		    			${detail.kinds+""}/${detail.kinds}/${detail.kinds+"1"}/${detail.kinds*10}/${detail.kinds+"1" eq "21"}${detail.kinds eq "50"}
+		    			<c:if test="${detail.kinds eq '1'}">강아지</c:if>
+		    			<c:if test="${detail.kinds eq '2'}">고양이</c:if>
+		    			<c:if test="${detail.kinds eq '3'}">기타</c:if>
 		    		</td>
 		    		<th>성별</th>
 		    		<td>
-		    			[${detail.gender}]${detail.gender eq "0"}
+		    			<c:if test="${detail.gender eq '0'}">암컷</c:if>
+		    			<c:if test="${detail.gender eq '1'}">수컷</c:if>
 		    		</td>
 		    	</tr>
 	    	</tbody>
@@ -84,12 +92,8 @@
 	            <!-- 댓글이 들어갈 공간 -->
 	            <c:forEach var="replyList" items="${replyList}" varStatus="status">
 	             <tr reply_type="<c:if test="${replyList.depth == '0'}">main</c:if><c:if test="${replyList.depth == '1'}">sub</c:if>"><!-- 댓글의 depth 표시 -->
-	                 <td width="*">
-	                     <c:if test="${replyList.depth == '1'}"> → </c:if>${replyList.reply_content}
-	                 </td>
-	                 <td width="80px">
-	                     ${replyList.reply_writer}
-	                 </td>
+	                 <td width="*">${replyList.reply_content}</td>
+	                 <td width="80px">${replyList.displayName}</td>
 	                 <td width="172px" style="text-align:right;">
 	                     <c:if test="${replyList.depth != '1'}">
 	                         <button class="btn btn-sm btn-info" name="reply_reply" parent_id = "${replyList.reply_id}" reply_id = "${replyList.reply_id}">댓글</button><!-- 첫 댓글에만 댓글이 추가 대댓글 불가 -->
@@ -106,6 +110,9 @@
         <!-- 댓글작성 -->
         <div class="mb-2" style="border-radius:8px;width:100%;padding:8px;background:#efeef1;">
 	        <table style="width:100%;">
+	        	<tr>
+	        		<td>${sessionScope.userSession.displayName}</td>
+	        	</tr>
 	            <tr>
 	                <td>
 	                    <textarea id="reply_content" name="reply_content" rows="4" cols="50" placeholder="댓글을 입력하세요." style="display: inline-block;float: left;width: calc(100% - 87px);"></textarea>
@@ -169,28 +176,6 @@
                      }
             	}
             );
-            /*
-            $.ajax({
-                url            :    "/board/reply/save",
-                dataType    :    "json",
-                contentType :    "application/x-www-form-urlencoded; charset=UTF-8",
-                type         :    "post",
-                data        :    objParams,
-                success     :    function(retVal){
-                    if(retVal.code != "OK") {
-                        alert(retVal.message);
-                        
-                        return false;
-                    }else{
-                    	location.href = location.href;
-                    }
-                    
-                },
-                error        :    function(request, status, error){
-                    console.log("AJAX_ERROR");
-                }
-            });
-            */
         });
         
         //댓글 삭제
@@ -220,25 +205,6 @@
                     }
             	}
             );
-            /*
-            $.ajax({
-                url :    "/board/reply/del",
-                dataType    :    "json",
-                contentType :    "application/x-www-form-urlencoded; charset=UTF-8",
-                type         :    "post",
-                data        :    objParams,
-                success     :    function(retVal){
-                    if(retVal.code != "OK") {
-                        alert(retVal.message);
-                    } else {
-                        location.href = location.href;
-                    }
-                },
-                error        :    function(request, status, error){
-                    
-                }
-            });
-            */
         });
         
         //댓글 수정 입력
@@ -259,9 +225,10 @@
                 //입력받는 창 등록
                 var replyEditor = 
                    '<tr id="reply_add" class="reply_modify">'+
-                   '   <td width="*" colspan="2">'+
-                   '       <textarea style="width:100%;" name="reply_modify_content_'+reply_id+'" id="reply_modify_content_'+reply_id+'" rows="3" cols="50">'+txt_reply_content+'</textarea>'+ //기존 내용 넣기
+                   '   <td width="*">'+
+                   '       <textarea style="width:100%;height:50px;" name="reply_modify_content_'+reply_id+'" id="reply_modify_content_'+reply_id+'" rows="3" cols="50">'+txt_reply_content+'</textarea>'+ //기존 내용 넣기
                    '   </td>'+
+                   '   <td width="80px">${sessionScope.userSession.displayName}</td>'+
                    '   <td width="172px" style="text-align:right;">'+
                    '       <button class="btn btn-sm btn-info" name="reply_modify_save" r_type = "'+r_type+'" parent_id="'+parent_id+'" reply_id="'+reply_id+'">등록</button>'+
                    '       <button class="btn btn-sm btn-warning" name="reply_modify_cancel" r_type = "'+r_type+'" r_content = "'+txt_reply_content+'" r_writer = "'+txt_reply_writer+'" parent_id="'+parent_id+'"  reply_id="'+reply_id+'">취소</button>'+
@@ -291,30 +258,26 @@
             if(r_type=="main"){
                 reply = 
                     '<tr reply_type="main">'+
-                    '   <td width="820px">'+
+                    '   <td width="*">'+
                     r_content+
                     '   </td>'+
-                    '   <td width="100px">'+
-                    r_writer+
-                    '   </td>'+
-                    '   <td align="center">'+
-                    '       <button name="reply_reply" reply_id = "'+reply_id+'">댓글</button>'+
-                    '       <button name="reply_modify" r_type = "main" parent_id="0" reply_id = "'+reply_id+'">수정</button>      '+
-                    '       <button name="reply_del" reply_id = "'+reply_id+'">삭제</button>      '+
+                    '   <td width="80px">${sessionScope.userSession.displayName}</td>'+
+                    '   <td width="172px" style="text-align:right;">'+
+                    '       <button class="btn btn-sm btn-info" name="reply_reply" reply_id = "'+reply_id+'">댓글</button>'+
+                    '       <button class="btn btn-sm btn-success" name="reply_modify" r_type = "main" parent_id="0" reply_id = "'+reply_id+'">수정</button>      '+
+                    '       <button class="btn btn-sm btn-warning" name="reply_del" reply_id = "'+reply_id+'">삭제</button>      '+
                     '   </td>'+
                     '</tr>';
             }else{
                 reply = 
                     '<tr reply_type="sub">'+
-                    '   <td width="820px"> → '+
+                    '   <td width="*">'+
                     r_content+
                     '   </td>'+
-                    '   <td width="100px">'+
-                    r_writer+
-                    '   </td>'+
-                    '   <td align="center">'+
-                    '       <button name="reply_modify" r_type = "sub" parent_id="'+parent_id+'" reply_id = "'+reply_id+'">수정</button>'+
-                    '       <button name="reply_del" reply_id = "'+reply_id+'">삭제</button>'+
+                    '   <td width="80px">${sessionScope.userSession.displayName}</td>'+
+                    '   <td width="172px" style="text-align:right;">'+
+                    '       <button class="btn btn-sm btn-success" name="reply_modify" r_type = "sub" parent_id="'+parent_id+'" reply_id = "'+reply_id+'">수정</button>'+
+                    '       <button class="btn btn-sm btn-warning" name="reply_del" reply_id = "'+reply_id+'">삭제</button>'+
                     '   </td>'+
                     '</tr>';
             }
@@ -393,9 +356,10 @@
             //입력받는 창 등록
              var replyEditor = 
                 '<tr id="reply_add" class="reply_reply">'+
-                '    <td width="*" colspan="2">'+
+                '    <td width="*">'+
                 '        <textarea name="reply_reply_content" rows="3" cols="50" style="width:100%;"></textarea>'+
                 '    </td>'+
+                '    <td width="80px">${sessionScope.userSession.displayName}</td>'+
                 '    <td align="center" width="172px">'+
                 '        <button class="btn btn-sm btn-info" name="reply_reply_save" parent_id="'+reply_id+'">등록</button>'+
                 '        <button class="btn btn-sm btn-warning" name="reply_reply_cancel">취소</button>'+

@@ -22,6 +22,8 @@ import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.util.StringUtils;
 
+import com.common.constantes.BaseConstantes;
+
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
 	private RequestCache requestCache = new HttpSessionRequestCache();
@@ -37,18 +39,22 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		Map<String, Object> principalMap = mapper.convertValue(authentication.getPrincipal(), Map.class);
 		
-		Map<String, Object> sessionVo = new HashMap<String, Object>();
+		Map<String, Object> sessionMap = new HashMap<String, Object>();
 		
 		// 소셜 로그인
 		if (StringUtils.isEmpty(principalMap.get("displayName"))) {
 			Map<String, Object> sosialMap = mapper.convertValue(principalMap.get("social"), Map.class);
-			sessionVo.putAll(sosialMap);
+			sessionMap.putAll(sosialMap);
+			sosialMap.put("id", principalMap.get("id"));
 		} else {
-			sessionVo.putAll(principalMap);
+			sessionMap.putAll(principalMap);
 		}
 		
+		// 비밀번호 삭제
+		sessionMap.remove("password");
+		
 		HttpSession session = request.getSession();
-		session.setAttribute("sessionVo", sessionVo);
+		session.setAttribute(BaseConstantes.USER_SESSION_ID, sessionMap);
 		
 		resultRedirectStrategy(request, response, authentication);
     }

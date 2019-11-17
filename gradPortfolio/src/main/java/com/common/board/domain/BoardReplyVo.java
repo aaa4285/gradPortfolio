@@ -11,6 +11,6 @@ public class BoardReplyVo {
 	private String parent_id;
 	private String depth;
 	private String reply_content;
-	private String reply_writer;
+	private int reply_writer;
 	private String register_datetime;
 }

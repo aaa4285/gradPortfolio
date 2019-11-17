@@ -1,6 +1,5 @@
 package com.common.board.controller;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,12 +9,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +30,7 @@ import com.common.board.domain.FileVO;
 import com.common.board.paging.Criteria;
 import com.common.board.paging.PageMaker;
 import com.common.board.service.BoardService;
+import com.common.constantes.BaseConstantes;
 import com.common.util.CommonUtils;
 
 import lombok.RequiredArgsConstructor;
@@ -145,12 +145,17 @@ public class BoardController {
   //AJAX 호출 (댓글 등록)
     @RequestMapping(value="/reply/save", method=RequestMethod.POST)
     @ResponseBody
-    public Object boardReplySave(@ModelAttribute BoardReplyVo boardReply) {
+    public Object boardReplySave(HttpServletRequest request, @ModelAttribute BoardReplyVo boardReply) {
  
         //리턴값
         Map<String, Object> retVal = new HashMap<String, Object>();
+        Map<String, Object> sessionMap = new HashMap<String, Object>();
         
-        //boardReply.setReply_writer(reply_writer);
+        
+        HttpSession session = request.getSession();
+        sessionMap = (Map<String, Object>) session.getAttribute(BaseConstantes.USER_SESSION_ID);
+        
+        boardReply.setReply_writer((int) (long) sessionMap.get("id"));
         
         //정보입력
         int result = boardService.regReply(boardReply);

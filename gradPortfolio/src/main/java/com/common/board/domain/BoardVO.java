@@ -19,4 +19,5 @@ public class BoardVO {
 	private String location;
 	private String kinds;
 	private String gender;
+	private String displayName;
 }

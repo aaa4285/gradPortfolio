@@ -13,4 +13,5 @@ public class BoardReplyVo {
 	private String reply_content;
 	private int reply_writer;
 	private String register_datetime;
+	private String displayName;
 }

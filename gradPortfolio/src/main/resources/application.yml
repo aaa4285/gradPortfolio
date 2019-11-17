@@ -25,6 +25,11 @@ spring:
            initial-size: 1
            max-idle: 1
            min-idle: 1
+   servlet:
+      multipart:
+         max-file-size: 30MB
+         max-request-size: 30MB
+      
    jpa:
       database: h2
       show-sql: true

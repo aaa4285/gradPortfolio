@@ -24,5 +24,9 @@
        <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
    </definition>
    
+   <!-- no tiles -->
+	<definition name="error/error" template="/WEB-INF/views/common/layout/no-layout.jsp">
+		<put-attribute name="body" value="/WEB-INF/views/error/error.jsp"/>
+	</definition>
    
 </tiles-definitions>

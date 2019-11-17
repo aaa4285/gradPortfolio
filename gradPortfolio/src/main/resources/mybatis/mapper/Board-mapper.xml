@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			FROM files
 			GROUP BY board_id) b ON a.fno = b.fno
 		) b ON a.board_id = b.board_id
-		INNER JOIN user c ON c.id = a.board_id
+		INNER JOIN user c ON c.id = a.writer
 		ORDER BY a.board_id DESC
 		LIMIT #{pageStart}, #{perPageNum}
     </select>

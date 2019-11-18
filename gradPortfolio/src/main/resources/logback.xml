@@ -10,6 +10,10 @@
         <appender-ref ref="STDOUT" />
     </logger>
     
+    <logger name="com.common.board.mapper.ProBoardMapper" level="ALL">
+        <appender-ref ref="STDOUT" />
+    </logger>
+    
     <!-- Application Loggers -->
     <logger name="com" additivity="false">
         <level value="info" />

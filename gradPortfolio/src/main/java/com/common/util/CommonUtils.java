@@ -39,12 +39,12 @@ public class CommonUtils {
 			menuVO = new MenuVO();
 			menuVO.setIdx(3);
 			menuVO.setTitle("HELP FIND");
-			menuVO.setUrl("/main/index3.do");
+			menuVO.setUrl("/board/list");
 			menuList.add(menuVO);
 			menuVO = new MenuVO();
 			menuVO.setIdx(5);
 			menuVO.setTitle("FREE BOARD");
-			menuVO.setUrl("/board/list");
+			menuVO.setUrl("/proBoard/list");
 			menuList.add(menuVO);
 			sessionVO = new SessionVO();
 			sessionVO.setUserVO(userVO);

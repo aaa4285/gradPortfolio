@@ -261,7 +261,7 @@ fill:#ffc107 !important;
 		</li>
 		<%} %>
 	</ul> <!-- cd-items -->
-	<div class="cd-quick-view" style="width:90%;max-width:1024px;">
+	<div class="cd-quick-view" style="width:90%;max-width:900px;max-height:900px;transform: translate(-50%, -50%);top: 50%;">
 		<div class="cd-slider-wrapper">
 			
 		</div> <!-- cd-slider-wrapper -->
@@ -362,7 +362,7 @@ function search(pageNo){
 				
 				// 상세 데이터 셋팅
 				$(".cd-quick-view .cd-slider-wrapper").html("");
-				$(".cd-quick-view .cd-slider-wrapper").append('<img src="'+slectedImageUrl+'" class="img-box" onload="javascript:myinfo(this);"></li>');
+				$(".cd-quick-view .cd-slider-wrapper").append('<img src="'+slectedImageUrl+'" class="img-box" onload="javascript:myinfo(this);" style="max-width:500px;"></li>');
 				$('body').addClass('overlay-layer');
 				resetHtml("detail",[list[$(this).parent().attr("idx")]]);
 				

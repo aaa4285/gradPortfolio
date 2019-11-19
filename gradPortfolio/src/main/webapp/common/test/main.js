@@ -40,8 +40,8 @@ function resizeQuickView() {
 	var quickViewLeft = ($(window).width() - $('.cd-quick-view').width())/2,
 		quickViewTop = ($(window).height() - $('.cd-quick-view').height())/2;
 	$('.cd-quick-view').css({
-	    "top": quickViewTop,
-	    "left": quickViewLeft,
+	    "top": quickViewTop
+	    //"left": quickViewLeft,
 	});
 } 
 
@@ -50,12 +50,15 @@ function closeQuickView(finalWidth, maxQuickWidth) {
 		activeSliderUrl = close.siblings('.cd-slider-wrapper').find('img.img-box').attr('src'),
 		selectedImage = $('.empty-box').find('div.img-box');
 	//update the image in the gallery
+	closeNoAnimation(selectedImage, finalWidth, maxQuickWidth);
+	/*
 	if( !$('.cd-quick-view').hasClass('velocity-animating') && $('.cd-quick-view').hasClass('add-content')) {
 		//selectedImage.attr('src', activeSliderUrl);
 		animateQuickView(selectedImage, finalWidth, maxQuickWidth, 'close');
 	} else {
-		closeNoAnimation(selectedImage, finalWidth, maxQuickWidth);
+		
 	}
+	*/
 }
 
 function animateQuickView(image, finalWidth, maxQuickWidth, animationType) {
@@ -76,17 +79,14 @@ function animateQuickView(image, finalWidth, maxQuickWidth, animationType) {
 		parentListItem.addClass('empty-box');
 		//place the quick view over the image gallery and give it the dimension of the gallery image
 		$('.cd-quick-view').css({
-		    "top": 0,
-		    //"left": leftSelected+"px",
-		    //"width": quickViewWidth+"px",
-		    overflow:'hidden auto'
+		    "top": 0
 		}).addClass('is-visible').css({
 		    'top': '0',
 		    //'left': finalLeft+'px',
 		    //'width': quickViewWidth+'px',
 		});
 		$('.cd-quick-view').addClass('animate-width').velocity({
-			'top': finalTop+ 'px',
+			'top':'50%',
 			//'left': quickViewLeft+'px',
 	    	//'width': quickViewWidth+'px',
 		}, 300, 'ease' ,function(){
@@ -149,10 +149,11 @@ function closeNoAnimation(image, finalWidth, maxQuickWidth) {
 		widthSelected = image.width();
 
 	$('body').removeClass('overlay-layer');
+	$("body").css("overflow","auto");
 	parentListItem.removeClass('empty-box');
-	$('.cd-quick-view').velocity("stop").removeClass('add-content animate-width is-visible').css({
+	$('.cd-quick-view').velocity("stop").removeClass('add-content animate-width is-visible')/*.css({
 		"top": topSelected,
 	    "left": leftSelected,
 	    "max-width": widthSelected,
-	});
+	});*/
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.common.board.domain.BoardReplyVo;
-import com.common.board.domain.ProBoardVO;
+import com.common.board.domain.BoardVO;
 import com.common.board.domain.FileVO;
 import com.common.board.mapper.ProBoardMapper;
 import com.common.board.paging.Criteria;
@@ -25,22 +25,22 @@ public class ProBoardService {
 		return proBoardMapper.boardCount();
 	}
 
-	public List<ProBoardVO> boardList(Criteria criteria) throws Exception {
+	public List<BoardVO> boardList(Criteria criteria) throws Exception {
 
 		return proBoardMapper.boardList(criteria);
 	}
 
-	public ProBoardVO boardDetail(int bno) throws Exception {
+	public BoardVO boardDetail(int bno) throws Exception {
 
 		return proBoardMapper.boardDetail(bno);
 	}
 
-	public int boardInsert(ProBoardVO board) throws Exception {
+	public int boardInsert(BoardVO board) throws Exception {
 
 		return proBoardMapper.boardInsert(board);
 	}
 
-	public int boardUpdate(ProBoardVO board) throws Exception {
+	public int boardUpdate(BoardVO board) throws Exception {
 
 		return proBoardMapper.boardUpdate(board);
 	}

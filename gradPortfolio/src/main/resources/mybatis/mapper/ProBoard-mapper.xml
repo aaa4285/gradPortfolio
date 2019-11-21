@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM protection_board
     </select>
     
-    <select id="boardList" resultType="com.common.board.domain.ProBoardVO" parameterType="com.common.board.paging.Criteria">
+    <select id="boardList" resultType="com.common.board.domain.BoardVO" parameterType="com.common.board.paging.Criteria">
 		SELECT a.*, b.fullPath, c.nickname AS displayName, f.*
 		FROM protection_board a
 		LEFT OUTER JOIN (
@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LIMIT #{pageStart}, #{perPageNum}
     </select>
     
-    <select id="boardDetail" parameterType="int" resultType="com.common.board.domain.ProBoardVO">
+    <select id="boardDetail" parameterType="int" resultType="com.common.board.domain.BoardVO">
 		SELECT a.*, b.fullPath, c.nickname AS displayName
 		FROM protection_board a
 		LEFT OUTER JOIN (
@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			a.BOARD_ID = #{board_id}
     </select>
     
-    <insert id="boardInsert" parameterType="com.common.board.domain.ProBoardVO" useGeneratedKeys="true" keyProperty="id">
+    <insert id="boardInsert" parameterType="com.common.board.domain.BoardVO" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO protection_board (
 	        SUBJECT, 
 	        CONTENT,
@@ -72,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
     
-    <update id="boardUpdate" parameterType="com.common.board.domain.ProBoardVO">
+    <update id="boardUpdate" parameterType="com.common.board.domain.BoardVO">
         UPDATE protection_board
             SET
         <if test="subject != null">

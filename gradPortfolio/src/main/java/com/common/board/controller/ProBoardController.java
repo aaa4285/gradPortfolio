@@ -26,7 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.common.aws.service.AwsService;
 import com.common.board.domain.BoardReplyVo;
-import com.common.board.domain.ProBoardVO;
+import com.common.board.domain.BoardVO;
 import com.common.board.domain.FileVO;
 import com.common.board.paging.Criteria;
 import com.common.board.paging.PageMaker;
@@ -63,7 +63,7 @@ public class ProBoardController {
         
         pageMaker.setTotalCount(ProBoardService.boardCount());
             
-        List<ProBoardVO> list = ProBoardService.boardList(criteria);
+        List<BoardVO> list = ProBoardService.boardList(criteria);
         
         model.addAttribute("list", list);
         model.addAttribute("pageMaker", pageMaker);
@@ -86,7 +86,7 @@ public class ProBoardController {
     }
     
     @RequestMapping("/insertProc")
-    private String boardInsertProc(HttpServletRequest request, @ModelAttribute ProBoardVO board, MultipartFile[] files) throws Exception{
+    private String boardInsertProc(HttpServletRequest request, @ModelAttribute BoardVO board, MultipartFile[] files) throws Exception{
     	FileVO file  = new FileVO();
     	
     	Map<String, Object> sessionMap = new HashMap<String, Object>();
@@ -138,7 +138,7 @@ public class ProBoardController {
     }
     
     @RequestMapping("/updateProc")
-    private String boardUpdateProc(@ModelAttribute ProBoardVO board) throws Exception{
+    private String boardUpdateProc(@ModelAttribute BoardVO board) throws Exception{
         
          ProBoardService.boardUpdate(board);
          

@@ -56,7 +56,7 @@ public class BoardController {
     @RequestMapping("/list") //게시판 리스트 화면 호출  
     private String boardList(HttpServletRequest request,Model model, @ModelAttribute("search") Criteria criteria) throws Exception{
         
-    	CommonUtils.setSession2(request, 3);
+    	CommonUtils.setSession(request, 3);
     	
         PageMaker pageMaker = new PageMaker();
         pageMaker.setCri(criteria);

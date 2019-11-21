@@ -35,6 +35,10 @@ table tr th{
             <input type="text" class="form-control" id="telNo" name="telNo" placeholder="내용을 입력하세요.">
           </div>
           <div class="form-group">
+            <label for="writer">잃어버린 일자</label>
+            <input type="text" class="form-control" id="lost_date" name="lost_date" placeholder="잃어버린 일자">
+          </div>
+          <div class="form-group">
             <label for="writer">잃어버린 장소</label>
             <input type="text" class="form-control" id="location" name="location" placeholder="내용을 입력하세요.">
           </div>

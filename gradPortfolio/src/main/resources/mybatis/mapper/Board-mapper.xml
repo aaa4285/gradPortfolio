@@ -76,7 +76,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	        TELNO, 
 	        LOCATION, 
 	        KINDS, 
-	        GENDER, 
+	        GENDER,
+	        LOST_DATE,
 	        REG_DATE
 		) VALUES (
 			#{subject},
@@ -86,6 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{location},
 			#{kinds},
 			#{gender},
+			#{lost_date},
 			now()
 		)
 	</insert>

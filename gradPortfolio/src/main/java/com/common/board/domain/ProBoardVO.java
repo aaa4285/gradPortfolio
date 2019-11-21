@@ -21,4 +21,5 @@ public class ProBoardVO {
 	private String gender;
 	private String displayName;
 	private int replyCnt;
+	private String lost_date;
 }

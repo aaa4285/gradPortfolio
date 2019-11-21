@@ -12,7 +12,7 @@ import com.common.board.paging.Criteria;
 @Mapper
 public interface BoardMapper {
 	 //게시글 개수  
-    public int boardCount() throws Exception;
+    public int boardCount(Criteria criteria) throws Exception;
     
     //게시글 목록  
     public List<BoardVO> boardList(Criteria criteria) throws Exception;

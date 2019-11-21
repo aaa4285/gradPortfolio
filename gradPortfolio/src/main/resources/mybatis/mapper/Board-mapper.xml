@@ -9,6 +9,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT
             COUNT(*)
         FROM board
+        WHERE 1=1
+		<if test="subject != null and subject != ''">
+			AND subject like concat(concat('%',#{subject}),'%')
+		</if>
+		<if test="kinds != null and kinds != ''">
+			AND kinds = #{kinds}
+		</if>
+		<if test="gender != null and gender != ''">
+			AND gender = #{gender}
+		</if>
     </select>
     
     <select id="boardList" resultType="com.common.board.domain.BoardVO" parameterType="com.common.board.paging.Criteria">
@@ -28,6 +38,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				FROM board_reply
 				GROUP BY board_id
 		) f ON a.board_id = f.board_id
+		WHERE 1=1
+		<if test="subject != null and subject != ''">
+			AND subject like concat(concat('%',#{subject}),'%')
+		</if>
+		<if test="kinds != null and kinds != ''">
+			AND kinds = #{kinds}
+		</if>
+		<if test="gender != null and gender != ''">
+			AND gender = #{gender}
+		</if>
 		ORDER BY a.board_id DESC
 		LIMIT #{pageStart}, #{perPageNum}
     </select>

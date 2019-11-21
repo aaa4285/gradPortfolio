@@ -21,8 +21,8 @@ public class BoardService {
 	BoardMapper boardMapper;
 
 	// 게시글 개수
-	public int boardCount() throws Exception {
-		return boardMapper.boardCount();
+	public int boardCount(Criteria criteria) throws Exception {
+		return boardMapper.boardCount(criteria);
 	}
 
 	public List<BoardVO> boardList(Criteria criteria) throws Exception {

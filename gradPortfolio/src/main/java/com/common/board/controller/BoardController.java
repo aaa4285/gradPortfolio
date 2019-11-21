@@ -54,15 +54,17 @@ public class BoardController {
     
 	
     @RequestMapping("/list") //게시판 리스트 화면 호출  
-    private String boardList(HttpServletRequest request,Model model, @ModelAttribute Criteria criteria) throws Exception{
+    private String boardList(HttpServletRequest request,Model model, @ModelAttribute("search") Criteria criteria) throws Exception{
         
-    	CommonUtils.setSession(request, 1);
+    	CommonUtils.setSession2(request, 3);
     	
         PageMaker pageMaker = new PageMaker();
         pageMaker.setCri(criteria);
         
-        pageMaker.setTotalCount(boardService.boardCount());
-            
+        pageMaker.setTotalCount(boardService.boardCount(criteria));
+        
+        System.out.println("검색조건 :: "+criteria.toString());
+        
         List<BoardVO> list = boardService.boardList(criteria);
         
         model.addAttribute("list", list);

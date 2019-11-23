@@ -254,8 +254,8 @@ $(document).ready(function() {
 							</c:if>
 						</div>
 						<ul class="tags">
-							<li><a href="#"><i class="fa fa-hashtag"></i>${kindsNm}</a> , </li>
-							<li><a href="#"><i class="fa fa-hashtag"></i>${genderNm}</a> </li>
+							<li><a href="javascript:void(0)"><i class="fa fa-hashtag"></i>${kindsNm}</a> , </li>
+							<li><a href="javascript:void(0)"><i class="fa fa-hashtag"></i>${genderNm}</a> </li>
 						</ul>
 						<h2><i class="fa fa-quote-left"></i> ${detail.subject} <i class="fa fa-quote-right"></i></h2>
 						<h5><i class="fa fa-angle-double-right"></i> ${detail.location}</h5>
@@ -265,18 +265,10 @@ $(document).ready(function() {
 							<div class="user-details row align-items-center">
 								<div class="comment-wrap col-lg-6">
 									<ul>
-										<!-- <li><a href="#"><span class="fa fa-heart"></span>	4 likes</a></li> -->
+										<!-- <li><a href="javascript:void(0)"><span class="fa fa-heart"></span>	4 likes</a></li> -->
 										<li><a href="javascript:commentToggle();"><span class="fa fa-comments-o"></span> ${detail.replyCnt} Comments</a></li>
 									</ul>
 								</div>
-								<!-- 
-								<div class="social-wrap col-lg-6">
-									<ul>
-										<li>${detail.displayName}</li>
-										<li><fmt:formatDate value="${detail.reg_date}" pattern="yyyy.MM.dd HH:mm:ss"/></li>
-									</ul>
-								</div>
-								 -->
 							</div>
 						</div>
 					</div>
@@ -289,36 +281,13 @@ $(document).ready(function() {
 	    <div class="container comment-sec-area">
 	        <div class="row flex-column">
 	            <c:forEach var="replyList" items="${replyList}" varStatus="status">
-	            <!-- 
-					<div class="comment-list ${replyList.depth == '1' ? 'left-padding':''}" parent_id="${replyList.reply_id}" reply_id="${replyList.reply_id}" r_type="${replyList.depth == '0' ? 'main' : (replyList.depth == '1' ? 'sub' : '')}">
-		                <div class="single-comment justify-content-between d-flex">
-		                    <div class="user justify-content-between d-flex">
-		                        <div class="thumb">
-		                        	<a href="javascript:void(0);" onclick="removeReply(this);"><i aria-hidden="true" class="fa fa-remove"></i></a>
-		                            <div class="d-flex rounded-circle avatar z-depth-1-half mr-3 user-img"><h1>${replyList.displayName}</h1></div>
-		                        </div>
-		                        <div class="desc">
-		                            <h5><a href="#">${replyList.displayName}</a></h5>
-		                            <p class="date">December 4, 2017 at 3:12 pm </p>
-		                            <p class="comment">
-		                                <label name="reply_content">${replyList.reply_content}</label> 
-		                                <a href="javascript:void(0);" onclick="modify(this);"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-		                            </p>
-		                        </div>
-		                    </div>
-		                    <c:if test="${replyList.depth != '1'}">
-			                    <div class="reply-btn">
-			                           <button onclick="reply(this)" class="btn-reply text-uppercase">답글</button> 
-			                    </div>
-		                    </c:if>
-		                </div>
-		            </div>
-		             -->
 	            	<div class="comment-list ${replyList.depth == '1' ? 'left-padding':''}" parent_id="${replyList.parent_id}" reply_id="${replyList.reply_id}" r_type="${replyList.depth == '0' ? 'main' : (replyList.depth == '1' ? 'sub' : '')}">
 						<div class="single-comment justify-content-between">
 							<div class="user justify-content-between" style="float: left;">
 								<div class="thumb">
+									<c:if test="${sessionScope.userSession.id eq detail.writer}">
 									<a href="javascript:void(0);" onclick="removeReply(this);"><i aria-hidden="true" class="fa fa-remove"></i></a>
+									</c:if>
 		                            <div class="d-flex rounded-circle avatar z-depth-1-half mr-3 user-img"><h1>${replyList.displayName}</h1></div>
 								</div>
 				
@@ -326,13 +295,15 @@ $(document).ready(function() {
 							<div class="media mt-3 shadow-textarea">
 								<div class="media-body">
 									<h5>
-										<a href="#">${sessionScope.userSession.displayName}</a>
+										<a href="javascript:void(0)">${replyList.displayName}</a>
 									</h5>
-									<p class="date">December 4, 2017 at 3:12 pm </p>
+									<!-- <p class="date">December 4, 2017 at 3:12 pm </p> -->
 									<div class="form-group basic-textarea rounded-corners">
 										<p class="comment">
 			                                <label name="reply_content">${replyList.reply_content}</label> 
+			                                <c:if test="${sessionScope.userSession.id eq detail.writer}">
 			                                <a href="javascript:void(0);" onclick="modify(this);"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+			                                </c:if>
 			                            </p>
 			                            <c:if test="${replyList.depth != '1'}">
 					                           <button onclick="reply(this)" class="btn-reply text-uppercase">답글</button> 
@@ -367,7 +338,7 @@ $(document).ready(function() {
 							<div class="media-body">
 			
 								<h5>
-									<a href="#">${sessionScope.userSession.displayName}</a>
+									<a href="javascript:void(0)">${sessionScope.userSession.displayName}</a>
 								</h5>
 								<div class="form-group basic-textarea rounded-corners">
 									<textarea class="form-control z-depth-1" id="reply_content" rows="3" placeholder="댓글을 입력하세요."></textarea>
@@ -400,7 +371,7 @@ $(document).ready(function() {
 				<div class="media-body">
 
 					<h5>
-						<a href="#">${sessionScope.userSession.displayName}</a>
+						<a href="javascript:void(0)">${sessionScope.userSession.displayName}</a>
 					</h5>
 					<div class="form-group basic-textarea rounded-corners">
 						<textarea class="form-control z-depth-1" name="reply_content" rows="3" placeholder="입력하세요."></textarea>
@@ -428,7 +399,7 @@ $(document).ready(function() {
 				<div class="media-body">
 
 					<h5>
-						<a href="#">${sessionScope.userSession.displayName}</a>
+						<a href="javascript:void(0)">${sessionScope.userSession.displayName}</a>
 					</h5>
 					<div class="form-group basic-textarea rounded-corners">
 						<textarea class="form-control z-depth-1" name="reply_content" rows="3" placeholder="댓글을 입력하세요."></textarea>

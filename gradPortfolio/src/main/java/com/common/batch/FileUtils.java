@@ -1,5 +1,6 @@
 package com.common.batch;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,6 +18,22 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileUtils {
+	
+	public static String readFile(String filePath) {
+		String fileStr = "";
+		try {
+			FileInputStream fileInputStream = new FileInputStream(filePath);
+			InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, "UTF-8");
+			BufferedReader br = new BufferedReader(inputStreamReader);
+			String sCurrentLine; 
+			while ((sCurrentLine = br.readLine()) != null) { fileStr+=sCurrentLine; }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return fileStr;
+	}
+	
 	public static String readFile(Resource resource) {
 		try (Reader reader = new InputStreamReader(resource.getInputStream(), "UTF-8")) {
             return FileCopyUtils.copyToString(reader);

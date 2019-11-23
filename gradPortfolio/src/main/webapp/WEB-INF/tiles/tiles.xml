@@ -14,16 +14,30 @@
    <definition name="main-layout" template="/WEB-INF/views/common/layout/main-layout.jsp">
        <put-attribute name="header" value="/WEB-INF/views/common/layout/header.jsp" />
        <put-attribute name="body" value="" />
+       <put-attribute name="footer" value="/WEB-INF/views/common/layout/footer.jsp" />
+   </definition>
+   
+   <definition name="main-layout2" template="/WEB-INF/views/common/layout2/main-layout.jsp">
+       <put-attribute name="header" value="/WEB-INF/views/common/layout2/header.jsp" />
+       <put-attribute name="body" value="" />
+       <put-attribute name="footer" value="/WEB-INF/views/common/layout2/footer.jsp" />
    </definition>
    
    <definition name="login/*" extends="main-layout">
        <put-attribute name="body" value="/WEB-INF/views/login/{1}.jsp" />
    </definition>
-   
+   <definition name="main/*" extends="main-layout">
+       <put-attribute name="body" value="/WEB-INF/views/main/{1}.jsp" />
+   </definition>
+   <definition name="board/*" extends="main-layout">
+       <put-attribute name="body" value="/WEB-INF/views/board/{1}.jsp" />
+   </definition>
+   <definition name="proBoard/*" extends="main-layout">
+       <put-attribute name="body" value="/WEB-INF/views/proBoard/{1}.jsp" />
+   </definition>
    <definition name="*/*" extends="base-layout">
        <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
    </definition>
-   
    <!-- no tiles -->
 	<definition name="error/error" template="/WEB-INF/views/common/layout/no-layout.jsp">
 		<put-attribute name="body" value="/WEB-INF/views/error/error.jsp"/>

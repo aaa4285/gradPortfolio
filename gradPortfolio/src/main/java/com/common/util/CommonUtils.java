@@ -19,35 +19,40 @@ public class CommonUtils {
 		SessionVO sessionVO = (SessionVO)session.getAttribute("sessionVO");
 		// session check
 		if (session.getAttribute("sessionVO") == null) {
-			// TODO UserVO
-	        UserVO userVO = new UserVO();
-	        userVO.setId("testID"); // TODO
-			userVO.setName("testNm"); // TODO
-			
 	        // TODO 메뉴 관리 어캐할거냐?
 			List<MenuVO> menuList = new ArrayList();
 			MenuVO menuVO = new MenuVO();
+			
 			menuVO.setIdx(1);
 			menuVO.setTitle("HOME");
 			menuVO.setUrl("/main/index.do");
 			menuList.add(menuVO);
+			
 			menuVO = new MenuVO();
 			menuVO.setIdx(2);
+			menuVO.setTitle("ABOUT US");
+			menuVO.setUrl("/main/about.do");
+			menuList.add(menuVO);
+			
+			menuVO = new MenuVO();
+			menuVO.setIdx(3);
 			menuVO.setTitle("FIND PAT");
 			menuVO.setUrl("/main/index2.do");
 			menuList.add(menuVO);
+			
 			menuVO = new MenuVO();
-			menuVO.setIdx(3);
+			menuVO.setIdx(4);
 			menuVO.setTitle("HELP FIND");
 			menuVO.setUrl("/board/list");
 			menuList.add(menuVO);
+			
 			menuVO = new MenuVO();
 			menuVO.setIdx(5);
 			menuVO.setTitle("FREE BOARD");
 			menuVO.setUrl("/proBoard/list");
 			menuList.add(menuVO);
+			
 			sessionVO = new SessionVO();
-			sessionVO.setUserVO(userVO);
 			sessionVO.setMenuList(menuList);
 		}
 		sessionVO.setMenuIdx(idx);

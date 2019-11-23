@@ -56,7 +56,7 @@ public class ProBoardController {
     @RequestMapping("/list") //게시판 리스트 화면 호출  
     private String boardList(HttpServletRequest request,Model model, @ModelAttribute Criteria criteria) throws Exception{
         
-    	CommonUtils.setSession(request, 1);
+    	CommonUtils.setSession(request, 5);
     	
         PageMaker pageMaker = new PageMaker();
         pageMaker.setCri(criteria);
@@ -73,6 +73,9 @@ public class ProBoardController {
     
     @RequestMapping("/detail/{boardId}") 
     private String boardDetail(HttpServletRequest request, @PathVariable int boardId, Model model) throws Exception{
+    	
+    	CommonUtils.setSession(request, 5);
+    	
         model.addAttribute("detail", ProBoardService.boardDetail(boardId));
         model.addAttribute("replyList", ProBoardService.getReplyList(boardId));
         
@@ -80,7 +83,9 @@ public class ProBoardController {
     }
     
     @RequestMapping("/insert") //게시글 작성폼 호출  
-    private String boardInsertForm(){
+    private String boardInsertForm(HttpServletRequest request){
+    	
+    	CommonUtils.setSession(request, 5);
         
         return "proBoard/board_insert";
     }

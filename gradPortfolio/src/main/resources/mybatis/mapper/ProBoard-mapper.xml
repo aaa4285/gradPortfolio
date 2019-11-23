@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="boardDetail" parameterType="int" resultType="com.common.board.domain.BoardVO">
-		SELECT a.*, b.fullPath, c.nickname AS displayName
+		SELECT a.*, b.fullPath, c.nickname AS displayName, f.*
 		FROM protection_board a
 		LEFT OUTER JOIN (
 			SELECT a.*
@@ -44,6 +44,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			GROUP BY board_id) b ON a.fno = b.fno
 		) b ON a.board_id = b.board_id
 		INNER JOIN user c ON c.id = a.writer
+		LEFT OUTER JOIN (
+			SELECT board_id, COUNT(*) AS replyCnt
+				FROM protection_board_reply
+				GROUP BY board_id
+		) f ON a.board_id = f.board_id
 		WHERE
 			a.BOARD_ID = #{board_id}
     </select>
@@ -119,12 +124,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <delete id="delReply" parameterType="com.common.board.domain.BoardReplyVo">
-        delete
-        from
-            protection_board_reply
-        where
-            reply_id = #{reply_id}
-        and reply_writer = #{reply_writer}
+        DELETE FROM
+			protection_board_reply
+		WHERE
+			reply_id = #{reply_id}
+		OR parent_id = #{reply_id}
     </delete>
     
     <delete id="deleteBoardReplyAll" parameterType="com.common.board.domain.BoardReplyVo">

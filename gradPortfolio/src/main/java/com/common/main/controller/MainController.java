@@ -1,5 +1,6 @@
 package com.common.main.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -85,7 +87,6 @@ public class MainController {
 		CommonUtils.setSession(request, 2);
 		
 		// 차트 데이터
-		/*
 		try {
 			Resource resource = awsService.getObject(bucketJsonUploadPath, fileNm);
 			String jsonString = FileUtils.readFile(resource);
@@ -94,8 +95,6 @@ public class MainController {
 			//errors.aws.file.not.find
 			e.printStackTrace();
 		}
-		*/
-		//model.addAttribute("chartData",FileUtils.readFile("C:\\data\\data\\batch\\chart\\chart_data.json"));
 		
 		return view;
 	}

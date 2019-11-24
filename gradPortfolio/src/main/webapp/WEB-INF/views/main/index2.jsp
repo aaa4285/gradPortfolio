@@ -206,16 +206,12 @@ function detailIdFormat(d){
 		});
 		// 검색 버튼 click
 		$("#btnSearch").on("click",function(){
-			if ($("button.findAPetMenu-button.active").length>0) {
-				$("#upkind").val($("button.findAPetMenu-button.active").eq(0).attr("upkind"));
-			} else {
-				$("#upkind").val("");
-			}
 			search(1);
 		});
 		search(1);
 	});
 	function search(pageNo){
+		
 		ajax("/abandonmentPublic",
 			{upr_cd:$("#upr_cd").val(),org_cd:$("#org_cd").val(),upkind:$("#upkind").val(),pageNo:(pageNo||1),numOfRows:12},
 			function(data){
@@ -242,25 +238,6 @@ function detailIdFormat(d){
 					<form id="form" class="serach-form-area" method="get">
 						<input type="hidden" name="page" value="${search.page}">
 						<div class="row justify-content-center form-wrap">
-							<div class="col-lg-3 form-cols">
-								<div class="default-select">
-									<select style="display:none;" id="upkind" name="upkind">
-										<option value="" selected='selected'>전체</option>
-										<option value="417000">강아지</option>
-										<option value="422400">고양이</option>
-										<option value="429900">다른 동물</option>
-									</select>
-									<div class="nice-select" tabindex="0">
-										<span class="current">전체</span>
-										<ul class="list">
-											<li data-value="" class='option selected'>전체</li>
-											<li data-value="1" class='option'>강아지</li>
-											<li data-value="2" class='option'>고양이</li>
-											<li data-value="3" class='option'>기타</li>
-										</ul>
-									</div>
-								</div>
-							</div>
 							<div class="col-lg-3 form-cols">
 								<div class="default-select">
 									<select style="display: none;" id="upr_cd" name="upr_cd">
@@ -292,6 +269,25 @@ function detailIdFormat(d){
 										</ul>
 									</div>
 								</div>										
+							</div>
+							<div class="col-lg-3 form-cols">
+								<div class="default-select">
+									<select style="display:none;" id="upkind" name="upkind">
+										<option value="" selected='selected'>전체</option>
+										<option value="417000">강아지</option>
+										<option value="422400">고양이</option>
+										<option value="429900">다른 동물</option>
+									</select>
+									<div class="nice-select" tabindex="0">
+										<span class="current">전체</span>
+										<ul class="list">
+											<li data-value="" class='option selected'>전체</li>
+											<li data-value="417000" class='option'>강아지</li>
+											<li data-value="422400" class='option'>고양이</li>
+											<li data-value="429900" class='option'>다른 동물</li>
+										</ul>
+									</div>
+								</div>
 							</div>
 							<div class="col-lg-2 form-cols">
 							    <button type="button" class="btn btn-info" id="btnSearch">

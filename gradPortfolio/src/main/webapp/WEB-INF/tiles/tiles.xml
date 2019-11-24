@@ -17,13 +17,13 @@
        <put-attribute name="footer" value="/WEB-INF/views/common/layout/footer.jsp" />
    </definition>
    
-   <definition name="main-layout2" template="/WEB-INF/views/common/layout2/main-layout.jsp">
-       <put-attribute name="header" value="/WEB-INF/views/common/layout2/header.jsp" />
+   <definition name="login-layout" template="/WEB-INF/views/common/layout/login-layout.jsp">
+       <put-attribute name="header" value="/WEB-INF/views/common/layout/header.jsp" />
        <put-attribute name="body" value="" />
-       <put-attribute name="footer" value="/WEB-INF/views/common/layout2/footer.jsp" />
+       <put-attribute name="footer" value="/WEB-INF/views/common/layout/footer.jsp" />
    </definition>
    
-   <definition name="login/*" extends="main-layout">
+   <definition name="login/*" extends="login-layout">
        <put-attribute name="body" value="/WEB-INF/views/login/{1}.jsp" />
    </definition>
    <definition name="main/*" extends="main-layout">

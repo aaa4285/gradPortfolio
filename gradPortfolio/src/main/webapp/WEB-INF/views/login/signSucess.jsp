@@ -161,10 +161,7 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 	}
 }
 </style>
-<body>
-<script>
-
-</script>
+<section class="blog-posts-area section-gap">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -179,10 +176,11 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 								type="button" onclick="location.href='/login';" style="width: calc(50% - 2.5px);">로그인</button>
 						</form>
 					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</body>
+</section>
 <script type="text/javascript">
 
 	// 로그인
@@ -201,4 +199,3 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 	}
 	
 </script>
-</html>

@@ -165,7 +165,7 @@ position:absolute;
 right:0;
 }
 </style>
-<body>
+<section class="blog-posts-area section-gap">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -224,7 +224,8 @@ right:0;
 			</div>
 		</div>
 	</div>
-</body>
+</section>
+	
 <script type="text/javascript">
 
 	// 로그인
@@ -243,4 +244,3 @@ right:0;
 	}
 	
 </script>
-</html>

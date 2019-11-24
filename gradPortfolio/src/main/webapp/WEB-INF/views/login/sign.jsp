@@ -159,7 +159,7 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 	}
 }
 </style>
-<body>
+<section class="blog-posts-area section-gap">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -195,7 +195,7 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 			</div>
 		</div>
 	</div>
-</body>
+</section>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#signForm").validate({
@@ -286,4 +286,3 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 
 	});
 </script>
-</html>

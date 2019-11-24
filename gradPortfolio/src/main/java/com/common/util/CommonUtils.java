@@ -30,25 +30,25 @@ public class CommonUtils {
 			
 			menuVO = new MenuVO();
 			menuVO.setIdx(2);
-			menuVO.setTitle("ABOUT US");
+			menuVO.setTitle("소개");
 			menuVO.setUrl("/main/about.do");
 			menuList.add(menuVO);
 			
 			menuVO = new MenuVO();
 			menuVO.setIdx(3);
-			menuVO.setTitle("FIND PAT");
+			menuVO.setTitle("유기동물 조회");
 			menuVO.setUrl("/main/index2.do");
 			menuList.add(menuVO);
 			
 			menuVO = new MenuVO();
 			menuVO.setIdx(4);
-			menuVO.setTitle("HELP FIND");
+			menuVO.setTitle("실종동물 찾기");
 			menuVO.setUrl("/board/list");
 			menuList.add(menuVO);
 			
 			menuVO = new MenuVO();
 			menuVO.setIdx(5);
-			menuVO.setTitle("FREE BOARD");
+			menuVO.setTitle("유기동물 보호중");
 			menuVO.setUrl("/proBoard/list");
 			menuList.add(menuVO);
 			

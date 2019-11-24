@@ -274,6 +274,10 @@ $(document).ready(function() {
 					</div>
 				</div>
 			</div>
+			<c:if test="${sessionScope.userSession.id eq detail.writer}">
+				<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/board/delete/${detail.board_id}'" style="margin-left: 5px; float:right">삭제</button>
+				<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/board/update/${detail.board_id}'" style="float:right;">수정</button>
+			</c:if>
 		</div>
 	</section>
 

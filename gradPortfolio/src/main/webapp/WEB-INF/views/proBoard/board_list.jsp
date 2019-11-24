@@ -167,6 +167,7 @@
 				    </li>
 			    </c:if>
 			  </ul>
+			  <button class="btn btn-primary btn-sm" style="float:right;" onclick="location.href='/proBoard/insert'">글쓰기</button>
 			</div>
 	</section><!-- #portfolio2 -->
 </main>

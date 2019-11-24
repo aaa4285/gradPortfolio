@@ -100,12 +100,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="boardUpdate" parameterType="com.common.board.domain.BoardVO">
         UPDATE board
             SET
-        <if test="subject != null">
-            SUBJECT = #{subject}
-        </if>
-        <if test="subject != null and content != null"> , </if>
+        SUBJECT = #{subject}
         <if test="content != null">
-            CONTENT = #{content}
+            , CONTENT = #{content}
+        </if>
+        <if test="telNo != null">
+            , TELNO = #{telNo}
+        </if>
+        <if test="location != null">
+            , LOCATION = #{location}
+        </if>
+        <if test="kinds != null">
+            , KINDS = #{kinds}
+        </if>
+        <if test="gender != null">
+            ,GENDER = #{gender}
+        </if>
+        <if test="lost_date != null">
+            , LOST_DATE = #{lost_date}
         </if>
         WHERE BOARD_ID = #{board_id}
     </update>

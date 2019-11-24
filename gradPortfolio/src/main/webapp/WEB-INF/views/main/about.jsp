@@ -116,7 +116,7 @@
 					<div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-duration="1.4s">
 						<div class="box">
 							<div class="icon" style="background: #fff0da;"><i class="ion-ios-bookmarks-outline" style="color: #e98e06;"></i></div>
-							<h4 class="title"><a href="/board/list">보호동물 게시</a></h4>
+							<h4 class="title"><a href="/board/list">유기동물 보호중</a></h4>
 							<p class="description">임시 보호중인 동물을 게시하고 조회 할수있는 서비스 입니다.</p>
 						</div>
 					</div>

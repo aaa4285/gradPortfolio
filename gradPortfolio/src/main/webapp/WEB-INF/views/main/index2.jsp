@@ -9,6 +9,9 @@
   <!-- Theme CSS -->
   <link href="/common3/css/freelancer.css" rel="stylesheet">
   <style>
+  	.blog-post-list{
+  	padding:0;
+  	}
 	  .portfolio-item img.img-fluid {
 	    object-fit: cover;
 	    height: 250px !important;
@@ -217,33 +220,13 @@ function detailIdFormat(d){
 			{upr_cd:$("#upr_cd").val(),org_cd:$("#org_cd").val(),upkind:$("#upkind").val(),pageNo:(pageNo||1),numOfRows:12},
 			function(data){
 				list = data.data;
-				/*
 				$("#numOfRows").html(data.numOfRows);
 				$("#pageNo").html(data.pageNo);
 				$("#totalCount").html(data.totalCount);
-				*/
 				// list 셋팅
 				resetHtml("liveList",data.data);
 				resetHtml("detail",data.data);
-				/*
-				var sliderFinalWidth = 1024,
-				maxQuickWidth = 1024;
-				//open the quick view panel
-				$('li.cd-item .cd-trigger, li.cd-item div.img-box').on('click', function(event){
-					var selectedImage = $(this).parent('.cd-item').children('div.img-box'),
-						slectedImageUrl = selectedImage.attr('src');
-					
-					// 상세 데이터 셋팅
-					$(".cd-quick-view .cd-slider-wrapper").html("");
-					$(".cd-quick-view .cd-slider-wrapper").append('<img src="'+slectedImageUrl+'" class="img-box" onload="javascript:myinfo(this);" style="max-width:500px;"></li>');
-					$('body').addClass('overlay-layer');
-					resetHtml("detail",[list[$(this).parent().attr("idx")]]);
-					
-					animateQuickView(selectedImage, sliderFinalWidth, maxQuickWidth, 'open');
-				});
-				*/
-				//setPaging(data.totalCount,data.numOfRows,data.pageNo);
-				
+				setPaging(data.totalCount,data.numOfRows,data.pageNo);
 			});
 	}
 </script>
@@ -331,7 +314,54 @@ function detailIdFormat(d){
 
       </div>
       <!-- /.row -->
-
+		
+			<!-- 페이징 -->
+	<script type="text/html" id="paging">
+		<li class="page-item" idx="#idx#">
+			<a class="page-link waves-effect waves-effect">#idx#</a>
+		</li>
+	</script>
+	<script>
+		function setPaging(total,numOfRows,pageNo) {
+			/*
+			var total = 11604;
+			var numOfRows = 12;
+			var pageNo = 11;
+			*/
+			var pageArr = [];
+			var showpage = 5;
+			// 5단위로 넘기기
+			// i=(Math.floor((pageNo-1)/showpage)*showpage)+1;
+			// 중간에오게
+			// i=pageNo-2<0?1:pageNo-2;
+			$("#page").children().remove();
+			var maxNo = Math.ceil(total/numOfRows);
+			
+			var startNo = (maxNo-pageNo<2?maxNo-4:pageNo-2);
+			for (var i=startNo<1?1:startNo;i<maxNo+1;i++) {
+				if (pageArr.length>4) {
+					break;
+				}
+				pageArr.push({idx:i});
+			}
+			var callback = function(){
+				$("li.page-item[idx='"+pageNo+"']").addClass("active");
+				$("#page li.page-item").not(".active").on("click",function(){
+					$("#page li.page-item").removeClass("active");
+					$(this).addClass("active");
+					search($(this).attr("idx"));
+				});
+			}
+			resetHtml("paging",pageArr,callback);
+		}
+	</script>
+	<div style="position: relative; text-align: center;width:100%;padding-top:25px;">
+		<nav style="display: inline-block;">
+			<ul class="pagination pg-purple fl" id="page" for="paging">
+			</ul>
+		</nav>
+	</div>
+	<!-- //페이징 -->
     </div>
   </section>
 

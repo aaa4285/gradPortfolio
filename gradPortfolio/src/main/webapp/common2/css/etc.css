@@ -337,7 +337,7 @@ svg:not(:root).svg-inline--fa {
 }
 .blog-post-list .single-post {
   background: transparent;
-  padding: 0px 30px;
+  padding: 0px;
 }
 
 .single-post {

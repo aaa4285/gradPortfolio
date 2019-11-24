@@ -102,7 +102,6 @@
 
 				<header class="section-header">
 					<h3>Services</h3>
-					<p>Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo abhorreant vituperatoribus.</p>
 				</header>
 
 				<div class="row">
@@ -111,14 +110,14 @@
 						<div class="box">
 							<div class="icon" style="background: #fceef3;"><i class="ion-ios-analytics-outline" style="color: #ff689b;"></i></div>
 							<h4 class="title"><a href="">유기동물 조회</a></h4>
-							<p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+							<p class="description">유기된 동물을 공공데이터포털에서 제공하는 오픈 API를 이용해서 조회 하는 서비스 입니다.</p>
 						</div>
 					</div>
 					<div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-duration="1.4s">
 						<div class="box">
 							<div class="icon" style="background: #fff0da;"><i class="ion-ios-bookmarks-outline" style="color: #e98e06;"></i></div>
 							<h4 class="title"><a href="">보호동물 게시</a></h4>
-							<p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+							<p class="description">임시 보호중인 동물을 게시하고 조회 할수있는 서비스 입니다.</p>
 						</div>
 					</div>
 
@@ -126,7 +125,7 @@
 						<div class="box">
 							<div class="icon" style="background: #e6fdfc;"><i class="ion-ios-paper-outline" style="color: #3fcdc7;"></i></div>
 							<h4 class="title"><a href="">실종동물 찾기</a></h4>
-							<p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+							<p class="description">실종된 반려 동물을 게시하고 조회 할수있는 서비스 입니다.</p>
 						</div>
 					</div>
 				</div>
@@ -164,33 +163,6 @@
 					</div>
 				</div>
 			</div>
-
-		</section><!-- #about -->
-
-		<!--==========================
-			Clients Section
-		============================-->
-		<section id="clients" class="wow fadeInUp">
-			<div class="container">
-
-				<header class="section-header">
-					<h3>Our Clients</h3>
-				</header>
-
-				<div class="owl-carousel clients-carousel">
-					<img src="/common2/img/clients/client-1.png" alt="">
-					<img src="/common2/img/clients/client-2.png" alt="">
-					<img src="/common2/img/clients/client-3.png" alt="">
-					<img src="/common2/img/clients/client-4.png" alt="">
-					<img src="/common2/img/clients/client-5.png" alt="">
-					<img src="/common2/img/clients/client-6.png" alt="">
-					<img src="/common2/img/clients/client-7.png" alt="">
-					<img src="/common2/img/clients/client-8.png" alt="">
-				</div>
-
-			</div>
-		</section><!-- #clients -->
-
 	</main>
 	
 	

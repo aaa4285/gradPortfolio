@@ -201,7 +201,7 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 		$("#signForm").validate({
 			//validation이 끝난 이후의 submit 직전 추가 작업할 부분
 			submitHandler : function(frm) {
-				com.confirm("회원가입을하시겠습니까?", function() {
+				com.signConfirm("회원가입을하시겠습니까?", function() {
 					duplicateCheck(frm);
 				});
 			},
@@ -250,16 +250,15 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 				}
 			},
 			tooltip_options : {
-				
+				//_all_: {"trigger": "hover"}
 			},
-			
-			
 		});
 		
 		// ID중복 체크
 		function duplicateCheck(frm) {
 			ajax("/sign/duplicateCheck",$("#signForm").serialize(),function(r){
 				if (r.result) {
+					loder_show();
 					frm.submit();
 				} else {
 					com.alert(r.msg);

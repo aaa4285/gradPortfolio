@@ -75,10 +75,6 @@ table tr th{
 				</div>
 	          </div>
 <script>
-function sldjfrnf(){
-	loder_show();
-	$("#form").submit();
-}
 function bs_input_file() {
 	$(".input-file").before(
 		function() {
@@ -111,10 +107,96 @@ $(function() {
 </script>
 				<div class="row">
 					<div class="col">
-						<button type="button" onclick="sldjfrnf();" class="btn btn-primary btn-sm" style="float:right;">작성</button>
+						<button type="submit" class="btn btn-primary btn-sm" style="float:right;">작성</button>
 					</div>
 				</div>
 	        </form>
 	    </div>
 	</div> 
 </section>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#form").validate({
+		//validation이 끝난 이후의 submit 직전 추가 작업할 부분
+		submitHandler : function(form) {
+			loder_show();
+			form.submit();
+		},
+		onkeyup:false,
+		onclick:false,
+		//규칙
+		rules : {
+			subject : {
+				required : true,
+			},
+			telNo : {
+				required : true,
+				minlength : 9,
+			},
+			lost_date : {
+				required : true,
+				minlength : 8
+			},
+			location : {
+				required : true,
+			},
+			kinds : {
+				required : true,
+			},
+			gender : {
+				required : true,
+			},
+			content : {
+				required : true,
+			},
+			inp_img : {
+				required : true,
+			},
+		},
+		//규칙체크 실패시 출력될 메시지
+		messages : {
+			subject : {
+				required : "제목을 입력하세요",
+			},
+			telNo : {
+				required : "연락처 입력하세요",
+				minlength : "최소 {0}글자이상이어야 합니다",
+			},
+			lost_date : {
+				required : "일자를 입력하세요",
+				minlength : "최소 {0}글자이상이어야 합니다",
+			},
+			location : {
+				required : "장소를 입력하세요",
+			},
+			kinds : {
+				required : "종류를 선택하세요",
+			},
+			gender : {
+				required : "성별을 선택하세요",
+			},
+			content : {
+				required : "내용을 입력하세요",
+			},
+			inp_img : {
+				required : "이미지를 선택하세요",
+			}
+		},
+		errorPlacement: function(error, element) 
+        {
+            if ( element.is(":radio") ) 
+            {
+                error.appendTo( element.parents('.col') );
+            }
+            else 
+            { // This is the default behavior 
+                error.insertAfter( element );
+            }
+         },
+		tooltip_options : {
+			//_all_: {"trigger": "hover"}
+		},
+	});
+});
+</script>

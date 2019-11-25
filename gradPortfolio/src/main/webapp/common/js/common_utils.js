@@ -174,7 +174,7 @@ function getUpkindNm(cd) {
 
 var com = {};
 
-com.alert = function (msg) {
+com.alert = function (msg, fn) {
 	$.alert({
 	    title: '알림',
 	    content: msg,
@@ -188,15 +188,21 @@ com.alert = function (msg) {
 	    buttons: {
 	        okay: {
 	            text: '확인',
-	            btnClass: 'btn-blue'
+	            btnClass: 'btn-blue',
+            	action: function () {
+                	if (typeof fn == 'function') {
+						fn();
+					}
+                }
 	        }
 	    }
 	});
 };
 
-com.confirm = function(msg, fn) {
+com.signConfirm = function(msg, fn) {
     $.confirm({
     	boxWidth: '300px',
+    	useBootstrap: false,
         icon: 'fa fa-smile-o',
         theme: 'modern',
         closeIcon: true,
@@ -211,6 +217,40 @@ com.confirm = function(msg, fn) {
         animateFromElement: true,
         smoothContent: true,
         content: msg,
+        buttons: {
+            ok: {
+                action: function () {
+                	if (typeof fn == 'function') {
+						fn();
+					}
+                }
+            },
+            close: {
+                action: function () {
+                }
+            },
+        },
+    });
+};
+
+com.confirm = function(option, fn) {
+    $.confirm({
+    	boxWidth: '300px',
+    	useBootstrap: false,
+        icon: 'fa fa-warning',
+        theme: 'modern',
+        closeIcon: true,
+        animation: 'scale',
+        type: 'purple',
+        title: option.title,
+        titleClass: '',
+        typeAnimated: true,
+        draggable: true,
+        dragWindowGap: 15,
+        dragWindowBorder: true,
+        animateFromElement: true,
+        smoothContent: true,
+        content: option.msg,
         buttons: {
             ok: {
                 action: function () {

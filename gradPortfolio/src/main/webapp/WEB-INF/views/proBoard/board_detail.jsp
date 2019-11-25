@@ -83,30 +83,37 @@ function modifyReply(_this) {
     );
 }
 function removeReply(_this) {
-	var parent = $(_this).parents(".comment-list").eq(0);
-	var parent_id = parent.attr("parent_id");
-	var reply_id = parent.attr("reply_id");
-	var r_type = parent.attr("r_type");
+	var option = {
+			msg:	"댓글을 삭제 하시겠습니까?",
+			title: "댓글 삭제"
+		};
 	
-    //값 셋팅
-    var objParams = {
-            reply_id        : reply_id,
-            r_type            : r_type
-    };
-    
-    //ajax 호출
-    ajax(
-    	"/proBoard/reply/del",
-    	objParams,
-    	function(retVal){
-    		if(retVal.code != "OK") {
-                com.alert(retVal.message);
-            } else {
-            	loder_show();
-                location.href = location.href;
-            }
-    	}
-    );
+	com.confirm(option, function() {
+		var parent = $(_this).parents(".comment-list").eq(0);
+		var parent_id = parent.attr("parent_id");
+		var reply_id = parent.attr("reply_id");
+		var r_type = parent.attr("r_type");
+		
+	    //값 셋팅
+	    var objParams = {
+	            reply_id        : reply_id,
+	            r_type            : r_type
+	    };
+	    
+	    //ajax 호출
+	    ajax(
+	    	"/proBoard/reply/del",
+	    	objParams,
+	    	function(retVal){
+	    		if(retVal.code != "OK") {
+	                com.alert(retVal.message);
+	            } else {
+	            	loder_show();
+	                location.href = location.href;
+	            }
+	    	}
+	    );
+	});
 }
 function modify(_this){
 	// modify_clone
@@ -241,6 +248,24 @@ $(document).ready(function() {
         	}
         );
     });
+	
+    $("#deleteBoard").click(function(){
+    	var option = {
+    			msg:	"게시글을 삭제 하시겠습니까?",
+    			title: "게시글 삭제"
+    		};
+    	
+    	com.confirm(option, function() {
+    		loder_show();
+    		location.href='/proBoard/delete/${detail.board_id}';
+    	});
+    });
+    
+    $("#updateBoard").click(function(){
+		loder_show();
+   		location.href='/proBoard/update/${detail.board_id}';
+    });
+    
 });
 </script>
 	<section class="blog-posts-area section-gap">
@@ -279,8 +304,8 @@ $(document).ready(function() {
 				</div>
 			</div>
 			<c:if test="${sessionScope.userSession.id eq detail.writer}">
-				<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/proBoard/delete/${detail.board_id}'" style="margin-left: 5px; float:right">삭제</button>
-				<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/proBoard/update/${detail.board_id}'" style="float:right;">수정</button>
+				<button type="button" class="btn btn-primary btn-sm" id="deleteBoard" onclick="'" style="margin-left: 5px; float:right">삭제</button>
+				<button type="button" class="btn btn-primary btn-sm" id="updateBoard" onclick="" style="float:right;">수정</button>
 			</c:if>
 		</div>
 	</section>

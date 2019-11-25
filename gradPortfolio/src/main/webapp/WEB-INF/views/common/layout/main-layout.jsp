@@ -27,6 +27,8 @@
 	<link href="/common2/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 	<link href="/common2/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 	<link href="/common2/lib/nice-select/css/nice-select.css" rel="stylesheet">
+	<link href="/common/css/jquery-confirm.min.css" rel="stylesheet">
+	<link href="/common/css/bundled.css" rel="stylesheet">
 
 	<!-- Main Stylesheet File -->
 	<link href="/common2/css/style.css" rel="stylesheet">
@@ -34,9 +36,11 @@
 	<link href="/common2/css/etc.css" rel="stylesheet">
 	
 	<!-- JavaScript Libraries -->
+	<script src="/common/js/bundled.js"></script>
 	<script src="/common2/lib/jquery/jquery.min.js"></script>
 		<script src="/common/js/jquery.validate.js"></script>
 	<script src="/common/js/jquery-validate.bootstrap-tooltip.min.js"></script>
+	<script src="/common/js/jquery-confirm.min.js"></script>
 	<script src="/common/js/bPopup.js"></script>
 	<script src="/common/js/common_utils.js"></script>
 

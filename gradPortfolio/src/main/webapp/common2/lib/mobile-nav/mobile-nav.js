@@ -4,8 +4,9 @@
   // Mobile Navigation
   if ($('.main-nav').length) {
     var $mobile_nav = $('.main-nav').clone().prop({
-      class: 'mobile-nav d-lg-none'
+      class: 'mobile-nav d-lg-none login-hide'
     });
+    $mobile_nav.find("ul").prepend($("#mobile-nav-login").html());
     $('body').append($mobile_nav);
     $('body').prepend('<button type="button" class="mobile-nav-toggle d-lg-none"><i class="fa fa-bars"></i></button>');
     $('body').append('<div class="mobile-nav-overly"></div>');
@@ -14,6 +15,7 @@
       $('body').toggleClass('mobile-nav-active');
       $('.mobile-nav-toggle i').toggleClass('fa-times fa-bars');
       $('.mobile-nav-overly').toggle();
+      $("nav.main-nav").removeClass("login-hide");
     });
     
     $(document).on('click', '.mobile-nav .drop-down > a', function(e) {
@@ -29,11 +31,13 @@
           $('body').removeClass('mobile-nav-active');
           $('.mobile-nav-toggle i').toggleClass('fa-times fa-bars');
           $('.mobile-nav-overly').fadeOut();
+          $("nav.main-nav").addClass("login-hide");
         }
       }
     });
   } else if ($(".mobile-nav, .mobile-nav-toggle").length) {
     $(".mobile-nav, .mobile-nav-toggle").hide();
+    $("nav.main-nav").addClass("login-hide");
   }
 
 })(jQuery);

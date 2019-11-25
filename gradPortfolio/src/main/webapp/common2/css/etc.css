@@ -335,6 +335,9 @@ svg:not(:root).svg-inline--fa {
 .section-gap {
   padding: 120px 0 60px 0;
 }
+.section-login-gap {
+  padding: 30px 0 60px 0;
+}
 .blog-post-list .single-post {
   background: transparent;
   padding: 0px;

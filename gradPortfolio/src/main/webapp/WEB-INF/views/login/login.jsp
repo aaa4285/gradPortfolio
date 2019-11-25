@@ -165,7 +165,7 @@ position:absolute;
 right:0;
 }
 </style>
-<section class="blog-posts-area section-gap">
+<section class="blog-posts-area section-login-gap">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">

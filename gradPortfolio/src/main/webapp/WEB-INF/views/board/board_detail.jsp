@@ -289,7 +289,7 @@ $(document).ready(function() {
 						<div class="single-comment justify-content-between">
 							<div class="user justify-content-between" style="float: left;">
 								<div class="thumb">
-									<c:if test="${sessionScope.userSession.id eq detail.writer}">
+									<c:if test="${replyList.reply_writer eq sessionScope.userSession.id}">
 									<a href="javascript:void(0);" onclick="removeReply(this);"><i aria-hidden="true" class="fa fa-remove"></i></a>
 									</c:if>
 		                            <div class="d-flex rounded-circle avatar z-depth-1-half mr-3 user-img"><h1>${replyList.displayName}</h1></div>
@@ -305,7 +305,7 @@ $(document).ready(function() {
 									<div class="form-group basic-textarea rounded-corners">
 										<p class="comment">
 			                                <label name="reply_content">${replyList.reply_content}</label> 
-			                                <c:if test="${sessionScope.userSession.id eq detail.writer}">
+			                                <c:if test="${replyList.reply_writer eq sessionScope.userSession.id}">
 			                                <a href="javascript:void(0);" onclick="modify(this);"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
 			                                </c:if>
 			                            </p>

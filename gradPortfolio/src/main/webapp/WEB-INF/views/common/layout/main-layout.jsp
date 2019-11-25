@@ -35,6 +35,9 @@
 	
 	<!-- JavaScript Libraries -->
 	<script src="/common2/lib/jquery/jquery.min.js"></script>
+		<script src="/common/js/jquery.validate.js"></script>
+	<script src="/common/js/jquery-validate.bootstrap-tooltip.min.js"></script>
+	<script src="/common/js/bPopup.js"></script>
 	<script src="/common/js/common_utils.js"></script>
 
 	<!-- =======================================================

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+	<style>
+	nav.main-nav.login-hide li:first-child{ display:none;
+	}
+	</style>
 	<header id="header">
 	
 		<div id="topbar">
@@ -25,14 +28,28 @@
 				<h1 class="text-light"><a href="/" class="scrollto"><span>Find Pet</span></a></h1>
 			</div>
 
-			<nav class="main-nav float-right d-none d-lg-block">
+			<nav class="main-nav float-right d-none d-lg-block login-hide">
 				<ul>
 					<c:forEach var="menu" items="${sessionVO.menuList}" varStatus="status">
-						<script>console.log("${menu.idx}${menu.title}")</script>
 						<li class="${sessionVO.menuIdx  eq menu.idx?'active':''}"><a href="${menu.url}">${menu.title}</a></li>
 					</c:forEach>
 				</ul>
 			</nav><!-- .main-nav -->
 			
+		</div>
+		<div id="mobile-nav-login" style="display:none;">
+			<c:choose>
+				<c:when test="${not empty sessionScope.userSession}">
+					<li>
+						<label style="color:white;padding:0 20px;">${sessionScope.userSession.displayName}님 환영합니다.</label>
+						<a href="javascript:void(0);" onclick="location.href='/logout'" class="logout"><i class="fa fa-sign-out"></i>로그아웃</a>
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li>
+					<a href="javascript:void(0);" onclick="location.href='/login'" class="login"><i class="fa fa-sign-in"></i>로그인</a>
+					</li>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</header><!-- #header -->

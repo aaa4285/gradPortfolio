@@ -61,15 +61,6 @@
 	body
 	============================-->
 	<tiles:insertAttribute name="body"/>
-
-	<!--==========================
-	Footer
-	============================-->
-
-
-	<a href="javascript:void(0);" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-	<!-- Uncomment below i you want to use a preloader -->
-	<!-- <div id="preloader"></div> -->
 	
 	<script src="/common2/lib/jquery/jquery-migrate.min.js"></script>
 	<script src="/common2/lib/bootstrap/js/bootstrap.bundle.min.js"></script>

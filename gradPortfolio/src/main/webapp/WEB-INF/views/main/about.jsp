@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<style>
+body{overflow-x: hidden !important;}
+</style>
+
 	<!--==========================
 		Intro Section
 	============================-->
@@ -12,7 +16,7 @@
 				<div class="col-md-6 intro-info order-md-first order-last">
 					<h2>이 지금 당신의<br><span>Pet</span>을 찾으세요!</h2>
 					<div>
-						<a href="#about" class="btn-get-started scrollto">Find Started</a>
+						<a href="/main/index2.do" class="btn-get-started scrollto">Find Started</a>
 					</div>
 				</div>
 	
@@ -66,7 +70,7 @@
 				
 				<div class="row wow bounceInUp" data-wow-duration="1.4s">
 
-					<div class="col-lg-12" id="line" style="height:300px;">
+					<div class="col-lg-12" id="line" style="height:400px;">
 					</div>
 				</div>
 				
@@ -79,13 +83,13 @@
 				</div>
 				
 				<div class="row wow bounceInUp" data-wow-duration="1.4s">
-	 				<div class="col-lg-6" id="barchart">
+	 				<div class="col-lg-6" id="barchart" style="height:400px;">
 	 				</div>
 					<div class="col-lg-6" id="">
 						<div class="radius card" style="height:400px;width:100%;">
-							<div id="chartdiv3" style="width: 230px;height:233px;position: absolute;left: 23px;top: 10px;"></div>
-							<div id="chartdiv2" style="width: 230px;height:132px;position: absolute;left: 31px;bottom: 18px;"></div>
-							<div id="chartdiv"style="width: calc(100% - 181px);height:400px;position: absolute;right: -47px;"></div>
+							<div id="chartdiv3" style="width: 180px;height:200px;position: absolute;left: 20px;top: 40px;"></div>
+							<div id="chartdiv2" style="width: 180px;height:140px;position: absolute;left: 20px;bottom: 30px;"></div>
+							<div id="chartdiv"style="width: calc(100% - 150px);height:100%;position: absolute;right: -17px;"></div>
 						</div>
 					</div>
 				</div>

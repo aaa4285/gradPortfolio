@@ -171,3 +171,59 @@ function getUpkindNm(cd) {
 	}
 	return "";
 }
+
+var com = {};
+
+com.alert = function (msg) {
+	$.alert({
+	    title: '알림',
+	    content: msg,
+	    boxWidth: '300px',
+	    useBootstrap: false,
+	    icon: 'fa fa-question',
+	    theme: 'material',
+	    closeIcon: true,
+	    animation: 'scale',
+	    type: 'orange',
+	    buttons: {
+	        okay: {
+	            text: '확인',
+	            btnClass: 'btn-blue'
+	        }
+	    }
+	});
+};
+
+com.confirm = function(msg, fn) {
+    $.confirm({
+    	boxWidth: '300px',
+        icon: 'fa fa-smile-o',
+        theme: 'modern',
+        closeIcon: true,
+        animation: 'scale',
+        type: 'blue',
+        title: 'Hello',
+        titleClass: '',
+        typeAnimated: true,
+        draggable: true,
+        dragWindowGap: 15,
+        dragWindowBorder: true,
+        animateFromElement: true,
+        smoothContent: true,
+        content: msg,
+        buttons: {
+            ok: {
+                action: function () {
+                	if (typeof fn == 'function') {
+						fn();
+					}
+                }
+            },
+            close: {
+                action: function () {
+                }
+            },
+        },
+    });
+};
+

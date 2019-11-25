@@ -201,14 +201,12 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 		$("#signForm").validate({
 			//validation이 끝난 이후의 submit 직전 추가 작업할 부분
 			submitHandler : function(frm) {
-				var f = confirm("회원가입을하시겠습니까?");
-				if (f) {
-					console.log(frm);	
+				com.confirm("회원가입을하시겠습니까?", function() {
 					duplicateCheck(frm);
-				} else {
-					return false;
-				}
+				});
 			},
+			onkeyup:false,
+			onclick:false,
 			//규칙
 			rules : {
 				password : {
@@ -233,27 +231,29 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 			//규칙체크 실패시 출력될 메시지
 			messages : {
 				password : {
-					required : "필수로입력하세요",
+					required : "비밀번호를 입력하세요",
 					minlength : "최소 {0}글자이상이어야 합니다"
 				},
 				repatPassword : {
-					required : "필수로입력하세요",
+					required : "비밀번호를 입력하세요",
 					minlength : "최소 {0}글자이상이어야 합니다",
 					equalTo : "비밀번호가 일치하지 않습니다."
 				},
 				nickname : {
-					required : "필수로입력하세요",
+					required : "이름을 입력하세요",
 					minlength : "최소 {0}글자이상이어야 합니다"
 				},
 				email : {
-					required : "필수로입력하세요",
+					required : "email을 입력하세요",
 					minlength : "최소 {0}글자이상이어야 합니다",
 					email : "메일규칙에 어긋납니다"
 				}
 			},
 			tooltip_options : {
-				_all_: {placement: "right"}
-			}
+				
+			},
+			
+			
 		});
 		
 		// ID중복 체크
@@ -262,23 +262,7 @@ supports (-ms-ime-align: auto ) { .form-label-group>label {
 				if (r.result) {
 					frm.submit();
 				} else {
-					$.alert({
-                        title: '알림',
-                        content: r.msg,
-                        boxWidth: '300px',
-                        useBootstrap: false,
-                        icon: 'fa fa-question',
-                        theme: 'material',
-                        closeIcon: true,
-                        animation: 'scale',
-                        type: 'orange',
-                        buttons: {
-                            okay: {
-                                text: '확인',
-                                btnClass: 'btn-blue'
-                            }
-                        }
-                    });
+					com.alert(r.msg);
 				}
 			});
 		}

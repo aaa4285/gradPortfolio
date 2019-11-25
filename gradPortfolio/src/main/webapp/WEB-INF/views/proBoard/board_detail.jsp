@@ -73,7 +73,7 @@ function modifyReply(_this) {
     	objParams,
     	function(retVal){
     		if(retVal.code != "OK") {
-                alert(retVal.message);
+                com.alert(retVal.message);
                 return false;
             }else{
             	loder_show();
@@ -100,7 +100,7 @@ function removeReply(_this) {
     	objParams,
     	function(retVal){
     		if(retVal.code != "OK") {
-                alert(retVal.message);
+                com.alert(retVal.message);
             } else {
             	loder_show();
                 location.href = location.href;
@@ -175,7 +175,7 @@ function regReply(_this){
     	objParams,
     	function(retVal){
     		if(retVal.code != "OK") {
-                alert(retVal.message);
+                com.alert(retVal.message);
                 status = false;
             }else{
             	loder_show();
@@ -210,7 +210,7 @@ $(document).ready(function() {
         
         //널 검사
         if($("#reply_content").val().trim() == ""){
-            alert("내용을 입력하세요.");
+            com.alert("내용을 입력하세요.");
             $("#reply_content").focus();
             return false;
         }
@@ -233,7 +233,7 @@ $(document).ready(function() {
         	objParams,
         	function(retVal){
         		 if(retVal.code != "OK") {
-                     alert(retVal.message);
+                     com.alert(retVal.message);
                  } else {
                 	loder_show();
                  	location.href = location.href;

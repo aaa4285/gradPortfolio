@@ -185,19 +185,23 @@ function regReply(_this){
     );
 }
 function commentToggle(){
+	$("#commentsCnt").css({ 'pointer-events': 'none' });
 	if ($("#commentList").hasClass("hide")) {
+		$('html, body').animate({scrollTop : $("#commentsCnt").offset().top-70},1000, 'easeInOutExpo');
 		$("#commentList,#commentList2").removeClass("hide").addClass("bounceInUp animated").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 		      $(this).removeClass("bounceInUp");
 		      $(this).removeClass("animated");
+		      $("#commentsCnt").css({ 'pointer-events': '' });
 	    });
 	} else {
+		$('html, body').animate({scrollTop : $("#commentsCnt").offset().top+70-window.innerHeight},1000, 'easeInOutExpo');
 		$("#commentList,#commentList2").addClass("bounceOutDown animated").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 		      $(this).addClass("hide");
 		      $(this).removeClass("bounceOutDown");
 		      $(this).removeClass("animated");
+		      $("#commentsCnt").css({ 'pointer-events': '' });
 	    });
 	}
-	
 }
 $(document).ready(function() {
 
@@ -266,7 +270,7 @@ $(document).ready(function() {
 								<div class="comment-wrap col-lg-6">
 									<ul>
 										<!-- <li><a href="javascript:void(0)"><span class="fa fa-heart"></span>	4 likes</a></li> -->
-										<li><a href="javascript:commentToggle();"><span class="fa fa-comments-o"></span> ${detail.replyCnt} Comments</a></li>
+										<li><a id="commentsCnt" href="javascript:commentToggle();"><span class="fa fa-comments-o"></span> ${detail.replyCnt} Comments</a></li>
 									</ul>
 								</div>
 							</div>

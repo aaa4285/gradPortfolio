@@ -120,6 +120,7 @@
 							<li data-filter=".filter-cat">고양이</li>
 							<li data-filter=".filter-etc">기타</li>
 						</ul>
+						<button class="btn btn-primary btn-sm" style="position: absolute;right: 0;top: 55px;" onclick="location.href='/board/insert'">글쓰기</button>
 					</div>
 				</div>
 				
@@ -168,13 +169,12 @@
 				    </li>
 			    </c:if>
 			  </ul>
-			  <button class="btn btn-primary btn-sm" style="float:right;" onclick="location.href='/board/insert'">글쓰기</button>
 			</div>
 	</section><!-- #portfolio2 -->
 </main>
 <style>
 .mobile-write-btn {
-border-radius: 6px;bottom: 70px;display: inline;padding: 14px 1px 0px 5px;background: rgb(130, 130, 130);
+border-radius: 6px;bottom: 70px;display: none;padding: 14px 1px 0px 5px;background: rgb(130, 130, 130);
 position: fixed;
     color: #fff;
     width: 44px;
@@ -188,3 +188,13 @@ position: fixed;
 }
 </style>
 <a href="/board/insert" class="mobile-write-btn"><i class="fa fa-pencil-square-o"></i></a>
+<script>
+//Back to top button
+$(window).scroll(function() {
+  if ($(this).scrollTop() > 100) {
+    $('.mobile-write-btn').fadeIn('slow');
+  } else {
+    $('.mobile-write-btn').fadeOut('slow');
+  }
+});
+</script>

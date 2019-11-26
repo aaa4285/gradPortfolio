@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <style>
 body{overflow-x: hidden !important;}
 </style>
@@ -46,22 +46,22 @@ body{overflow-x: hidden !important;}
 				<div class="row counters">
 
 					<div class="col-lg-3 col-6 text-center">
-						<span id="aaa" data-toggle="counter-up">${totCnt}</span>
+						<span id="aaa" data-toggle="counter-up"><fmt:formatNumber type="number" maxFractionDigits="3" value="${totCnt}"/></span>
 						<p>전체</p>
 					</div>
 
 					<div class="col-lg-3 col-6 text-center">
-						<span data-toggle="counter-up">${dogCnt}</span>
+						<span data-toggle="counter-up"><fmt:formatNumber type="number" maxFractionDigits="3" value="${dogCnt}"/></span>
 						<p>강아지</p>
 					</div>
 
 					<div class="col-lg-3 col-6 text-center">
-						<span data-toggle="counter-up">${catCnt}</span>
+						<span data-toggle="counter-up"><fmt:formatNumber type="number" maxFractionDigits="3" value="${catCnt}"/></span>
 						<p>고양이</p>
 					</div>
 
 					<div class="col-lg-3 col-6 text-center">
-						<span data-toggle="counter-up">${etcCnt}</span>
+						<span data-toggle="counter-up"><fmt:formatNumber type="number" maxFractionDigits="3" value="${etcCnt}"/></span>
 						<p>기타</p>
 					</div>
 	

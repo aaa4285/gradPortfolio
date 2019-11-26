@@ -117,6 +117,15 @@ body{overflow-x: hidden !important;}
 							<p class="description">유기된 동물을 공공데이터포털에서 제공하는 오픈 API를 이용해서 조회 하는 서비스 입니다.</p>
 						</div>
 					</div>
+					
+					<div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
+						<div class="box">
+							<div class="icon" style="background: #e6fdfc;"><i class="ion-ios-paper-outline" style="color: #3fcdc7;"></i></div>
+							<h4 class="title"><a href="/proBoard/list">실종동물 찾기</a></h4>
+							<p class="description">실종된 반려 동물을 게시하고 조회 할수있는 서비스 입니다.</p>
+						</div>
+					</div>
+					
 					<div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-duration="1.4s">
 						<div class="box">
 							<div class="icon" style="background: #fff0da;"><i class="ion-ios-bookmarks-outline" style="color: #e98e06;"></i></div>
@@ -125,13 +134,7 @@ body{overflow-x: hidden !important;}
 						</div>
 					</div>
 
-					<div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
-						<div class="box">
-							<div class="icon" style="background: #e6fdfc;"><i class="ion-ios-paper-outline" style="color: #3fcdc7;"></i></div>
-							<h4 class="title"><a href="/proBoard/list">실종동물 찾기</a></h4>
-							<p class="description">실종된 반려 동물을 게시하고 조회 할수있는 서비스 입니다.</p>
-						</div>
-					</div>
+					
 				</div>
 
 			</div>

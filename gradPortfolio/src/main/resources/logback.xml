@@ -16,27 +16,27 @@
     
     <!-- Application Loggers -->
     <logger name="com" additivity="false">
-        <level value="info" />
+        <level value="error" />
     </logger>
     
     <!-- 3rdparty Loggers -->
     <logger name="org.springframework.core" additivity="false">
-        <level value="info" />
+        <level value="error" />
     </logger>
     
     <logger name="org.springframework.beans" additivity="false">
-        <level value="info" />
+        <level value="error" />
     </logger>
     
     <logger name="org.springframework.context" additivity="false">
-        <level value="info" />
+        <level value="error" />
     </logger>
  
     <logger name="org.springframework.web" additivity="false">
-        <level value="info" />
+        <level value="error" />
     </logger>
 
-    <root level="INFO" additivity="false">
+    <root level="error" additivity="false">
         <appender-ref ref="STDOUT" />
     </root>
 

@@ -172,3 +172,19 @@
 			</div>
 	</section><!-- #portfolio2 -->
 </main>
+<style>
+.mobile-write-btn {
+border-radius: 6px;bottom: 70px;display: inline;padding: 14px 1px 0px 5px;background: rgb(130, 130, 130);
+position: fixed;
+    color: #fff;
+    width: 44px;
+    height: 44px;
+    text-align: center;
+    line-height: 1;
+    font-size: 16px;
+    right: 15px;
+    transition: background 0.5s;
+    z-index: 11;
+}
+</style>
+<a href="/board/insert" class="mobile-write-btn"><i class="fa fa-pencil-square-o"></i></a>

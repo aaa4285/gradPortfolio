@@ -9,6 +9,21 @@
   <!-- Theme CSS -->
   <link href="/common3/css/freelancer.css" rel="stylesheet">
   <style>
+  .portfolio-modal h2 {
+  	font-size: 1.5rem;
+  }
+      
+  .portfolio-modal h5, .portfolio-modal p {
+  	font-size: 1rem;
+  }
+  	@media (min-width: 576px) {
+	  .portfolio-modal h5, .portfolio-modal p {
+	    font-size: 1.25rem;
+	  }
+	  .portfolio-modal h2 {
+	  	font-size: 2rem;
+	  }
+	}
   	.blog-post-list{
   	padding:0;
   	}

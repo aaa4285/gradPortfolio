@@ -6,7 +6,13 @@
 <style>
 body{overflow-x: hidden !important;}
 </style>
-
+<script>
+$(document).ready(function(){
+	alert($("#aaa").html());
+	$("#aaa").html("111");
+	alert($("#aaa").html());
+})
+</script>
 	<!--==========================
 		Intro Section
 	============================-->
@@ -47,22 +53,22 @@ body{overflow-x: hidden !important;}
 				<div class="row counters">
 
 					<div class="col-lg-3 col-6 text-center">
-						<span data-toggle="counter-up">1,364</span>
+						<span id="aaa" data-toggle="counter-up">${dogCnt+catCnt+etcCnt}</span>
 						<p>전체</p>
 					</div>
 
 					<div class="col-lg-3 col-6 text-center">
-						<span data-toggle="counter-up">721</span>
+						<span data-toggle="counter-up">${dogCnt}</span>
 						<p>강아지</p>
 					</div>
 
 					<div class="col-lg-3 col-6 text-center">
-						<span data-toggle="counter-up">568</span>
+						<span data-toggle="counter-up">${catCnt}</span>
 						<p>고양이</p>
 					</div>
 
 					<div class="col-lg-3 col-6 text-center">
-						<span data-toggle="counter-up">18</span>
+						<span data-toggle="counter-up">${etcCnt}</span>
 						<p>기타</p>
 					</div>
 	

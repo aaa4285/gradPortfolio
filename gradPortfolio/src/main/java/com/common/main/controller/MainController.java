@@ -7,6 +7,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -90,6 +94,30 @@ public class MainController {
 		try {
 			Resource resource = awsService.getObject(bucketJsonUploadPath, fileNm);
 			String jsonString = FileUtils.readFile(resource);
+			System.out.println(jsonString);
+			int dogCnt = 0;
+			int catCnt = 0;
+			int etcCnt = 0;
+			
+			try {
+				for (String str : jsonString.split(";\n")) {
+					String[] arr = str.split("=");
+					if ("var dogCnt".equals(arr[0])) {
+						dogCnt = Integer.parseInt(arr[1]);
+					} else if ("var catCnt".equals(arr[0])) {
+						catCnt = Integer.parseInt(arr[1]);
+					} else if ("var etcCnt".equals(arr[0])) {
+						etcCnt = Integer.parseInt(arr[1]);
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			model.addAttribute("dogCnt",dogCnt);
+			model.addAttribute("catCnt",catCnt);
+			model.addAttribute("etcCnt",etcCnt);
+			model.addAttribute("totCnt",dogCnt+catCnt+etcCnt);
 			model.addAttribute("chartData",jsonString);
 		} catch (IOException e) {
 			//errors.aws.file.not.find

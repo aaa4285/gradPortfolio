@@ -39,8 +39,7 @@ public class chartBatch {
 	@Value("${aws.bucket.json.file.name}")
 	private String fileNm;
 	
-//	@Scheduled(cron="0 0 03 * * ?")
-//	@Scheduled(initialDelay = 1000, fixedDelay = 600000)
+	@Scheduled(cron="0 0 03 * * ?")
 	private void chardBatch() {
 		List<Map<String, Object>> upr_cd_list = null;
 		List<Map<String, Object>> upkind_list = null;
@@ -171,6 +170,9 @@ public class chartBatch {
 			/***************************************************************/
 			System.out.println("\nline start~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 			List lineData = new ArrayList();
+			int dogCnt = 0;
+			int catCnt = 0;
+			int etcCnt = 0;
 			// 한달
 			for (int i=12;i>0;i--) {
 				Date date = new Date();
@@ -214,10 +216,13 @@ public class chartBatch {
 					
 					if ("417000".equals(upkind)) {
 						upkindMap.put("dog", searchMap.get("totalCount"));
+						dogCnt+=Integer.parseInt(String.valueOf(searchMap.get("totalCount")));
 					} else if ("422400".equals(upkind)) {
 						upkindMap.put("cat", searchMap.get("totalCount"));
+						catCnt+=Integer.parseInt(String.valueOf(searchMap.get("totalCount")));
 					} else if ("429900".equals(upkind)) {
 						upkindMap.put("etc", searchMap.get("totalCount"));
+						etcCnt+=Integer.parseInt(String.valueOf(searchMap.get("totalCount")));
 					}
 				} // 축종 end
 				lineData.add(upkindMap);
@@ -230,6 +235,9 @@ public class chartBatch {
 			outMap.put("pieData", pieData);
 			outMap.put("barData", barData);
 			outMap.put("lineData", lineData);
+			outMap.put("dogCnt", dogCnt);
+			outMap.put("catCnt", catCnt);
+			outMap.put("etcCnt", etcCnt);
 			createJsonStr(outMap);
 		}
 	}

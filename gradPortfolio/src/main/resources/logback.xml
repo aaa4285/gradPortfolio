@@ -6,11 +6,11 @@
         </encoder>
     </appender>
 
-	<logger name="com.common.board.mapper.BoardMapper" level="ALL">
+	<logger name="com.common.board.mapper.BoardMapper" level="error">
         <appender-ref ref="STDOUT" />
     </logger>
     
-    <logger name="com.common.board.mapper.ProBoardMapper" level="ALL">
+    <logger name="com.common.board.mapper.ProBoardMapper" level="error">
         <appender-ref ref="STDOUT" />
     </logger>
     

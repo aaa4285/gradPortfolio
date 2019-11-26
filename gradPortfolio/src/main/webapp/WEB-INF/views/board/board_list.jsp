@@ -147,20 +147,21 @@
 			  <ul class="pagination justify-content-center">
 			  	<c:if test="${pageMaker.prev}">
 				    <li class="page-item">
-				      <a class="page-link" href="javascript:void(0);" aria-label="Previous">
+				      <a class="page-link" href='<c:url value="/board/list?page=${pageMaker.startPage-1}"/>' aria-label="Previous">
 				            <span aria-hidden="true">&laquo;</span>
 				            <span class="sr-only">Previous</span>
 				          </a>
 				    </li>
 			    </c:if>
 			    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-					<li class="page-item ${pageMaker.cri.page eq idx?" active":""}" onclick="goPage('${idx}',this)">
-						<a class="page-link waves-effect waves-effect" href='javascript:void(0);'>${idx}</a>
+					<li class="page-item ${pageMaker.cri.page eq idx?" active":""}">
+						<a class="page-link waves-effect waves-effect" href='<c:url value="/board/list?page=${idx }"/>'>${idx}</a>
 					</li>
 				</c:forEach>
-			    <c:if test="${pageMaker.next && pageMaker.endPage >0 }">
+				
+			    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 				    <li class="page-item">
-				      <a class="page-link" href="javascript:void(0);" aria-label="Next">
+				      <a class="page-link" href='<c:url value="/board/list?page=${pageMaker.endPage+1}"/>' aria-label="Next">
 				            <span aria-hidden="true">&raquo;</span>
 				            <span class="sr-only">Next</span>
 				          </a>

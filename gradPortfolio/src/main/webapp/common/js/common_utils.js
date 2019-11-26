@@ -52,10 +52,12 @@ function ajax(url,data,callback,loding){
 }
 function setLoderTop() {
 	var loader = $("html > div.loader");
+	console.log(loader);
 	if (loader.length == 1) {
 		var h = loader.height();
 		var iH = window.innerHeight;
 		var hh = (iH/2+h);
+		console.log($(document).scrollTop()+hh);
 		loader.css("top",$(document).scrollTop()+hh+"px");
 	}
 }

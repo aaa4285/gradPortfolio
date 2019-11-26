@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>I LOVE PUPPY</title>
+<title>Find pet</title>
 	<!-- Bootstrap core CSS -->
 	<link href="/common/css/bootstrap.css" rel="stylesheet">
 	

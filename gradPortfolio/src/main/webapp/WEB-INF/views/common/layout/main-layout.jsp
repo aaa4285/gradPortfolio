@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Rapid Bootstrap Template</title>
+	<title>Find pet</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<meta content="" name="keywords">
 	<meta content="" name="description">
@@ -89,6 +89,13 @@
 	
 	<!-- Template Main Javascript File -->
 	<script src="/common2/js/main.js"></script>
-
+	<script>
+  		$(document).ready(function(){
+  			$(window).scroll(function() {
+  				setLoderTop();
+  			});
+  			
+  		});
+  	</script>
 </body>
 </html>

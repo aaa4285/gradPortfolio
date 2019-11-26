@@ -14,9 +14,9 @@ body{overflow-x: hidden !important;}
 		<div class="container d-flex h-100">
 			<div class="row justify-content-center align-self-center">
 				<div class="col-md-6 intro-info order-md-first order-last">
-					<h2>이 지금 당신의<br><span>Pet</span>을 찾으세요!</h2>
+					<h2>지금 당신의<br><span>반려동물</span>을 찾으세요!</h2>
 					<div>
-						<a href="/main/index2.do" class="btn-get-started scrollto">Find Started</a>
+						<a href="/main/index2.do" class="btn-get-started scrollto">FIND STARTED</a>
 					</div>
 				</div>
 	

@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	<style>
-	nav.main-nav.login-hide li:first-child{ display:none;
-	}
-	</style>
 	<header id="header">
 	
 		<div id="topbar">
@@ -28,7 +24,7 @@
 				<h1 class="text-light"><a href="/" class="scrollto"><span>Find Pet</span></a></h1>
 			</div>
 
-			<nav class="main-nav float-right d-none d-lg-block login-hide">
+			<nav class="main-nav float-right d-none d-lg-block">
 				<ul>
 					<c:forEach var="menu" items="${sessionVO.menuList}" varStatus="status">
 						<li class="${sessionVO.menuIdx  eq menu.idx?'active':''}"><a href="${menu.url}">${menu.title}</a></li>

@@ -37,6 +37,7 @@
   			
   			// 메뉴 click 이벤트
   			$("#navbar li").click(function(){
+  				loder_show();
   				var url = $(this).attr("url");
   				location.href = url;
   			});

@@ -230,11 +230,13 @@ right:0;
 
 	// 로그인
 	function login(url) {
+		loder_show();
 		location.href = url;
 	}
 
 	// 회원가입
 	function sign() {
+		loder_show();
 		location.href = "/sign";
 	}
 	

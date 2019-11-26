@@ -89,6 +89,13 @@
 	
 	<!-- Template Main Javascript File -->
 	<script src="/common2/js/main.js"></script>
-
+	<script>
+  		$(document).ready(function(){
+  			$(window).scroll(function() {
+  				setLoderTop();
+  			});
+  			
+  		});
+  	</script>
 </body>
 </html>

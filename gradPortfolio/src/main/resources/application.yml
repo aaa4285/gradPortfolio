@@ -18,10 +18,10 @@ spring:
         password: ts6plmm9bwlv7wmn
         driver-class-name: org.mariadb.jdbc.Driver
         #driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-        max-active: 1
+        max-active: 5
         type: org.apache.tomcat.jdbc.pool.DataSource
         tomcat:
-           max-active: 3
+           max-active: 5
            initial-size: 1
            max-idle: 1
            min-idle: 1

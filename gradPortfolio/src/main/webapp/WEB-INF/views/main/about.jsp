@@ -6,13 +6,6 @@
 <style>
 body{overflow-x: hidden !important;}
 </style>
-<script>
-$(document).ready(function(){
-	alert($("#aaa").html());
-	$("#aaa").html("111");
-	alert($("#aaa").html());
-})
-</script>
 	<!--==========================
 		Intro Section
 	============================-->
@@ -53,7 +46,7 @@ $(document).ready(function(){
 				<div class="row counters">
 
 					<div class="col-lg-3 col-6 text-center">
-						<span id="aaa" data-toggle="counter-up">${dogCnt+catCnt+etcCnt}</span>
+						<span id="aaa" data-toggle="counter-up">${totCnt}</span>
 						<p>전체</p>
 					</div>
 

@@ -27,7 +27,7 @@
 			<nav class="main-nav float-right d-none d-lg-block">
 				<ul>
 					<c:forEach var="menu" items="${sessionVO.menuList}" varStatus="status">
-						<li class="${sessionVO.menuIdx  eq menu.idx?'active':''}"><a href='javascript:void(0)' onclick="goPage('${menu.url}')">${menu.title}</a></li>
+						<li class="${sessionVO.menuIdx  eq menu.idx?'active':''}"><a href='javascript:void(0)' onclick="goMenuPage('${menu.url}')">${menu.title}</a></li>
 					</c:forEach>
 				</ul>
 			</nav><!-- .main-nav -->
@@ -49,7 +49,7 @@
 			</c:choose>
 		</div>
 		<script type="text/javascript">
-			function goPage(url) {
+			function goMenuPage(url) {
 				loder_show();
 				location.href=url;
 			}
